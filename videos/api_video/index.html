@@ -51,24 +51,6 @@
         background: var(--canvas-bg);
       }
 
-      /* Infinite Blueprint Grid Layer */
-      #grid-layer {
-        position: absolute;
-        left: -600px;
-        top: -400px;
-        width: 9600px;
-        height: 2800px;
-        background-color: #ffffff;
-        background-image:
-          linear-gradient(to right, #ebebef 1.5px, transparent 1.5px),
-          linear-gradient(to bottom, #ebebef 1.5px, transparent 1.5px),
-          linear-gradient(to right, #dcdce2 2px, transparent 2px),
-          linear-gradient(to bottom, #dcdce2 2px, transparent 2px);
-        background-size: 48px 48px, 48px 48px, 240px 240px, 240px 240px;
-        will-change: transform;
-        z-index: 1;
-      }
-
       /* Infinite Spatial Camera & World */
       #camera-rig {
         position: absolute;
@@ -76,16 +58,17 @@
         top: 0;
         width: 1080px;
         height: 1920px;
-        transform-origin: 540px 760px;
+        transform-origin: 540px 840px;
         will-change: transform;
         z-index: 10;
+        perspective: 1400px;
       }
 
       #spatial-world {
         position: absolute;
         left: 0;
         top: 0;
-        width: 8200px;
+        width: 10400px;
         height: 1920px;
         direction: ltr;
         will-change: transform;
@@ -98,14 +81,26 @@
         direction: rtl;
       }
 
-      /* Pure Ink Components */
+      /* Pure Ink Components & Multi-Tier Elevation Shadows */
       .ink-card {
         background: #ffffff;
         border: 4px solid #000000;
         border-radius: 26px;
         box-shadow:
           0 4px 8px rgba(0, 0, 0, 0.42),
-          0 22px 46px rgba(0, 0, 0, 0.14);
+          0 22px 48px rgba(0, 0, 0, 0.14);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ink-card-3d {
+        background: linear-gradient(145deg, #ffffff 0%, #f1f2f5 100%);
+        border: 4px solid #000000;
+        border-radius: 30px;
+        box-shadow:
+          0 6px 10px rgba(0, 0, 0, 0.44),
+          0 28px 60px rgba(0, 0, 0, 0.18),
+          inset 0 2px 0 rgba(255, 255, 255, 0.9);
         position: relative;
         overflow: hidden;
       }
@@ -123,24 +118,108 @@
         background: #000000;
         color: #ffffff;
         border: 4px solid #000000;
-        border-radius: 22px;
+        border-radius: 24px;
         box-shadow:
-          0 5px 10px rgba(0, 0, 0, 0.45),
-          0 24px 48px rgba(0, 0, 0, 0.18);
+          0 6px 12px rgba(0, 0, 0, 0.48),
+          0 26px 54px rgba(0, 0, 0, 0.22);
+      }
+
+      /* Distinct World Surface Layers (NO single repetitive grid!) */
+      /* World 1: Living Monochrome Ink & Mist Studio */
+      #w1-atmos-bg {
+        position: absolute;
+        inset: -160px;
+        background: radial-gradient(circle at 50% 44%, #ffffff 0%, #f1f2f4 46%, #dcdee3 100%);
+        overflow: hidden;
+      }
+
+      .atmos-orb-a {
+        position: absolute;
+        left: -180px;
+        top: 140px;
+        width: 960px;
+        height: 960px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0.04) 50%, rgba(0, 0, 0, 0) 74%);
+        will-change: transform;
+      }
+
+      .atmos-orb-b {
+        position: absolute;
+        right: -220px;
+        bottom: 180px;
+        width: 1040px;
+        height: 1040px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.05) 48%, rgba(0, 0, 0, 0) 74%);
+        will-change: transform;
+      }
+
+      .atmos-clarity-wipe {
+        position: absolute;
+        inset: -120px;
+        background: #ffffff;
+        opacity: 0;
+      }
+
+      /* World 2: Pure Clean Matte Paper (Sheet 3 & Sheet 7 - Zero Grid!) */
+      #w2-pure-canvas {
+        position: absolute;
+        inset: -500px;
+        background: #ffffff;
+      }
+
+      /* World 3A: 3D Depth Studio (Sheet 11 bottom row) */
+      #w3a-depth-bg {
+        position: absolute;
+        inset: -240px;
+        background: radial-gradient(circle at 50% 46%, #ffffff 0%, #eceef2 58%, #d4d6dc 100%);
+      }
+
+      /* World 3B: Textured Blueprint Graph-Paper Board (Sheet 9) */
+      #w3b-blueprint-board {
+        position: absolute;
+        left: -260px;
+        top: -260px;
+        width: 1700px;
+        height: 2440px;
+        background-color: #f9f9fb;
+        background-image:
+          linear-gradient(to right, rgba(0, 0, 0, 0.055) 1.5px, transparent 1.5px),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.055) 1.5px, transparent 1.5px),
+          linear-gradient(to right, rgba(0, 0, 0, 0.11) 2px, transparent 2px),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.11) 2px, transparent 2px);
+        background-size: 44px 44px, 44px 44px, 220px 220px, 220px 220px;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      /* World 4: Tactile Warm-Silver Studio Desk for 3D Phone Mockup */
+      #w4-desk-bg {
+        position: absolute;
+        inset: -300px;
+        background: radial-gradient(ellipse at 54% 48%, #ffffff 0%, #f2f3f6 52%, #e2e4e9 100%);
+      }
+
+      /* World 5: Crisp White Architectural Horizon */
+      #w5-horizon-bg {
+        position: absolute;
+        inset: -240px;
+        background: radial-gradient(circle at 50% 42%, #ffffff 0%, #f8f9fa 65%, #eceef2 100%);
       }
 
       /* Traveling Specular Light Sweep */
       .light-sweep {
         position: absolute;
-        top: -40%;
-        left: -60%;
-        width: 45%;
-        height: 180%;
+        top: -45%;
+        left: -70%;
+        width: 48%;
+        height: 190%;
         background: linear-gradient(
           90deg,
           transparent 0%,
           rgba(255, 255, 255, 0) 20%,
-          rgba(255, 255, 255, 0.55) 50%,
+          rgba(255, 255, 255, 0.52) 50%,
           rgba(255, 255, 255, 0) 80%,
           transparent 100%
         );
@@ -152,8 +231,8 @@
       .puppet-rig {
         position: absolute;
         transform-origin: 50% 93%;
-        will-change: transform, opacity;
-        filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.22));
+        will-change: transform, opacity, filter;
+        filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.24));
       }
 
       .puppet-rig img {
@@ -173,7 +252,7 @@
         position: absolute;
         transform-origin: 50% 92%;
         mix-blend-mode: multiply;
-        will-change: transform, opacity;
+        will-change: transform, opacity, filter;
       }
 
       .flork-rig img {
@@ -189,13 +268,13 @@
         position: absolute;
         background: #ffffff;
         border: 4px solid #000000;
-        border-radius: 24px;
+        border-radius: 26px;
         overflow: hidden;
         box-shadow:
-          0 4px 8px rgba(0, 0, 0, 0.44),
-          0 20px 40px rgba(0, 0, 0, 0.16);
+          0 5px 10px rgba(0, 0, 0, 0.44),
+          0 22px 44px rgba(0, 0, 0, 0.18);
         transform-origin: 50% 85%;
-        will-change: transform, opacity;
+        will-change: transform, opacity, filter;
       }
 
       .sticker-card img {
@@ -206,49 +285,52 @@
         display: block;
       }
 
-      /* Top Editorial Chapter Bar (>= 28px readable floor) */
-      #top-header {
+      /* Center Hero Hook Typography (Act 1 0.00s -> 1.22s) */
+      #hook-center-stage {
         position: absolute;
-        top: 60px;
-        left: 72px;
-        right: 72px;
-        height: 82px;
+        left: 60px;
+        right: 60px;
+        top: 640px;
+        height: 440px;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        justify-content: space-between;
-        border-bottom: 2.5px solid #e4e4e7;
-        padding-bottom: 16px;
-        z-index: 600;
+        justify-content: center;
+        gap: 18px 22px;
+        z-index: 40;
         direction: rtl;
+        pointer-events: none;
       }
 
-      .header-brand {
-        font-size: 30px;
+      .hook-word {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 108px;
         font-weight: 900;
+        line-height: 1.3;
+        padding: 12px 30px;
+        border-radius: 24px;
         color: #000000;
-        letter-spacing: -0.01em;
+        opacity: 0;
+        will-change: transform, opacity, filter;
       }
 
-      .header-chapter {
-        font-size: 28px;
-        font-weight: 800;
-        color: #52525b;
-      }
-
-      /* Kinetic Caption Safe Stage */
+      /* Kinetic Caption Safe Stage (Bottom-third clean, ZERO header/progress clutter) */
       #caption-backdrop {
         position: absolute;
         left: 0;
         right: 0;
         bottom: 0;
-        height: 520px;
+        height: 410px;
         background: linear-gradient(
           to top,
-          rgba(255, 255, 255, 0.98) 0%,
-          rgba(255, 255, 255, 0.95) 70%,
+          rgba(255, 255, 255, 0.94) 0%,
+          rgba(255, 255, 255, 0.82) 55%,
           rgba(255, 255, 255, 0) 100%
         );
         pointer-events: none;
+        opacity: 0;
         z-index: 450;
       }
 
@@ -256,8 +338,8 @@
         position: absolute;
         left: 56px;
         right: 56px;
-        bottom: 140px;
-        height: 320px;
+        bottom: 96px;
+        height: 290px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -282,10 +364,10 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 50px;
+        font-size: 52px;
         font-weight: 900;
-        line-height: 1.55;
-        padding: 10px 18px;
+        line-height: 1.5;
+        padding: 8px 18px;
         border-radius: 14px;
         color: #000000;
         background: transparent;
@@ -294,36 +376,16 @@
         will-change: transform, opacity, filter;
       }
 
-      /* Bottom Progress Bar (GSAP-only transform) */
-      #bottom-progress-track {
-        position: absolute;
-        left: 72px;
-        right: 72px;
-        bottom: 72px;
-        height: 8px;
-        background: #e4e4e7;
-        border-radius: 4px;
-        overflow: hidden;
-        z-index: 600;
-      }
-
-      #bottom-progress-fill {
-        width: 100%;
-        height: 100%;
-        background: #000000;
-        transform-origin: right center;
-      }
-
       /* Cinema Overlays */
       #breathing-vignette {
         position: absolute;
         inset: 0;
         background: radial-gradient(
-          circle at 50% 44%,
-          transparent 54%,
-          rgba(0, 0, 0, 0.24) 100%
+          circle at 50% 45%,
+          transparent 50%,
+          rgba(0, 0, 0, 0.28) 100%
         );
-        opacity: 0.35;
+        opacity: 0.32;
         pointer-events: none;
         z-index: 800;
       }
@@ -331,7 +393,7 @@
       #film-grain {
         position: absolute;
         inset: 0;
-        opacity: 0.032;
+        opacity: 0.036;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         pointer-events: none;
         z-index: 850;
@@ -344,14 +406,6 @@
         opacity: 0;
         pointer-events: none;
         z-index: 950;
-      }
-
-      .hero-api-title {
-        font-size: 160px;
-        font-weight: 900;
-        letter-spacing: -0.04em;
-        line-height: 1;
-        direction: ltr;
       }
 
       .label-tag {
@@ -377,7 +431,7 @@
       data-height="1920"
       data-fps="30"
     >
-      <!-- Voiceover & Tactile SFX (all with unique id and exact media durations) -->
+      <!-- Voiceover & Tactile SFX -->
       <audio id="vo-main" src="./assets/voiceover.m4a" data-start="0" data-duration="49.76" data-volume="1.0" preload="auto"></audio>
       <audio id="sfx-pop-1" src="./assets/sfx/pop.wav" data-start="0.56" data-duration="0.09" data-volume="0.22" preload="auto"></audio>
       <audio id="sfx-whoosh-1" src="./assets/sfx/whoosh.wav" data-start="5.52" data-duration="0.28" data-volume="0.24" preload="auto"></audio>
@@ -391,381 +445,470 @@
       <audio id="sfx-whoosh-4" src="./assets/sfx/whoosh.wav" data-start="42.86" data-duration="0.28" data-volume="0.22" preload="auto"></audio>
       <audio id="sfx-pop-5" src="./assets/sfx/pop.wav" data-start="47.36" data-duration="0.09" data-volume="0.22" preload="auto"></audio>
 
-      <!-- Infinite Graph Paper Grid -->
-      <div id="grid-layer" class="clip" data-start="0" data-duration="50.0" data-layout-allow-overflow="true"></div>
-
-      <!-- Top Editorial Bar -->
-      <div id="top-header" class="clip" data-start="0" data-duration="50.0">
-        <span class="header-brand">شروحات تقنية مبسطة</span>
-        <span class="header-chapter" id="chapter-label">01 · وش يعني API؟</span>
-      </div>
-
-      <!-- Infinite Spatial Camera Rig -->
+      <!-- Infinite Spatial Camera Rig (NO top header, NO progress bar!) -->
       <div id="camera-rig" data-layout-allow-overflow="true">
         <div id="spatial-world" data-layout-allow-overflow="true">
 
           <!-- =========================================================
-               WORLD 1: HOOK & SIMPLIFICATION (x = 0 .. 1080) [0.00s - 5.75s]
+               WORLD 1: ATMOSPHERIC MONOCHROME HOOK (x = 0 .. 1080) [0.00s - 5.65s]
                ========================================================= -->
-          <div class="world-zone clip" id="world-1" data-start="0" data-duration="5.75" data-layout-allow-overflow="true" style="left: 0px; width: 1080px;">
-            <div
-              id="w1-api-card"
-              class="ink-badge-inverted"
-              style="position: absolute; left: 260px; top: 220px; width: 560px; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;"
-            >
-              <div class="hero-api-title" style="color: #ffffff;">API</div>
-              <div style="font-size: 28px; font-weight: 700; color: #e4e4e7; margin-top: 6px; direction: ltr;">
-                Application Interface
-              </div>
-              <div class="light-sweep" id="w1-sweep"></div>
-            </div>
+          <div class="world-zone clip" id="world-1" data-start="0" data-duration="5.65" data-layout-allow-overflow="true" style="left: 0px; width: 1080px;">
+            <div id="w1-atmos-bg" data-layout-allow-overflow="true">
+              <div class="atmos-orb-a" id="w1-orb-a"></div>
+              <div class="atmos-orb-b" id="w1-orb-b"></div>
 
-            <div id="w1-bracket-l" data-layout-ignore="true" class="ink-card-soft" style="position: absolute; left: 90px; top: 340px; width: 112px; height: 112px; display: flex; align-items: center; justify-content: center; font-size: 46px; font-weight: 900; direction: ltr;">
-              { }
-            </div>
-            <div id="w1-bracket-r" data-layout-ignore="true" class="ink-card-soft" style="position: absolute; left: 878px; top: 260px; width: 112px; height: 112px; display: flex; align-items: center; justify-content: center; font-size: 44px; font-weight: 900; direction: ltr;">
-              &lt;/&gt;
-            </div>
-
-            <div id="w1-flork-q" class="flork-rig" style="left: 72px; top: 530px; width: 320px; height: 320px;">
-              <img id="img-flork-q" src="./assets/img/flork_question.webp" alt="حيرة واستفهام" />
-            </div>
-
-            <div id="w1-flork-math" class="sticker-card" style="left: 64px; top: 500px; width: 370px; height: 370px; opacity: 0;">
-              <img id="img-flork-math" src="./assets/img/flork_math.webp" alt="معادلات معقدة" />
-            </div>
-
-            <div id="w1-simple-card" class="ink-card" style="position: absolute; left: 68px; top: 520px; width: 410px; height: 220px; display: flex; align-items: center; justify-content: center; gap: 20px; padding: 20px; opacity: 0;">
-              <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="m9 12 2 2 4-4"></path>
+              <!-- Subtle animated orbital ink rings (depth backdrop) -->
+              <svg id="w1-orbit-rings" style="position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%); opacity: 0.22;" width="1280" height="1280" viewBox="0 0 1280 1280" fill="none">
+                <circle cx="640" cy="640" r="340" stroke="#000000" stroke-width="2" stroke-dasharray="14 18"/>
+                <circle cx="640" cy="640" r="470" stroke="#52525b" stroke-width="2.5" stroke-dasharray="60 28"/>
+                <circle cx="640" cy="640" r="590" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 14"/>
               </svg>
-              <div style="text-align: right;">
-                <div style="font-size: 36px; font-weight: 900; color: #000000;">أبسط مما تتوقع</div>
-                <div style="font-size: 28px; font-weight: 700; color: #52525b;">فكرة واحدة واضحة</div>
+
+              <!-- Counter-motion depth-blurred floating code symbols -->
+              <div id="w1-float-far" data-layout-ignore="true" style="position: absolute; left: 110px; top: 200px; font-size: 72px; font-weight: 900; color: #71717a; filter: blur(4px); opacity: 0.45; direction: ltr;">
+                { API }
               </div>
+              <div id="w1-float-near" data-layout-ignore="true" style="position: absolute; right: 90px; top: 185px; font-size: 88px; font-weight: 900; color: #000000; filter: blur(7px); opacity: 0.28; direction: ltr;">
+                &lt;/&gt;
+              </div>
+              <div id="w1-float-mid" data-layout-ignore="true" style="position: absolute; left: 220px; bottom: 420px; font-size: 54px; font-weight: 900; color: #52525b; filter: blur(3px); opacity: 0.38; direction: ltr;">
+                JSON · 200 OK
+              </div>
+
+              <div class="atmos-clarity-wipe" id="w1-clarity-wipe"></div>
             </div>
 
-            <div id="w1-char-stand" class="puppet-rig" style="left: 420px; top: 510px; width: 580px; height: 830px;">
-              <img id="img-w1-stand" src="./assets/img/char_stand.png" alt="الشخصية الأساسية واقفة" />
+            <!-- Hero Giant Kinetic Hook Words (0.00s - 1.22s) -->
+            <div id="hook-center-stage" data-layout-allow-overflow="true">
+              <span class="hook-word" id="hk-w0">وش</span>
+              <span class="hook-word" id="hk-w1">يعني</span>
+              <span class="hook-word" id="hk-w2" style="direction: ltr; font-size: 124px; padding: 14px 36px;">API؟</span>
             </div>
-            <div id="w1-char-confused" class="puppet-rig waist-fade" style="left: 410px; top: 540px; width: 580px; height: 830px; opacity: 0;">
-              <img id="img-w1-confused" src="./assets/img/char_confused.png" alt="الشخصية متعجبة من التعقيد" />
+
+            <!-- Playful Flork peeking during Hook -->
+            <div id="w1-flork-q" class="flork-rig" data-layout-allow-overflow="true" style="left: 720px; top: 340px; width: 250px; height: 250px; opacity: 0;">
+              <img id="img-flork-q" src="./assets/img/flork_question.webp" alt="حيرة" />
             </div>
-            <div id="w1-char-talk" class="puppet-rig" style="left: 420px; top: 510px; width: 580px; height: 830px; opacity: 0;">
+
+            <!-- Beat 2 (1.22s - 3.55s): Complexity & Tension -->
+            <div id="w1-flork-math" class="sticker-card" data-layout-allow-overflow="true" style="left: 68px; top: 380px; width: 410px; height: 410px; opacity: 0; z-index: 25;">
+              <img id="img-flork-math" src="./assets/img/flork_math.webp" alt="معادلات معقدة" />
+              <div class="light-sweep" id="w1-math-sweep"></div>
+            </div>
+
+            <div id="w1-char-confused" class="puppet-rig waist-fade" data-layout-allow-overflow="true" style="left: 440px; top: 540px; width: 590px; height: 860px; opacity: 0; z-index: 30;">
+              <img id="img-w1-confused" src="./assets/img/char_confused.png" alt="الشخصية متعجبة" />
+            </div>
+
+            <!-- Beat 3 (3.55s - 5.58s): Clarity Wipe & Simplification -->
+            <div id="w1-simple-seal" class="ink-badge-inverted" data-layout-allow-overflow="true" style="position: absolute; left: 74px; top: 440px; width: 420px; padding: 28px 30px; opacity: 0; z-index: 32;">
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+                <div style="font-size: 38px; font-weight: 900; color: #ffffff;">فكرة بسيطة جداً</div>
+              </div>
+              <div class="light-sweep" id="w1-simple-sweep"></div>
+            </div>
+
+            <div id="w1-char-talk" class="puppet-rig" data-layout-allow-overflow="true" style="left: 430px; top: 520px; width: 590px; height: 850px; opacity: 0; z-index: 34;">
               <img id="img-w1-talk" src="./assets/img/char_talk.png" alt="الشخصية تشرح ببساطة" />
             </div>
           </div>
 
           <!-- =========================================================
-               WORLD 2: RESTAURANT METAPHOR (x = 1280 .. 3180) [5.45s - 20.40s]
+               WORLD 2: PURE MATTE WHITE RESTAURANT CANVAS (x = 1280 .. 3780) [5.50s - 20.30s]
                ========================================================= -->
-          <div class="world-zone clip" id="world-2" data-start="5.45" data-duration="14.95" data-layout-allow-overflow="true" style="left: 1280px; width: 1900px;">
+          <div class="world-zone clip" id="world-2" data-start="5.50" data-duration="14.80" data-layout-allow-overflow="true" style="left: 1280px; width: 2500px;">
+            <div id="w2-pure-canvas" data-layout-allow-overflow="true"></div>
+
+            <!-- DoF Background Layer (sharp alone -> blurs smoothly when Waiter enters!) -->
             <div id="w2-bg-stage" data-layout-allow-overflow="true" style="position: absolute; inset: 0; will-change: filter;">
-              <div id="w2-restaurant" class="ink-card" data-layout-allow-overflow="true" style="position: absolute; left: 590px; top: 240px; width: 520px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
-                <svg width="240" height="170" viewBox="0 0 240 170" fill="none">
+              <!-- Center Storefront -->
+              <div id="w2-restaurant" data-layout-allow-overflow="true" style="position: absolute; left: 960px; top: 240px; width: 580px; height: 390px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <svg width="440" height="290" viewBox="0 0 240 170" fill="none" style="filter: drop-shadow(0 16px 24px rgba(0,0,0,0.14));">
                   <path d="M25 65 L215 65 L225 92 L15 92 Z" fill="#ffffff" stroke="#000000" stroke-width="5" stroke-linejoin="round"/>
                   <path d="M55 65 L50 92 M90 65 L88 92 M120 65 L120 92 M150 65 L152 92 M185 65 L190 92" stroke="#000000" stroke-width="5"/>
                   <path d="M55 65 L88 65 L88 92 L50 92 Z" fill="#000000"/>
                   <path d="M120 65 L152 65 L152 92 L120 92 Z" fill="#000000"/>
                   <path d="M185 65 L215 65 L225 92 L190 92 Z" fill="#000000"/>
-                  <rect x="30" y="92" width="180" height="68" fill="#f8f9fa" stroke="#000000" stroke-width="5"/>
+                  <rect x="30" y="92" width="180" height="68" fill="#ffffff" stroke="#000000" stroke-width="5"/>
                   <rect x="102" y="108" width="36" height="52" fill="#000000"/>
-                  <rect x="48" y="108" width="36" height="28" fill="#ffffff" stroke="#000000" stroke-width="4"/>
-                  <rect x="156" y="108" width="36" height="28" fill="#ffffff" stroke="#000000" stroke-width="4"/>
-                  <rect x="66" y="18" width="108" height="40" rx="8" fill="#000000"/>
-                  <text data-layout-ignore="true" x="120" y="46" fill="#ffffff" font-size="24" font-weight="900" text-anchor="middle" font-family="CairoLocal, sans-serif">مطعم</text>
+                  <rect x="48" y="108" width="36" height="28" fill="#f4f4f5" stroke="#000000" stroke-width="4"/>
+                  <rect x="156" y="108" width="36" height="28" fill="#f4f4f5" stroke="#000000" stroke-width="4"/>
+                  <rect x="66" y="16" width="108" height="42" rx="10" fill="#000000"/>
+                  <text data-layout-ignore="true" x="120" y="45" fill="#ffffff" font-size="25" font-weight="900" text-anchor="middle" font-family="CairoLocal, sans-serif">مطعم</text>
                 </svg>
-                <div style="font-size: 46px; font-weight: 800; color: #52525b; margin-top: 4px;">تخيل إنك داخل مطعم</div>
               </div>
 
-              <div id="w2-customer-group" data-layout-allow-overflow="true" style="position: absolute; left: 110px; top: 650px; width: 420px; height: 520px;">
-                <div class="flork-rig" style="left: 10px; top: 20px; width: 250px; height: 250px;">
-                  <img id="img-flork-table" src="./assets/img/flork_table.webp" alt="الزبون على الطاولة" />
+              <!-- Customer seated at Bistro Table (Left) -->
+              <div id="w2-customer-group" data-layout-allow-overflow="true" style="position: absolute; left: 340px; top: 680px; width: 460px; height: 520px; opacity: 0;">
+                <div class="flork-rig" style="left: 16px; top: 10px; width: 260px; height: 260px;">
+                  <img id="img-flork-table" src="./assets/img/flork_table.webp" alt="الزبون" />
                 </div>
-                <svg style="position: absolute; left: 95px; top: 225px;" width="270" height="170" viewBox="0 0 270 170" fill="none">
+                <svg style="position: absolute; left: 105px; top: 225px;" width="280" height="175" viewBox="0 0 270 170" fill="none">
                   <ellipse cx="135" cy="34" rx="115" ry="22" fill="#ffffff" stroke="#000000" stroke-width="5"/>
                   <ellipse cx="135" cy="34" rx="75" ry="11" fill="#e4e4e7" stroke="#000000" stroke-width="3"/>
                   <line x1="135" y1="56" x2="135" y2="148" stroke="#000000" stroke-width="7"/>
                   <ellipse cx="135" cy="150" rx="64" ry="12" fill="#000000"/>
                 </svg>
-                <div class="ink-card-soft" style="position: absolute; left: 20px; top: 410px; padding: 10px 26px; display: inline-block; white-space: nowrap;">
-                  <span style="font-size: 46px; font-weight: 900; color: #000000;">أنت (الطاولة)</span>
+                <div class="ink-card-soft" style="position: absolute; left: 60px; top: 410px; padding: 12px 32px; white-space: nowrap;">
+                  <span style="font-size: 54px; font-weight: 900; color: #000000;">أنت (الطاولة)</span>
                 </div>
               </div>
 
-              <div id="w2-kitchen-group" data-layout-allow-overflow="true" style="position: absolute; left: 1220px; top: 580px; width: 520px; height: 610px;">
-                <div class="ink-card" style="width: 460px; height: 420px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8f9fa;">
-                  <svg id="w2-steam" width="140" height="60" viewBox="0 0 140 60" fill="none">
-                    <path d="M40 50 Q28 32 42 16 Q52 6 40 0" stroke="#52525b" stroke-width="4" stroke-linecap="round"/>
-                    <path d="M72 52 Q60 30 74 14 Q84 4 72 0" stroke="#000000" stroke-width="4.5" stroke-linecap="round"/>
-                    <path d="M104 50 Q92 32 106 16 Q116 6 104 0" stroke="#52525b" stroke-width="4" stroke-linecap="round"/>
+              <!-- Swinging Kitchen Doors & Animated Steam (Right) -->
+              <div id="w2-kitchen-group" data-layout-allow-overflow="true" style="position: absolute; left: 1680px; top: 610px; width: 520px; height: 610px;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                  <svg id="w2-steam" width="180" height="72" viewBox="0 0 180 72" fill="none">
+                    <path d="M48 62 Q34 40 50 20 Q62 8 48 0" stroke="#71717a" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M90 66 Q76 38 92 18 Q104 6 90 0" stroke="#000000" stroke-width="5.5" stroke-linecap="round"/>
+                    <path d="M132 62 Q118 40 134 20 Q146 8 132 0" stroke="#71717a" stroke-width="5" stroke-linecap="round"/>
                   </svg>
-                  <svg width="310" height="250" viewBox="0 0 310 250" fill="none">
-                    <rect x="20" y="15" width="130" height="220" rx="8" fill="#ffffff" stroke="#000000" stroke-width="6"/>
-                    <rect x="160" y="15" width="130" height="220" rx="8" fill="#ffffff" stroke="#000000" stroke-width="6"/>
+                  <svg width="360" height="300" viewBox="0 0 310 250" fill="none" style="filter: drop-shadow(0 18px 26px rgba(0,0,0,0.16));">
+                    <rect x="20" y="15" width="130" height="220" rx="10" fill="#ffffff" stroke="#000000" stroke-width="6"/>
+                    <rect x="160" y="15" width="130" height="220" rx="10" fill="#ffffff" stroke="#000000" stroke-width="6"/>
                     <circle cx="85" cy="85" r="24" fill="#e4e4e7" stroke="#000000" stroke-width="5"/>
                     <circle cx="225" cy="85" r="24" fill="#e4e4e7" stroke="#000000" stroke-width="5"/>
                     <rect x="128" y="135" width="10" height="44" rx="4" fill="#000000"/>
                     <rect x="172" y="135" width="10" height="44" rx="4" fill="#000000"/>
                   </svg>
-                  <div style="font-size: 46px; font-weight: 900; color: #000000; margin-top: 6px;">المطبخ (الأكل)</div>
+                  <div class="ink-card-soft" style="margin-top: 16px; padding: 12px 32px; white-space: nowrap;">
+                    <span style="font-size: 54px; font-weight: 900; color: #000000;">المطبخ (الأكل)</span>
+                  </div>
                 </div>
               </div>
 
-              <svg id="w2-comm-svg" style="position: absolute; left: 430px; top: 810px; pointer-events: none;" width="820" height="140" viewBox="0 0 820 140" fill="none">
-                <path id="w2-comm-line" d="M 30 70 Q 410 10 790 70" stroke="#000000" stroke-width="5" stroke-dasharray="16 14" stroke-linecap="round"/>
-                <circle cx="410" cy="40" r="32" fill="#000000"/>
-                <text data-layout-ignore="true" x="410" y="51" fill="#ffffff" font-size="34" font-weight="900" text-anchor="middle" font-family="CairoLocal, sans-serif">؟</text>
+              <!-- Wide Panorama Communication Path (Customer <-> Kitchen) -->
+              <svg id="w2-comm-svg" style="position: absolute; left: 710px; top: 800px; pointer-events: none; opacity: 0;" width="1020" height="170" viewBox="0 0 1020 170" fill="none">
+                <path id="w2-comm-line" d="M 30 90 Q 510 10 990 90" stroke="#000000" stroke-width="7" stroke-dasharray="1060" stroke-dashoffset="1060" stroke-linecap="round"/>
+                <circle id="w2-comm-q" cx="510" cy="52" r="44" fill="#000000" opacity="0"/>
+                <text id="w2-comm-qt" data-layout-ignore="true" x="510" y="68" fill="#ffffff" font-size="44" font-weight="900" text-anchor="middle" font-family="CairoLocal, sans-serif" opacity="0">؟</text>
               </svg>
             </div>
 
-            <div id="w2-stop-sticker" class="sticker-card" data-layout-allow-overflow="true" style="left: 1270px; top: 250px; width: 390px; height: 390px; opacity: 0;">
+            <!-- Dynamic Foreground Actors (Crisp 0px blur!) -->
+            <div id="w2-char-think" class="puppet-rig" data-layout-allow-overflow="true" style="left: 1180px; top: 610px; width: 470px; height: 730px; opacity: 0;">
+              <img id="img-w2-think" src="./assets/img/char_think.png" alt="الشخصية تفكر" />
+            </div>
+
+            <!-- No-Entry Kitchen Stop Sticker -->
+            <div id="w2-stop-sticker" class="sticker-card" data-layout-allow-overflow="true" style="left: 1660px; top: 230px; width: 410px; height: 410px; opacity: 0; z-index: 38;">
               <img id="img-stop" src="./assets/img/sticker_stop.webp" alt="ممنوع دخول المطبخ" />
-              <div style="position: absolute; bottom: 0; left: 0; right: 0; background: #000000; color: #ffffff; text-align: center; padding: 10px; font-size: 30px; font-weight: 900;">
+              <div style="position: absolute; bottom: 0; left: 0; right: 0; background: #000000; color: #ffffff; text-align: center; padding: 12px; font-size: 32px; font-weight: 900;">
                 ممنوع تدخل المطبخ!
               </div>
             </div>
 
-            <div id="w2-char-think" class="puppet-rig" data-layout-allow-overflow="true" style="left: 610px; top: 560px; width: 470px; height: 730px; opacity: 0;">
-              <img id="img-w2-think" src="./assets/img/char_think.png" alt="الشخصية تفكر في المطعم" />
-            </div>
-
-            <div id="w2-waiter-rig" class="flork-rig" data-layout-allow-overflow="true" style="left: 710px; top: 610px; width: 320px; height: 390px; opacity: 0; z-index: 40;">
-              <img id="img-w2-waiter" src="./assets/img/flork_point.webp" alt="النادل الوسيط" style="height: 290px;" />
-              <svg style="position: absolute; left: 112px; top: 222px;" width="96" height="44" viewBox="0 0 96 44" fill="none">
+            <!-- Waiter Flork Hero Foreground -->
+            <div id="w2-waiter-rig" class="flork-rig" data-layout-allow-overflow="true" style="left: 1090px; top: 610px; width: 340px; height: 430px; opacity: 0; z-index: 44;">
+              <img id="img-w2-waiter" src="./assets/img/flork_point.webp" alt="النادل الوسيط" style="height: 300px;" />
+              <svg style="position: absolute; left: 124px; top: 254px;" width="92" height="40" viewBox="0 0 96 44" fill="none">
                 <polygon points="8,6 44,22 8,38" fill="#000000"/>
                 <polygon points="88,6 52,22 88,38" fill="#000000"/>
                 <circle cx="48" cy="22" r="8" fill="#ffffff" stroke="#000000" stroke-width="4"/>
               </svg>
-              <div class="ink-badge-inverted" style="position: absolute; left: 30px; top: 295px; width: 260px; padding: 10px 16px; text-align: center;">
-                <span style="font-size: 30px; font-weight: 900; color: #ffffff;">النادل (الوسيط)</span>
+              <div class="ink-badge-inverted" style="position: absolute; left: 30px; top: 312px; width: 280px; padding: 12px 18px; text-align: center;">
+                <span style="font-size: 32px; font-weight: 900; color: #ffffff;">النادل (الوسيط)</span>
               </div>
             </div>
 
-            <div id="w2-order-ticket" class="ink-card" data-layout-allow-overflow="true" style="position: absolute; left: 520px; top: 620px; width: 180px; height: 110px; display: flex; align-items: center; justify-content: center; gap: 10px; opacity: 0; z-index: 45;">
-              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
+            <!-- Order Ticket & Silver Cloche Dish -->
+            <div id="w2-order-ticket" class="ink-card-3d" data-layout-allow-overflow="true" style="position: absolute; left: 690px; top: 640px; width: 210px; height: 122px; display: flex; align-items: center; justify-content: center; gap: 12px; opacity: 0; z-index: 48;">
+              <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.6">
                 <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/>
                 <path d="M8 7h8M8 11h8M8 15h5"/>
               </svg>
-              <span style="font-size: 28px; font-weight: 900;">الطلب</span>
+              <span style="font-size: 32px; font-weight: 900;">الطلب</span>
             </div>
 
-            <div id="w2-food-dome" class="ink-card" data-layout-allow-overflow="true" style="position: absolute; left: 1050px; top: 610px; width: 190px; height: 115px; display: flex; align-items: center; justify-content: center; gap: 10px; opacity: 0; z-index: 45;">
-              <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
+            <div id="w2-food-dome" class="ink-card-3d" data-layout-allow-overflow="true" style="position: absolute; left: 1580px; top: 630px; width: 215px; height: 124px; display: flex; align-items: center; justify-content: center; gap: 12px; opacity: 0; z-index: 48;">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.6">
                 <path d="M2 18h20M4 18a8 8 0 0 1 16 0M12 10V7M10 7h4"/>
               </svg>
-              <span style="font-size: 28px; font-weight: 900;">الأكل</span>
+              <span style="font-size: 32px; font-weight: 900;">الأكل</span>
             </div>
 
-            <div id="w2-flork-shrug" class="flork-rig" data-layout-allow-overflow="true" style="left: 180px; top: 470px; width: 260px; height: 260px; opacity: 0; z-index: 48;">
-              <img id="img-w2-shrug" src="./assets/img/flork_shrug.webp" alt="بسيطة صح؟" />
+            <div id="w2-flork-shrug" class="flork-rig" data-layout-allow-overflow="true" style="left: 140px; top: 480px; width: 320px; height: 320px; opacity: 0; z-index: 50;">
+              <img id="img-w2-shrug" src="./assets/img/flork_shrug.webp" alt="بسيطة صح" />
             </div>
-            <div id="w2-char-thumbs" class="puppet-rig waist-fade" data-layout-allow-overflow="true" style="left: 410px; top: 560px; width: 470px; height: 730px; opacity: 0; z-index: 48;">
-              <img id="img-w2-thumbs" src="./assets/img/char_thumbs.png" alt="بسيطة صح" />
+            <div id="w2-char-thumbs" class="puppet-rig waist-fade" data-layout-allow-overflow="true" style="left: 480px; top: 550px; width: 510px; height: 770px; opacity: 0; z-index: 50;">
+              <img id="img-w2-thumbs" src="./assets/img/char_thumbs.png" alt="بسيطة" />
             </div>
           </div>
 
           <!-- =========================================================
-               WORLD 3: THE TECHNICAL BRIDGE (x = 3400 .. 4480) [20.10s - 31.70s]
+               WORLD 3: 3D APP DEPTH -> BLUEPRINT BOARD (x = 4000 .. 6200) [20.15s - 31.65s]
                ========================================================= -->
-          <div class="world-zone clip" id="world-3" data-start="20.10" data-duration="11.60" data-layout-allow-overflow="true" style="left: 3400px; width: 1080px;">
-            <div id="w3-app-a" class="ink-card" style="position: absolute; left: 72px; top: 230px; width: 310px; height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;">
-              <svg width="78" height="78" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
-                <path d="M12 18h.01"/>
-              </svg>
-              <div class="label-tag">تطبيق أول</div>
-              <div class="label-sub">يحتاج خدمة</div>
-            </div>
+          <div class="world-zone clip" id="world-3" data-start="20.15" data-duration="11.50" data-layout-allow-overflow="true" style="left: 4000px; width: 2200px;">
+            <!-- Part 3A Background: 3D Depth Studio (20.22s -> 23.40s) -->
+            <div id="w3a-depth-bg" data-layout-allow-overflow="true"></div>
 
-            <div id="w3-api-node" class="ink-badge-inverted" style="position: absolute; left: 420px; top: 270px; width: 240px; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 30;">
-              <div style="font-size: 62px; font-weight: 900; color: #ffffff; direction: ltr;">API</div>
-              <div style="font-size: 28px; font-weight: 800; color: #e4e4e7;">الوسيط</div>
-            </div>
-
-            <div id="w3-app-b" class="ink-card" style="position: absolute; left: 698px; top: 230px; width: 310px; height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;">
-              <svg width="78" height="78" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="20" height="8" x="2" y="2" rx="2" ry="2"/>
-                <rect width="20" height="8" x="2" y="14" rx="2" ry="2"/>
-                <line x1="6" x2="6.01" y1="6" y2="6"/>
-                <line x1="6" x2="6.01" y1="18" y2="18"/>
-              </svg>
-              <div class="label-tag">تطبيق ثاني</div>
-              <div class="label-sub">الأنظمة</div>
-            </div>
-
-            <svg style="position: absolute; left: 0; top: 200px; pointer-events: none; z-index: 25;" width="1080" height="360" viewBox="0 0 1080 360" fill="none">
-              <path id="w3-req-path" d="M 382 135 L 420 135 M 660 135 L 698 135" stroke="#000000" stroke-width="7" stroke-linecap="round" stroke-dasharray="140" stroke-dashoffset="140"/>
-              <path id="w3-block-line" d="M 225 290 C 225 345, 855 345, 855 290" stroke="#71717a" stroke-width="5" stroke-dasharray="12 10"/>
-            </svg>
-
-            <div id="w3-packet-req" data-layout-allow-overflow="true" class="ink-card" style="position: absolute; left: 170px; top: 500px; padding: 12px 26px; opacity: 0; z-index: 35;">
-              <span style="font-size: 30px; font-weight: 900;">طلب ➔ Request</span>
-            </div>
-            <div id="w3-packet-res" data-layout-allow-overflow="true" class="ink-badge-inverted" style="position: absolute; left: 610px; top: 500px; padding: 12px 26px; opacity: 0; z-index: 35;">
-              <span style="font-size: 30px; font-weight: 900; color: #ffffff;">⬅ الرد Response</span>
-            </div>
-
-            <div id="w3-guard-badge" class="ink-card" style="position: absolute; left: 64px; top: 570px; width: 420px; height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; z-index: 32;">
-              <div class="flork-rig" style="position: relative; width: 190px; height: 190px;">
-                <img id="img-w3-guard" src="./assets/img/flork_guard.webp" alt="حماية الأنظمة" />
+            <!-- Part 3A: 3D Tilt-Shift Floating App Tiles (Sheet 4 & Sheet 11 bottom row) -->
+            <div id="w3a-stage" data-layout-allow-overflow="true" style="position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; perspective: 1200px;">
+              <!-- Blurred foreground depth tile (counter-motion outward) -->
+              <div id="w3a-tile-near" data-layout-ignore="true" class="ink-card-3d" style="position: absolute; left: -60px; top: 1040px; width: 320px; height: 320px; filter: blur(9px); opacity: 0.72; display: flex; align-items: center; justify-content: center; transform: rotateY(22deg) rotateZ(-14deg);">
+                <svg width="130" height="130" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
               </div>
-              <div style="background: #000000; color: #ffffff; padding: 8px 18px; border-radius: 10px; font-size: 28px; font-weight: 900; margin-top: 6px;">
-                ✖ ممنوع الدخول المباشر
+
+              <!-- Blurred top-right depth tile -->
+              <div id="w3a-tile-far" data-layout-ignore="true" class="ink-card-soft" style="position: absolute; right: -30px; top: 180px; width: 290px; height: 290px; filter: blur(6px); opacity: 0.75; display: flex; align-items: center; justify-content: center; transform: rotateY(-24deg) rotateZ(12deg);">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.2">
+                  <rect width="18" height="18" x="3" y="3" rx="4"/>
+                  <path d="M8 12h8M12 8v8"/>
+                </svg>
+              </div>
+
+              <!-- Razor-sharp hero 3D API Cube -->
+              <div id="w3a-api-hero" class="ink-badge-inverted" style="position: absolute; left: 290px; top: 380px; width: 500px; height: 290px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 25;">
+                <div style="font-size: 112px; font-weight: 900; color: #ffffff; line-height: 1; direction: ltr;">API</div>
+                <div style="font-size: 30px; font-weight: 800; color: #e4e4e7; margin-top: 8px;">نفس النادل بين التطبيقات</div>
+                <div class="light-sweep" id="w3a-sweep"></div>
+              </div>
+
+              <div id="w3a-char-point" class="puppet-rig" data-layout-allow-overflow="true" style="left: 440px; top: 610px; width: 540px; height: 790px; z-index: 30;">
+                <img id="img-w3-point" src="./assets/img/char_point.png" alt="الشخصية تشير للوسيط" />
               </div>
             </div>
 
-            <div id="w3-char-point" class="puppet-rig" style="left: 460px; top: 530px; width: 550px; height: 810px;">
-              <img id="img-w3-point" src="./assets/img/char_point.png" alt="الشخصية تشير للوسيط" />
-            </div>
-            <div id="w3-char-shock" class="puppet-rig waist-fade" style="left: 470px; top: 560px; width: 550px; height: 810px; opacity: 0;">
-              <img id="img-w3-shock" src="./assets/img/char_shock.png" alt="الشخصية تحذر من الدخول المباشر" />
-            </div>
-            <div id="w3-char-talk" class="puppet-rig" style="left: 460px; top: 530px; width: 550px; height: 810px; opacity: 0;">
-              <img id="img-w3-talk" src="./assets/img/char_talk.png" alt="الشخصية تشرح الطلب والرد" />
+            <!-- Part 3B (x = 1080 inside world-3): Textured Blueprint Grid Board (23.34s -> 31.56s) -->
+            <div id="w3b-board-wrap" data-layout-allow-overflow="true" style="position: absolute; left: 1080px; top: 0; width: 1120px; height: 1920px;">
+              <div id="w3b-blueprint-board" data-layout-allow-overflow="true">
+                <!-- Subtle cup ring stain like Sheet 9 -->
+                <svg style="position: absolute; right: 240px; top: 380px; opacity: 0.14; pointer-events: none;" width="280" height="280" viewBox="0 0 280 280" fill="none">
+                  <circle cx="140" cy="140" r="118" stroke="#52525b" stroke-width="7"/>
+                  <circle cx="144" cy="136" r="114" stroke="#71717a" stroke-width="2" stroke-dasharray="30 16"/>
+                </svg>
+              </div>
+
+              <!-- 3D Tactile App A & App B Monoliths -->
+              <div id="w3b-app-a" class="ink-card-3d" style="position: absolute; left: 72px; top: 270px; width: 310px; height: 270px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; opacity: 0;">
+                <svg width="82" height="82" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.4">
+                  <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
+                  <path d="M12 18h.01"/>
+                </svg>
+                <div class="label-tag">تطبيق أول</div>
+              </div>
+
+              <div id="w3b-api-pill" class="ink-badge-inverted" style="position: absolute; left: 422px; top: 325px; width: 236px; height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; z-index: 25;">
+                <div style="font-size: 56px; font-weight: 900; color: #ffffff; direction: ltr;">API</div>
+                <div class="light-sweep" id="w3b-pill-sweep"></div>
+              </div>
+
+              <div id="w3b-app-b" class="ink-card-3d" style="position: absolute; left: 698px; top: 270px; width: 310px; height: 270px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; opacity: 0;">
+                <svg width="82" height="82" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.4">
+                  <rect width="20" height="8" x="2" y="2" rx="2" ry="2"/>
+                  <rect width="20" height="8" x="2" y="14" rx="2" ry="2"/>
+                  <line x1="6" x2="6.01" y1="6" y2="6"/>
+                  <line x1="6" x2="6.01" y1="18" y2="18"/>
+                </svg>
+                <div class="label-tag">أنظمة التطبيق</div>
+              </div>
+
+              <!-- Animated SVG Direct-Block X -> Checkmark & Request/Response Arcs -->
+              <svg style="position: absolute; left: 0; top: 210px; pointer-events: none; z-index: 28;" width="1080" height="440" viewBox="0 0 1080 440" fill="none">
+                <path id="w3b-req-arc" d="M 382 195 Q 402 195 422 195 M 658 195 Q 678 195 698 195" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-dasharray="140" stroke-dashoffset="140"/>
+                <!-- Bold Ink X over direct access (26.38s -> 28.12s) -->
+                <path id="w3b-x-1" d="M 760 80 L 950 290" stroke="#000000" stroke-width="18" stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="320"/>
+                <path id="w3b-x-2" d="M 950 80 L 760 290" stroke="#000000" stroke-width="18" stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="320"/>
+                <!-- Crisp Checkmark upon API Request flow (28.35s+) -->
+                <path id="w3b-check" d="M 885 72 L 930 120 L 1010 38" stroke="#000000" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="260" stroke-dashoffset="260"/>
+              </svg>
+
+              <!-- Guard & Shock Character (26.38s - 28.20s) -->
+              <div id="w3b-guard-badge" class="ink-card" style="position: absolute; left: 74px; top: 610px; width: 410px; height: 290px; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; z-index: 32;">
+                <div class="flork-rig" style="position: relative; width: 185px; height: 185px;">
+                  <img id="img-w3-guard" src="./assets/img/flork_guard.webp" alt="حماية" />
+                </div>
+                <div style="background: #000000; color: #ffffff; padding: 8px 18px; border-radius: 10px; font-size: 28px; font-weight: 900; margin-top: 6px;">
+                  ✖ ممنوع الدخول المباشر
+                </div>
+              </div>
+
+              <div id="w3b-char-shock" class="puppet-rig waist-fade" style="left: 480px; top: 560px; width: 540px; height: 800px; opacity: 0; z-index: 34;">
+                <img id="img-w3-shock" src="./assets/img/char_shock.png" alt="صدمة" />
+              </div>
+
+              <!-- Request & Response Travelling Packets (28.20s - 31.56s) -->
+              <div id="w3b-packet-req" data-layout-allow-overflow="true" class="ink-card-3d" style="position: absolute; left: 120px; top: 600px; padding: 14px 28px; opacity: 0; z-index: 36;">
+                <span style="font-size: 32px; font-weight: 900;">طلب ➔ Request</span>
+              </div>
+              <div id="w3b-packet-res" data-layout-allow-overflow="true" class="ink-badge-inverted" style="position: absolute; left: 650px; top: 600px; padding: 14px 28px; opacity: 0; z-index: 36;">
+                <span style="font-size: 32px; font-weight: 900; color: #ffffff;">⬅ الرد Response</span>
+              </div>
+
+              <div id="w3b-char-talk" class="puppet-rig" style="left: 460px; top: 560px; width: 540px; height: 800px; opacity: 0; z-index: 34;">
+                <img id="img-w3-talk" src="./assets/img/char_talk.png" alt="شرح الطلب والرد" />
+              </div>
             </div>
           </div>
 
           <!-- =========================================================
-               WORLD 4: E-COMMERCE & TABBY EXAMPLE (x = 4720 .. 6000) [31.45s - 43.05s]
+               WORLD 4: 3D IPHONE DIVE-IN & TABBY (x = 6400 .. 8300) [31.45s - 43.05s]
                ========================================================= -->
-          <div class="world-zone clip" id="world-4" data-start="31.45" data-duration="11.60" data-layout-allow-overflow="true" style="left: 4720px; width: 1080px;">
-            <div id="w4-phone" data-layout-allow-overflow="true" class="ink-card" style="position: absolute; left: 46px; top: 215px; width: 452px; height: 980px; border-width: 6px; border-radius: 42px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; background: #ffffff; z-index: 20;">
-              <div style="width: 130px; height: 16px; background: #000000; border-radius: 8px; margin: 0 auto;"></div>
+          <div class="world-zone clip" id="world-4" data-start="31.45" data-duration="11.60" data-layout-allow-overflow="true" style="left: 6400px; width: 1900px;">
+            <div id="w4-desk-bg" data-layout-allow-overflow="true"></div>
 
-              <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2.5px solid #e4e4e7; padding-bottom: 12px;">
-                <span style="font-size: 29px; font-weight: 900;">متجر إلكتروني</span>
-                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
+            <!-- Parallax Foreground 3D Store Badges (Blurred edges like Sheet 4 Frame 6) -->
+            <div id="w4-badge-a" data-layout-ignore="true" class="ink-badge-inverted" style="position: absolute; left: 68px; top: 280px; width: 170px; height: 170px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 56px; font-weight: 900; filter: blur(2.5px); opacity: 0; z-index: 15;">
+              S
+            </div>
+            <div id="w4-badge-b" data-layout-ignore="true" class="ink-card-3d" style="position: absolute; left: 96px; top: 610px; width: 150px; height: 150px; border-radius: 36px; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 900; filter: blur(4px); opacity: 0; z-index: 15;">
+              Pay
+            </div>
+
+            <!-- Realistic 3D Floating iPhone Mockup -->
+            <div id="w4-phone" data-layout-allow-overflow="true" class="ink-card-3d" style="position: absolute; left: 260px; top: 210px; width: 560px; height: 1030px; border-width: 10px; border-radius: 58px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; background: #ffffff; z-index: 25;">
+              <div style="width: 150px; height: 22px; background: #000000; border-radius: 12px; margin: 0 auto;"></div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2.5px solid #e4e4e7; padding-bottom: 14px;">
+                <span style="font-size: 32px; font-weight: 900;">متجر إلكتروني</span>
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
                   <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
                   <path d="M3 6h18"/>
                   <path d="M16 10a4 4 0 0 1-8 0"/>
                 </svg>
               </div>
 
-              <div class="ink-card-soft" style="padding: 18px; display: flex; align-items: center; justify-content: space-between;">
+              <!-- Product Card inside Phone -->
+              <div class="ink-card-soft" style="padding: 20px; display: flex; align-items: center; justify-content: space-between;">
                 <div>
-                  <div style="font-size: 28px; font-weight: 900;">سماعة احترافية</div>
-                  <div style="font-size: 28px; font-weight: 700; color: #52525b;">فاتورة #402</div>
+                  <div style="font-size: 32px; font-weight: 900;">سماعة احترافية</div>
+                  <div style="font-size: 31px; font-weight: 700; color: #52525b;">فاتورة #402</div>
                 </div>
-                <div style="font-size: 30px; font-weight: 900; direction: ltr;">400 SAR</div>
+                <div style="font-size: 34px; font-weight: 900; direction: ltr;">400 SAR</div>
               </div>
 
-              <div style="display: flex; flex-direction: column; gap: 12px;">
-                <div style="font-size: 28px; font-weight: 800; color: #52525b;">وسيلة الدفع:</div>
-                <div id="w4-tabby-btn" class="ink-badge-inverted" style="padding: 20px 20px; display: flex; align-items: center; justify-content: space-between;">
+              <!-- Payment Choice + Tactile Tap Button -->
+              <div style="display: flex; flex-direction: column; gap: 14px; position: relative;">
+                <div style="font-size: 31px; font-weight: 800; color: #52525b;">اختر وسيلة الدفع:</div>
+                <div id="w4-tabby-btn" class="ink-badge-inverted" style="padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: hidden;">
                   <div>
-                    <div style="font-size: 30px; font-weight: 900; color: #ffffff;">الدفع عبر تابي</div>
-                    <div style="font-size: 28px; font-weight: 700; color: #e4e4e7;">4 دفعات شهرية</div>
+                    <div style="font-size: 32px; font-weight: 900; color: #ffffff;">الدفع عبر تابي</div>
+                    <div style="font-size: 31px; font-weight: 700; color: #e4e4e7;">4 دفعات بدون فوائد</div>
                   </div>
-                  <div style="background: #ffffff; color: #000000; padding: 6px 14px; border-radius: 10px; font-size: 28px; font-weight: 900; direction: ltr;">
+                  <div style="background: #ffffff; color: #000000; padding: 8px 16px; border-radius: 12px; font-size: 30px; font-weight: 900; direction: ltr;">
                     tabby
                   </div>
+                  <div class="light-sweep" id="w4-btn-sweep"></div>
                 </div>
+                <!-- Tactile Tap Ring positioned cleanly over Tabby badge -->
+                <div id="w4-tap-ring" data-layout-ignore="true" style="position: absolute; left: 32px; top: 68px; width: 76px; height: 76px; border-radius: 50%; border: 5px solid #000000; opacity: 0; pointer-events: none;"></div>
               </div>
 
-              <div id="w4-paid-stamp" style="background: #000000; color: #ffffff; border-radius: 20px; padding: 18px; display: flex; align-items: center; justify-content: center; gap: 12px; opacity: 0;">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
+              <div id="w4-paid-stamp" style="background: #000000; color: #ffffff; border-radius: 22px; padding: 20px; display: flex; align-items: center; justify-content: center; gap: 14px; opacity: 0;">
+                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
                   <circle cx="12" cy="12" r="10"/>
                   <path d="m9 12 2 2 4-4"/>
                 </svg>
-                <span style="font-size: 32px; font-weight: 900;">تم الدفع بنجاح ✓</span>
+                <span style="font-size: 34px; font-weight: 900;">تم الدفع بنجاح ✓</span>
               </div>
             </div>
 
-            <div id="w4-flork-card" data-layout-allow-overflow="true" class="flork-rig" style="left: 556px; top: 280px; width: 380px; height: 380px; opacity: 0;">
-              <img id="img-w4-card" src="./assets/img/flork_card.webp" alt="الدفع بالبطاقة عبر تابي" />
+            <!-- Flork with Card beside phone -->
+            <div id="w4-flork-card" data-layout-allow-overflow="true" class="flork-rig" style="left: 850px; top: 380px; width: 340px; height: 340px; opacity: 0; z-index: 30;">
+              <img id="img-w4-card" src="./assets/img/flork_card.webp" alt="الدفع بالبطاقة" />
             </div>
 
-            <div id="w4-tabby-api-box" data-layout-allow-overflow="true" class="ink-card" style="position: absolute; left: 534px; top: 225px; width: 500px; height: 490px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; opacity: 0; z-index: 25;">
-              <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2.5px solid #e4e4e7; padding-bottom: 12px;">
-                <span style="font-size: 32px; font-weight: 900; direction: ltr;">API تابي</span>
-                <span style="background: #000000; color: #ffffff; padding: 6px 14px; border-radius: 10px; font-size: 28px; font-weight: 800;">معالجة</span>
+            <!-- Tabby API Processing Panel (Right stage of World 4, cleanly isolated!) -->
+            <div id="w4-tabby-api-box" data-layout-allow-overflow="true" class="ink-card-3d" style="position: absolute; left: 1120px; top: 310px; width: 800px; height: 610px; padding: 34px; display: flex; flex-direction: column; justify-content: space-between; opacity: 0; z-index: 26;">
+              <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #e4e4e7; padding-bottom: 16px;">
+                <span style="font-size: 40px; font-weight: 900; direction: ltr;">Tabby API Engine</span>
+                <span style="background: #000000; color: #ffffff; padding: 8px 20px; border-radius: 12px; font-size: 32px; font-weight: 800;">معالجة الطلب</span>
               </div>
 
-              <div class="ink-card-soft" style="padding: 14px 18px; display: flex; align-items: center; justify-content: space-between;">
-                <span style="font-size: 28px; font-weight: 800;">تفاصيل الفاتورة</span>
-                <span style="font-size: 28px; font-weight: 900; direction: ltr;">400 SAR</span>
+              <div class="ink-card-soft" style="padding: 18px 24px; display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: 32px; font-weight: 900;">تفاصيل الفاتورة</span>
+                <span style="font-size: 34px; font-weight: 900; direction: ltr;">400 SAR</span>
               </div>
 
-              <div style="font-size: 28px; font-weight: 800; color: #52525b;">تقسيم على دفعات:</div>
-              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; direction: ltr;">
-                <div id="w4-inst-1" class="ink-badge-inverted" style="padding: 12px 4px; text-align: center; opacity: 0;">
-                  <div style="font-size: 28px; font-weight: 900;">100</div>
-                  <div style="font-size: 28px; color: #e4e4e7;">1</div>
+              <div style="font-size: 32px; font-weight: 800; color: #52525b;">تقسيم تلقائي على 4 دفعات:</div>
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; direction: ltr;">
+                <div id="w4-inst-1" class="ink-badge-inverted" style="padding: 18px 8px; text-align: center; opacity: 0;">
+                  <div style="font-size: 38px; font-weight: 900;">100</div>
+                  <div style="font-size: 32px; color: #e4e4e7;">Q1</div>
                 </div>
-                <div id="w4-inst-2" class="ink-badge-inverted" style="padding: 12px 4px; text-align: center; opacity: 0;">
-                  <div style="font-size: 28px; font-weight: 900;">100</div>
-                  <div style="font-size: 28px; color: #e4e4e7;">2</div>
+                <div id="w4-inst-2" class="ink-badge-inverted" style="padding: 18px 8px; text-align: center; opacity: 0;">
+                  <div style="font-size: 38px; font-weight: 900;">100</div>
+                  <div style="font-size: 32px; color: #e4e4e7;">Q2</div>
                 </div>
-                <div id="w4-inst-3" class="ink-badge-inverted" style="padding: 12px 4px; text-align: center; opacity: 0;">
-                  <div style="font-size: 28px; font-weight: 900;">100</div>
-                  <div style="font-size: 28px; color: #e4e4e7;">3</div>
+                <div id="w4-inst-3" class="ink-badge-inverted" style="padding: 18px 8px; text-align: center; opacity: 0;">
+                  <div style="font-size: 38px; font-weight: 900;">100</div>
+                  <div style="font-size: 32px; color: #e4e4e7;">Q3</div>
                 </div>
-                <div id="w4-inst-4" class="ink-badge-inverted" style="padding: 12px 4px; text-align: center; opacity: 0;">
-                  <div style="font-size: 28px; font-weight: 900;">100</div>
-                  <div style="font-size: 28px; color: #e4e4e7;">4</div>
+                <div id="w4-inst-4" class="ink-badge-inverted" style="padding: 18px 8px; text-align: center; opacity: 0;">
+                  <div style="font-size: 38px; font-weight: 900;">100</div>
+                  <div style="font-size: 32px; color: #e4e4e7;">Q4</div>
                 </div>
               </div>
             </div>
 
-            <div id="w4-flork-celebrate" data-layout-allow-overflow="true" class="flork-rig" style="left: 534px; top: 760px; width: 250px; height: 250px; opacity: 0; z-index: 30;">
-              <img id="img-w4-celebrate" src="./assets/img/flork_celebrate.webp" alt="احتفال بإتمام الدفع" />
+            <div id="w4-flork-celebrate" data-layout-allow-overflow="true" class="flork-rig" style="left: 860px; top: 340px; width: 310px; height: 310px; opacity: 0; z-index: 32;">
+              <img id="img-w4-celebrate" src="./assets/img/flork_celebrate.webp" alt="احتفال" />
             </div>
-            <div id="w4-cat-cool" data-layout-allow-overflow="true" class="sticker-card" style="left: 804px; top: 760px; width: 230px; height: 230px; opacity: 0; z-index: 30;">
-              <img id="img-w4-cat" src="./assets/img/sticker_cat_cool.webp" alt="قطة بالنظارة السوداء" />
+            <div id="w4-cat-cool" data-layout-allow-overflow="true" class="sticker-card" style="left: 870px; top: 700px; width: 290px; height: 290px; opacity: 0; z-index: 32;">
+              <img id="img-w4-cat" src="./assets/img/sticker_cat_cool.webp" alt="قطة رائعة" />
             </div>
           </div>
 
           <!-- =========================================================
-               WORLD 5: BRIDGE, PRIVACY & CTA (x = 6200 .. 7300) [42.80s - 50.00s]
+               WORLD 5: BRIDGE ARCH & INTIMATE FINALE (x = 8500 .. 9600) [42.80s - 50.00s]
                ========================================================= -->
-          <div class="world-zone clip" id="world-5" data-start="42.80" data-duration="7.20" data-layout-allow-overflow="true" style="left: 6200px; width: 1080px;">
-            <div id="w5-bridge-stage" style="position: absolute; left: 60px; top: 340px; width: 960px; height: 430px;">
-              <div class="ink-card" style="position: absolute; left: 0; top: 80px; width: 230px; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
-                  <rect width="18" height="18" x="3" y="3" rx="3"/>
+          <div class="world-zone clip" id="world-5" data-start="42.80" data-duration="7.20" data-layout-allow-overflow="true" style="left: 8500px; width: 1080px;">
+            <div id="w5-horizon-bg" data-layout-allow-overflow="true"></div>
+
+            <!-- Beat 1 (42.90s -> 47.30s): Minimalist Arch Bridge + Lock Seal -->
+            <div id="w5-bridge-stage" data-layout-allow-overflow="true" style="position: absolute; left: 50px; top: 380px; width: 980px; height: 500px;">
+              <div id="w5-node-l" class="ink-card-3d" style="position: absolute; left: 0; top: 110px; width: 230px; height: 230px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
+                <svg width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
+                  <rect width="18" height="18" x="3" y="3" rx="4"/>
                   <path d="M9 9h6v6H9z"/>
                 </svg>
                 <span class="label-tag">تطبيق 1</span>
               </div>
 
-              <div class="ink-card" style="position: absolute; right: 0; top: 80px; width: 230px; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
-                  <rect width="18" height="18" x="3" y="3" rx="3"/>
+              <div id="w5-node-r" class="ink-card-3d" style="position: absolute; right: 0; top: 110px; width: 230px; height: 230px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
+                <svg width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
+                  <rect width="18" height="18" x="3" y="3" rx="4"/>
                   <path d="M8 12h8M12 8v8"/>
                 </svg>
                 <span class="label-tag">تطبيق 2</span>
               </div>
 
-              <svg style="position: absolute; left: 220px; top: 40px; pointer-events: none;" width="520" height="220" viewBox="0 0 520 220" fill="none">
-                <path id="w5-bridge-arch" d="M 10 155 Q 260 20 510 155" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-dasharray="600" stroke-dashoffset="600"/>
-                <line id="w5-bridge-deck" x1="10" y1="155" x2="510" y2="155" stroke="#000000" stroke-width="6" stroke-dasharray="500" stroke-dashoffset="500"/>
+              <svg style="position: absolute; left: 220px; top: 45px; pointer-events: none;" width="540" height="250" viewBox="0 0 540 250" fill="none">
+                <path id="w5-bridge-arch" d="M 10 175 Q 270 12 530 175" stroke="#000000" stroke-width="9" stroke-linecap="round" stroke-dasharray="640" stroke-dashoffset="640"/>
+                <line id="w5-bridge-deck" x1="10" y1="175" x2="530" y2="175" stroke="#000000" stroke-width="7" stroke-dasharray="540" stroke-dashoffset="540"/>
               </svg>
 
-              <div id="w5-bridge-pill" class="ink-badge-inverted" style="position: absolute; left: 345px; top: 135px; width: 270px; padding: 12px 20px; text-align: center;">
-                <div style="font-size: 36px; font-weight: 900; color: #ffffff;">جسر الـ API</div>
+              <div id="w5-bridge-pill" class="ink-badge-inverted" style="position: absolute; left: 345px; top: 155px; width: 290px; padding: 14px 22px; text-align: center;">
+                <div style="font-size: 38px; font-weight: 900; color: #ffffff;">جسر الـ API</div>
               </div>
 
-              <div id="w5-privacy-badge" class="ink-card" style="position: absolute; left: 265px; top: 285px; width: 430px; padding: 14px 22px; display: flex; align-items: center; justify-content: center; gap: 14px; opacity: 0;">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.6">
+              <div id="w5-privacy-badge" class="ink-card" style="position: absolute; left: 255px; top: 340px; width: 470px; padding: 16px 24px; display: flex; align-items: center; justify-content: center; gap: 14px; opacity: 0;">
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.6">
                   <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                 </svg>
-                <span style="font-size: 28px; font-weight: 900;">بدون كشف التفاصيل</span>
+                <span style="font-size: 30px; font-weight: 900;">خصوصية وأمان تام</span>
               </div>
             </div>
 
-            <div id="w5-cta-card" class="ink-badge-inverted" style="position: absolute; left: 74px; top: 320px; width: 460px; padding: 28px; opacity: 0; z-index: 35;">
-              <div style="font-size: 40px; font-weight: 900; color: #ffffff; line-height: 1.3;">تابعنا الآن ↗</div>
-              <div style="font-size: 28px; font-weight: 700; color: #e4e4e7; margin-top: 8px;">لشروحات تقنية أكثر</div>
+            <!-- Beat 2 (47.36s -> 50.00s): Intimate Follow CTA -->
+            <div id="w5-cta-card" class="ink-badge-inverted" style="position: absolute; left: 74px; top: 310px; width: 480px; padding: 32px; opacity: 0; z-index: 35;">
+              <div style="font-size: 46px; font-weight: 900; color: #ffffff; line-height: 1.3;">تابعنا الآن ↗</div>
+              <div style="font-size: 30px; font-weight: 700; color: #e4e4e7; margin-top: 8px;">لشروحات تقنية أكثر</div>
+              <div class="light-sweep" id="w5-cta-sweep"></div>
             </div>
 
-            <div id="w5-sticker-point" class="sticker-card" style="left: 96px; top: 620px; width: 270px; height: 270px; opacity: 0;">
+            <div id="w5-sticker-point" class="sticker-card" style="left: 96px; top: 640px; width: 290px; height: 290px; opacity: 0;">
               <img id="img-w5-point-sticker" src="./assets/img/sticker_point_you.webp" alt="تابعنا" />
             </div>
 
-            <div id="w5-char-point-you" class="puppet-rig waist-fade" style="left: 420px; top: 550px; width: 600px; height: 840px; opacity: 0;">
+            <div id="w5-char-point-you" class="puppet-rig waist-fade" style="left: 410px; top: 530px; width: 620px; height: 870px; opacity: 0;">
               <img id="img-w5-point-you" src="./assets/img/char_point_you.png" alt="الشخصية تشير إليك للمتابعة" />
             </div>
           </div>
@@ -773,14 +916,9 @@
         </div>
       </div>
 
-      <!-- Kinetic Caption Backdrop & Stage -->
+      <!-- Kinetic Caption Backdrop & Stage (Hidden during centered Act 1 intro!) -->
       <div id="caption-backdrop" class="clip" data-start="0" data-duration="50.0"></div>
       <div id="caption-stage" class="clip" data-start="0" data-duration="50.0" data-layout-allow-overlap="true"></div>
-
-      <!-- Bottom Progress Bar -->
-      <div id="bottom-progress-track" class="clip" data-start="0" data-duration="50.0">
-        <div id="bottom-progress-fill"></div>
-      </div>
 
       <!-- Cinema Overlays -->
       <div id="breathing-vignette" class="clip" data-start="0" data-duration="50.0"></div>
@@ -789,8 +927,9 @@
     </div>
 
     <script>
+      // Note: Phrase 0 ("وش يعني API؟") plays on #hook-center-stage (0.00-1.22s),
+      // while Phrases 1..28 play smoothly on #caption-stage!
       const PHRASES = [
-        { id: 0, start: 0.0, end: 1.22, words: [{ w: "وش", s: 0.0, e: 0.26 }, { w: "يعني", s: 0.26, e: 0.56 }, { w: "API؟", s: 0.56, e: 1.22 }] },
         { id: 1, start: 1.22, end: 3.56, words: [{ w: "الكلمة", s: 1.22, e: 1.6 }, { w: "ممكن", s: 1.6, e: 1.86 }, { w: "تبان", s: 1.86, e: 2.1 }, { w: "معقدة", s: 2.1, e: 2.52 }, { w: "وتقنية", s: 2.52, e: 3.04 }, { w: "شوي", s: 3.04, e: 3.56 }] },
         { id: 2, start: 3.56, end: 5.6, words: [{ w: "بس", s: 3.56, e: 3.82 }, { w: "صدقني", s: 3.82, e: 4.24 }, { w: "انها", s: 4.24, e: 4.46 }, { w: "ابسط", s: 4.46, e: 4.8 }, { w: "مما", s: 4.8, e: 5.02 }, { w: "تتوقع", s: 5.02, e: 5.6 }] },
         { id: 3, start: 5.6, end: 6.68, words: [{ w: "تخيل", s: 5.6, e: 6.0 }, { w: "انك", s: 6.0, e: 6.24 }, { w: "في", s: 6.24, e: 6.34 }, { w: "مطعم", s: 6.34, e: 6.68 }] },
@@ -839,7 +978,10 @@
 
       const tl = gsap.timeline({ paused: true });
 
-      function addPendulumSway(target, start, end, baseAngle = 3.8, amp = 1.35, period = 1.8) {
+      // =========================================================
+      // DIVERSE MOTION VOCABULARY (6 distinct kinetic helpers)
+      // =========================================================
+      function addPendulumSway(target, start, end, baseAngle = 3.8, amp = 1.4, period = 1.7) {
         let t = start;
         let dir = 1;
         tl.set(target, { rotation: baseAngle - amp }, start);
@@ -849,8 +991,8 @@
           if (dur <= 0.05) break;
           tl.to(target, {
             rotation: baseAngle + dir * amp,
-            scaleY: dir > 0 ? 0.988 : 1.0,
-            scaleX: dir > 0 ? 1.012 : 1.0,
+            scaleY: dir > 0 ? 0.986 : 1.0,
+            scaleX: dir > 0 ? 1.014 : 1.0,
             duration: dur,
             ease: "sine.inOut",
           }, t);
@@ -859,219 +1001,323 @@
         }
       }
 
-      function popIn(target, t, finalScale = 1, rot = 0) {
-        tl.set(target, { opacity: 0, scale: 0.72, y: 26, rotation: rot - 4 }, Math.max(0, t - 0.02))
-          .to(target, { opacity: 1, scale: 0.92 * finalScale, y: 6, duration: 0.05, ease: "power2.in" }, t)
-          .to(target, { scale: 1.06 * finalScale, y: -4, rotation: rot + 1.5, duration: 0.14, ease: "power3.out" }, t + 0.05)
-          .to(target, { scale: finalScale, y: 0, rotation: rot, duration: 0.14, ease: "power2.out" }, t + 0.19);
+      // 1. Directional Whip Slide (horizontal/diagonal glide + angle settle)
+      function swoopSlide(target, t, { fromX = 220, fromY = 0, fromRot = 5, toRot = 0, dur = 0.44 } = {}) {
+        tl.set(target, { opacity: 0, x: fromX, y: fromY, rotation: fromRot, scale: 0.96 }, Math.max(0, t - 0.02))
+          .to(target, { opacity: 1, x: 0, y: 0, rotation: toRot, scale: 1, duration: dur, ease: "expo.out" }, t);
       }
 
+      // 2. Z-Axis Depth Dive (from foreground blur or deep distance)
+      function depthDive(target, t, { fromScale = 1.7, fromBlur = 12, toRot = 0, dur = 0.42 } = {}) {
+        tl.set(target, { opacity: 0, scale: fromScale, filter: `blur(${fromBlur}px)`, rotation: toRot - 2 }, Math.max(0, t - 0.02))
+          .to(target, { opacity: 1, scale: 1.0, filter: "blur(0px)", rotation: toRot, duration: dur, ease: "power4.out" }, t);
+      }
+
+      // 3. Elastic Squash Drop (pre-squash + bounce)
+      function elasticDrop(target, t, { fromY = -90, finalScale = 1, rot = 0 } = {}) {
+        tl.set(target, { opacity: 0, y: fromY, scale: 0.86, rotation: rot + 4 }, Math.max(0, t - 0.02))
+          .to(target, { opacity: 1, y: 8, scaleX: 1.05 * finalScale, scaleY: 0.93 * finalScale, rotation: rot - 1, duration: 0.2, ease: "power3.in" }, t)
+          .to(target, { y: 0, scaleX: finalScale, scaleY: finalScale, rotation: rot, duration: 0.26, ease: "back.out(1.7)" }, t + 0.2);
+      }
+
+      // 4. 3D Card Tilt Reveal (rotateY/X perspective settle)
+      function cardTiltIn(target, t, { fromRotY = -28, fromRotX = 12, toRotZ = 0, dur = 0.48 } = {}) {
+        tl.set(target, { opacity: 0, rotateY: fromRotY, rotateX: fromRotX, rotation: toRotZ - 3, scale: 0.9 }, Math.max(0, t - 0.02))
+          .to(target, { opacity: 1, rotateY: 0, rotateX: 0, rotation: toRotZ, scale: 1, duration: dur, ease: "power3.out" }, t);
+      }
+
+      // 5. Retinal 2-frame Flash
       function retinalFlash(t) {
         tl.set("#retinal-flash", { opacity: 0 }, Math.max(0, t - 0.01))
-          .to("#retinal-flash", { opacity: 0.88, duration: 0.033, ease: "none" }, t)
-          .to("#retinal-flash", { opacity: 0, duration: 0.066, ease: "power2.out" }, t + 0.033);
+          .to("#retinal-flash", { opacity: 0.84, duration: 0.032, ease: "none" }, t)
+          .to("#retinal-flash", { opacity: 0, duration: 0.068, ease: "power2.out" }, t + 0.032);
       }
 
-      // Progress bar (baseline set in GSAP only)
-      tl.set("#bottom-progress-fill", { scaleX: 0 }, 0)
-        .to("#bottom-progress-fill", { scaleX: 1, duration: 49.8, ease: "none" }, 0);
-
-      const chapterEl = document.getElementById("chapter-label");
-      const chapters = [
-        { t: 0.0, text: "01 · وش يعني API؟" },
-        { t: 5.58, text: "02 · تشبيه المطعم والنادل" },
-        { t: 20.22, text: "03 · الوسيط بين التطبيقات" },
-        { t: 31.56, text: "04 · مثال المتجر والدفع عبر تابي" },
-        { t: 42.9, text: "05 · جسر آمن للبيانات" },
-      ];
-      chapters.forEach((c) => {
-        tl.call(() => { chapterEl.textContent = c.text; }, null, c.t);
-      });
-
-      // ACT 1 (0.00s -> 5.58s)
+      // =========================================================
+      // ACT 1: ATMOSPHERIC MONOCHROME HOOK (0.00s -> 5.58s)
+      // =========================================================
       tl.set("#spatial-world", { x: 0, y: 0 }, 0)
-        .set("#grid-layer", { x: 0, y: 0 }, 0)
-        .set("#camera-rig", { scale: 1.0 }, 0);
+        .set("#camera-rig", { scale: 1.0, rotation: 0 }, 0)
+        .set("#caption-backdrop", { opacity: 0 }, 0);
 
-      tl.to("#camera-rig", { scale: 1.05, duration: 3.25, ease: "power1.inOut" }, 0.2)
-        .to("#camera-rig", { scale: 1.0, duration: 1.85, ease: "power2.out" }, 3.6);
+      // Living elliptical moving atmospheric background orbs + rotating ink rings
+      tl.set("#w1-orb-a", { x: -40, y: -30, scale: 0.95 }, 0)
+        .set("#w1-orb-b", { x: 40, y: 30, scale: 1.05 }, 0)
+        .to("#w1-orb-a", { x: 180, y: 120, scale: 1.18, duration: 3.5, ease: "sine.inOut" }, 0)
+        .to("#w1-orb-b", { x: -190, y: -140, scale: 0.9, duration: 3.5, ease: "sine.inOut" }, 0)
+        .to("#w1-orbit-rings", { rotation: 48, scale: 1.12, duration: 3.6, ease: "power1.inOut" }, 0);
 
-      popIn("#w1-api-card", 0.48, 1, -1.5);
-      tl.set("#w1-sweep", { x: -200 }, 0)
-        .to("#w1-sweep", { x: 900, duration: 0.55, ease: "power2.inOut" }, 0.72);
+      // Counter-motion parallax symbols moving smoothly without edge clipping
+      tl.to("#w1-float-far", { x: -35, y: -40, duration: 3.5, ease: "none" }, 0)
+        .to("#w1-float-near", { x: 45, y: -55, rotation: 8, duration: 3.5, ease: "none" }, 0)
+        .to("#w1-float-mid", { x: -35, y: 45, duration: 3.5, ease: "none" }, 0);
 
-      popIn("#w1-bracket-l", 0.58, 1, -6);
-      popIn("#w1-bracket-r", 0.64, 1, 6);
-      tl.to("#w1-bracket-l", { y: -38, rotation: -10, duration: 2.6, ease: "sine.inOut" }, 1.05)
-        .to("#w1-bracket-r", { y: -46, rotation: 10, duration: 2.6, ease: "sine.inOut" }, 1.05);
+      // Continuous kinetic camera push -> twist -> pull
+      tl.to("#camera-rig", { scale: 1.16, rotation: -0.7, duration: 1.15, ease: "power2.inOut" }, 0.0)
+        .to("#camera-rig", { scale: 1.02, rotation: 0.5, duration: 2.30, ease: "power2.out" }, 1.18)
+        .to("#camera-rig", { scale: 1.08, rotation: 0, duration: 2.0, ease: "sine.inOut" }, 3.55);
 
-      popIn("#w1-flork-q", 0.08, 1, -4);
-      tl.to("#w1-flork-q", { opacity: 0, y: -30, scale: 0.85, duration: 0.16 }, 1.16);
+      // Hook Giant Kinetic Centerpiece ("وش" 0.00 -> "يعني" 0.26 -> "API؟" 0.56)
+      const hookWords = [
+        { id: "#hk-w0", s: 0.0, e: 0.26 },
+        { id: "#hk-w1", s: 0.26, e: 0.56 },
+        { id: "#hk-w2", s: 0.56, e: 1.16 },
+      ];
+      hookWords.forEach((hw) => {
+        tl.set(hw.id, { opacity: 0, scale: 0.72, y: 34, filter: "blur(10px)", backgroundColor: "#000000", color: "#ffffff" }, Math.max(0, hw.s - 0.01))
+          .to(hw.id, { opacity: 1, scale: 1.08, y: -4, filter: "blur(0px)", duration: 0.09, ease: "power3.out" }, hw.s)
+          .to(hw.id, { scale: 1.0, y: 0, backgroundColor: hw.id === "#hk-w2" ? "#000000" : "rgba(0,0,0,0)", color: hw.id === "#hk-w2" ? "#ffffff" : "#000000", duration: 0.1, ease: "power2.out" }, hw.e);
+      });
+      swoopSlide("#w1-flork-q", 0.35, { fromX: 90, fromY: -40, fromRot: 14, toRot: -5, dur: 0.36 });
 
-      addPendulumSway("#w1-char-stand", 0.0, 1.2, 3.8, 1.4, 1.6);
-      tl.to("#w1-char-stand", { opacity: 0, duration: 0.1 }, 1.2);
+      // Kinetic upward whip exit for Hook at 1.14s
+      tl.to("#hook-center-stage", { y: -140, scale: 1.18, opacity: 0, filter: "blur(8px)", duration: 0.16, ease: "power3.in" }, 1.12)
+        .to("#w1-flork-q", { y: -110, opacity: 0, rotation: 16, duration: 0.16, ease: "power2.in" }, 1.12);
 
-      popIn("#w1-flork-math", 1.24, 1, -2);
-      tl.set("#w1-char-confused", { opacity: 1 }, 1.22);
-      addPendulumSway("#w1-char-confused", 1.22, 3.48, -4.2, 1.5, 1.5);
-      tl.to("#breathing-vignette", { opacity: 0.75, duration: 0.45 }, 1.4);
-      tl.to("#w1-flork-math", { opacity: 0, y: -24, scale: 0.88, duration: 0.14 }, 3.42)
-        .to("#w1-char-confused", { opacity: 0, duration: 0.1 }, 3.48);
+      // Beat 2 (1.22s - 3.55s): Complexity & Tension
+      tl.to("#caption-backdrop", { opacity: 1, duration: 0.25 }, 1.2);
+      cardTiltIn("#w1-flork-math", 1.24, { fromRotY: 28, fromRotX: -12, toRotZ: -2.5, dur: 0.44 });
+      tl.set("#w1-math-sweep", { x: -220 }, 1.24)
+        .to("#w1-math-sweep", { x: 800, duration: 0.48, ease: "power2.inOut" }, 1.48);
+      swoopSlide("#w1-char-confused", 1.22, { fromX: 220, fromY: 20, fromRot: 6, toRot: -4.2, dur: 0.42 });
+      addPendulumSway("#w1-char-confused", 1.64, 3.48, -4.2, 1.5, 1.4);
+      tl.to("#breathing-vignette", { opacity: 0.68, duration: 0.45 }, 1.35);
 
+      // Exit complexity at 3.45s
+      tl.to("#w1-flork-math", { x: -160, opacity: 0, rotation: -12, duration: 0.18, ease: "power2.in" }, 3.40)
+        .to("#w1-char-confused", { opacity: 0, x: 90, duration: 0.14, ease: "power2.in" }, 3.44);
+
+      // Beat 3 (3.55s - 5.58s): Clarity White Wipe + Talk Pose
       retinalFlash(3.55);
-      tl.to("#breathing-vignette", { opacity: 0.25, duration: 0.4 }, 3.58);
-      popIn("#w1-simple-card", 3.65, 1, 0);
-      tl.set("#w1-char-talk", { opacity: 1 }, 3.56);
-      addPendulumSway("#w1-char-talk", 3.56, 5.55, 4.2, 1.4, 1.4);
+      tl.to("#w1-clarity-wipe", { opacity: 1, duration: 0.22, ease: "power2.out" }, 3.56)
+        .to("#breathing-vignette", { opacity: 0.26, duration: 0.35 }, 3.58)
+        .to(["#w1-float-far", "#w1-float-near", "#w1-float-mid", "#w1-orbit-rings"], { opacity: 0, duration: 0.2 }, 3.56);
 
-      // ACT 2 (5.58s -> 20.22s)
+      depthDive("#w1-simple-seal", 3.60, { fromScale: 0.72, fromBlur: 8, toRot: -1, dur: 0.38 });
+      tl.set("#w1-simple-sweep", { x: -200 }, 3.6)
+        .to("#w1-simple-sweep", { x: 820, duration: 0.45, ease: "power2.inOut" }, 3.85);
+      elasticDrop("#w1-char-talk", 3.56, { fromY: 70, finalScale: 1, rot: 4.2 });
+      addPendulumSway("#w1-char-talk", 4.02, 5.55, 4.2, 1.4, 1.35);
+
+      // =========================================================
+      // ACT 2: RESTAURANT INFINITE SPATIAL CANVAS (5.58s -> 20.22s)
+      // Continuous multi-axis 3D camera journey (X, Y, Zoom, Rotation)
+      // =========================================================
       retinalFlash(5.56);
-      tl.to("#spatial-world", { x: -1620, duration: 0.65, ease: "power3.out" }, 5.56)
-        .to("#grid-layer", { x: -810, duration: 0.65, ease: "power3.out" }, 5.56);
+      // Camera arrives at Storefront Center (world-2 starts at x=1280, storefront at +960 -> world x ~ -1970)
+      tl.to("#spatial-world", { x: -1990, y: 120, duration: 0.68, ease: "expo.out" }, 5.56)
+        .to("#camera-rig", { scale: 1.12, rotation: -0.6, duration: 0.68, ease: "expo.out" }, 5.56);
 
-      tl.set("#w2-char-think", { opacity: 1 }, 5.58);
-      addPendulumSway("#w2-char-think", 5.58, 8.7, 3.6, 1.2, 1.7);
-      popIn("#w2-restaurant", 5.72, 1, 0);
+      depthDive("#w2-restaurant", 5.64, { fromScale: 0.8, fromBlur: 6, toRot: 0, dur: 0.42 });
+      swoopSlide("#w2-char-think", 5.58, { fromX: 200, fromY: 40, fromRot: 7, toRot: 3.6, dur: 0.46 });
+      addPendulumSway("#w2-char-think", 6.05, 8.65, 3.6, 1.2, 1.6);
 
-      tl.to("#spatial-world", { x: -1240, duration: 0.48, ease: "power2.out" }, 6.62)
-        .to("#grid-layer", { x: -620, duration: 0.48, ease: "power2.out" }, 6.62);
-      popIn("#w2-customer-group", 6.68, 1, 0);
+      // 6.68s: Swoop LEFT & zoom tight onto Customer at Bistro Table ("أنت جالس على الطاولة")
+      tl.to("#spatial-world", { x: -1350, y: -170, duration: 0.58, ease: "power3.out" }, 6.62)
+        .to("#camera-rig", { scale: 1.20, rotation: 0.8, duration: 0.58, ease: "power3.out" }, 6.62);
+      elasticDrop("#w2-customer-group", 6.68, { fromY: -60, rot: 0 });
 
-      tl.to("#spatial-world", { x: -2140, duration: 0.72, ease: "power3.inOut" }, 7.85)
-        .to("#grid-layer", { x: -1070, duration: 0.72, ease: "power3.inOut" }, 7.85)
-        .to("#w2-char-think", { opacity: 0, duration: 0.18 }, 8.7);
+      // 7.75s: Sweeping diagonal camera pan across restaurant to Kitchen Doors ("والأكل في المطبخ")
+      tl.to("#spatial-world", { x: -2680, y: -140, duration: 0.82, ease: "power3.inOut" }, 7.75)
+        .to("#camera-rig", { scale: 1.22, rotation: -0.8, duration: 0.82, ease: "power3.inOut" }, 7.75)
+        .to("#w2-char-think", { opacity: 0, duration: 0.2 }, 8.4);
 
-      // Kitchen steam with stable baseline
-      tl.set("#w2-steam", { y: 8, opacity: 0.45 }, 0);
-      for (let st = 7.8; st < 19.0; st += 1.4) {
-        tl.to("#w2-steam", { y: -10, opacity: 1, duration: 0.68, ease: "sine.inOut" }, st)
-          .to("#w2-steam", { y: 8, opacity: 0.45, duration: 0.68, ease: "sine.inOut" }, st + 0.7);
+      // Autonomous steam rising continuously
+      tl.set("#w2-steam", { y: 10, opacity: 0.45 }, 0);
+      for (let st = 7.6; st < 19.2; st += 1.3) {
+        tl.to("#w2-steam", { y: -14, opacity: 1, duration: 0.62, ease: "sine.inOut" }, st)
+          .to("#w2-steam", { y: 10, opacity: 0.45, duration: 0.62, ease: "sine.inOut" }, st + 0.65);
       }
 
-      tl.to("#breathing-vignette", { opacity: 0.72, duration: 0.35 }, 8.9);
-      popIn("#w2-stop-sticker", 8.95, 1, -3);
-      tl.to("#camera-rig", { scale: 1.07, duration: 1.2, ease: "power1.out" }, 9.1);
-      tl.to("#w2-stop-sticker", { opacity: 0, scale: 0.85, y: -25, duration: 0.2 }, 11.4);
-      tl.to("#breathing-vignette", { opacity: 0.3, duration: 0.35 }, 11.55);
+      // 8.90s: Kitchen Stop Sticker + Push-In Tension
+      tl.to("#breathing-vignette", { opacity: 0.66, duration: 0.32 }, 8.88);
+      cardTiltIn("#w2-stop-sticker", 8.92, { fromRotY: -26, fromRotX: 10, toRotZ: -3, dur: 0.42 });
+      tl.to("#camera-rig", { scale: 1.30, rotation: -1.1, duration: 1.9, ease: "sine.inOut" }, 9.0)
+        .to("#w2-stop-sticker", { y: -40, scale: 0.85, opacity: 0, duration: 0.22, ease: "power2.in" }, 11.35)
+        .to("#breathing-vignette", { opacity: 0.28, duration: 0.35 }, 11.45);
 
-      tl.to("#camera-rig", { scale: 0.62, duration: 0.65, ease: "power3.out" }, 11.6)
-        .to("#spatial-world", { x: -1620, duration: 0.65, ease: "power3.out" }, 11.6)
-        .to("#grid-layer", { x: -810, duration: 0.65, ease: "power3.out" }, 11.6);
-      tl.to("#w2-comm-line", { strokeDashoffset: -120, duration: 2.3, ease: "none" }, 11.8);
+      // 11.60s: Dramatic WIDE PANORAMA ZOOM-OUT (Customer left + Storefront center + Kitchen right!)
+      tl.to("#camera-rig", { scale: 0.52, rotation: 0, duration: 0.72, ease: "expo.out" }, 11.58)
+        .to("#spatial-world", { x: -1990, y: -40, duration: 0.72, ease: "expo.out" }, 11.58)
+        .to("#camera-rig", { scale: 0.55, duration: 1.75, ease: "none" }, 12.32);
 
-      tl.to("#camera-rig", { scale: 1.04, duration: 0.55, ease: "power3.out" }, 14.12)
-        .to("#spatial-world", { x: -1620, duration: 0.55, ease: "power3.out" }, 14.12)
-        .to("#w2-bg-stage", { filter: "blur(5px)", duration: 0.45, ease: "power2.out" }, 14.15);
-      popIn("#w2-waiter-rig", 14.18, 1.05, 2.5);
+      // Animated dashed trace drawing across the panorama ONLY during wide shot
+      tl.to("#w2-comm-svg", { opacity: 1, duration: 0.12 }, 11.72)
+        .to("#w2-comm-line", { strokeDashoffset: 0, duration: 1.45, ease: "power2.inOut" }, 11.82)
+        .to(["#w2-comm-q", "#w2-comm-qt"], { opacity: 1, duration: 0.22 }, 12.45)
+        .to("#w2-comm-svg", { opacity: 0, duration: 0.16 }, 14.08);
 
-      tl.to("#w2-bg-stage", { filter: "blur(2px)", duration: 0.4 }, 15.5);
-      popIn("#w2-order-ticket", 15.54, 1, -2);
-      tl.to("#w2-order-ticket", { x: 180, y: -30, duration: 0.75, ease: "power2.inOut" }, 15.92);
+      // 14.12s: Deep Foreground Dive + Selective DoF Gaussian Blur on Background ("وهنا يجي دور النادل")
+      tl.to("#camera-rig", { scale: 1.14, rotation: 0.5, duration: 0.62, ease: "expo.out" }, 14.10)
+        .to("#spatial-world", { x: -1990, y: -110, duration: 0.62, ease: "expo.out" }, 14.10)
+        .to("#w2-bg-stage", { filter: "blur(7px)", duration: 0.45, ease: "power2.out" }, 14.14);
+      depthDive("#w2-waiter-rig", 14.14, { fromScale: 0.65, fromBlur: 10, toRot: 2.5, dur: 0.44 });
 
-      tl.to("#spatial-world", { x: -1960, duration: 0.75, ease: "power2.inOut" }, 16.72)
-        .to("#grid-layer", { x: -980, duration: 0.75, ease: "power2.inOut" }, 16.72)
-        .to("#w2-waiter-rig", { x: 240, rotation: 6, duration: 0.95, ease: "power2.inOut" }, 16.72)
-        .to("#w2-order-ticket", { x: 640, opacity: 0, duration: 0.75, ease: "power2.in" }, 16.85);
+      // 15.50s: Order Ticket pops + curved arc travel as Camera tracks Waiter RIGHT toward Kitchen
+      tl.to("#w2-bg-stage", { filter: "blur(3px)", duration: 0.35 }, 15.48);
+      swoopSlide("#w2-order-ticket", 15.52, { fromX: -140, fromY: 40, fromRot: -8, toRot: -2, dur: 0.36 });
+      tl.to("#w2-order-ticket", { x: 260, y: -36, rotation: 3, duration: 0.75, ease: "power2.inOut" }, 15.92);
 
-      popIn("#w2-food-dome", 18.0, 1, 2);
-      tl.to("#spatial-world", { x: -1460, duration: 0.9, ease: "power2.inOut" }, 18.36)
-        .to("#grid-layer", { x: -730, duration: 0.9, ease: "power2.inOut" }, 18.36)
-        .to("#w2-waiter-rig", { x: -240, rotation: -4, duration: 0.9, ease: "power2.inOut" }, 18.36)
-        .to("#w2-food-dome", { x: -720, duration: 0.9, ease: "power2.inOut" }, 18.36)
-        .to("#w2-bg-stage", { filter: "blur(0px)", duration: 0.4 }, 18.5);
+      tl.to("#spatial-world", { x: -2440, y: -100, duration: 0.85, ease: "power2.inOut" }, 16.70)
+        .to("#camera-rig", { scale: 1.18, rotation: -0.7, duration: 0.85, ease: "power2.inOut" }, 16.70)
+        .to("#w2-waiter-rig", { x: 420, rotation: 6, duration: 0.95, ease: "power2.inOut" }, 16.70)
+        .to("#w2-order-ticket", { x: 860, y: -60, opacity: 0, duration: 0.75, ease: "power2.in" }, 16.82);
 
-      tl.to("#spatial-world", { x: -1280, duration: 0.42, ease: "power2.out" }, 19.28)
-        .to("#grid-layer", { x: -640, duration: 0.42, ease: "power2.out" }, 19.28);
-      tl.to(["#w2-waiter-rig", "#w2-food-dome"], { opacity: 0, duration: 0.16 }, 19.3);
-      popIn("#w2-flork-shrug", 19.38, 1, -4);
-      tl.set("#w2-char-thumbs", { opacity: 1 }, 19.35);
-      addPendulumSway("#w2-char-thumbs", 19.35, 20.18, 4.5, 2.0, 0.9);
+      // 18.00s: Waiter picks up Food Cloche & Camera tracks Waiter gliding BACK LEFT to Customer!
+      swoopSlide("#w2-food-dome", 18.0, { fromX: 140, fromY: -30, fromRot: 6, toRot: 2, dur: 0.36 });
+      tl.to("#spatial-world", { x: -1620, y: -120, duration: 0.96, ease: "power2.inOut" }, 18.32)
+        .to("#camera-rig", { scale: 1.16, rotation: 0.7, duration: 0.96, ease: "power2.inOut" }, 18.32)
+        .to("#w2-waiter-rig", { x: -280, rotation: -4, duration: 0.96, ease: "power2.inOut" }, 18.32)
+        .to("#w2-food-dome", { x: -940, y: 12, duration: 0.96, ease: "power2.inOut" }, 18.32)
+        .to("#w2-bg-stage", { filter: "blur(0px)", duration: 0.45 }, 18.45);
 
-      // ACT 3 (20.22s -> 31.56s)
-      retinalFlash(20.2);
-      tl.to("#camera-rig", { scale: 1.0, duration: 0.55, ease: "power3.out" }, 20.22)
-        .to("#spatial-world", { x: -3400, duration: 0.65, ease: "power3.out" }, 20.22)
-        .to("#grid-layer", { x: -1700, duration: 0.65, ease: "power3.out" }, 20.22);
+      // 19.30s: "بسيطة صح؟" Pure clean closing beat — hide table/waiter/dome cleanly!
+      tl.to(["#w2-waiter-rig", "#w2-food-dome", "#w2-bg-stage"], { opacity: 0, duration: 0.16 }, 19.26)
+        .to("#camera-rig", { scale: 1.04, rotation: 0, duration: 0.42, ease: "power2.out" }, 19.30)
+        .to("#spatial-world", { x: -1280, y: 0, duration: 0.42, ease: "power2.out" }, 19.30);
+      swoopSlide("#w2-flork-shrug", 19.34, { fromX: -90, fromY: 30, fromRot: -12, toRot: -4, dur: 0.35 });
+      elasticDrop("#w2-char-thumbs", 19.34, { fromY: 60, rot: 4.5 });
+      addPendulumSway("#w2-char-thumbs", 19.72, 20.18, 4.5, 2.0, 0.85);
 
-      popIn("#w3-api-node", 20.32, 1.06, 0);
-      popIn("#w3-app-a", 21.8, 1, -1.5);
-      popIn("#w3-app-b", 22.0, 1, 1.5);
+      // =========================================================
+      // ACT 3: 3D APP DEPTH SPACE -> BLUEPRINT GRAPH BOARD (20.22s -> 31.56s)
+      // =========================================================
+      retinalFlash(20.20);
+      // 3A: Fly into 3D Perspective App Depth Space (x = 4000)
+      tl.to("#spatial-world", { x: -4000, y: 0, duration: 0.64, ease: "expo.out" }, 20.22)
+        .to("#camera-rig", { scale: 1.0, rotation: 0, duration: 0.64, ease: "expo.out" }, 20.22);
 
-      tl.set("#w3-char-point", { opacity: 1 }, 20.22);
-      addPendulumSway("#w3-char-point", 20.22, 26.25, 3.8, 1.3, 1.6);
-      tl.to("#w3-char-point", { opacity: 0, duration: 0.1 }, 26.28);
+      // Continuous Z-drift starts cleanly AFTER arrival tween ends (20.88s -> 23.32s)
+      tl.to("#camera-rig", { scale: 1.14, rotation: -0.6, duration: 2.44, ease: "sine.inOut" }, 20.88)
+        .to("#w3a-tile-near", { x: -90, y: 90, rotation: -22, duration: 2.9, ease: "none" }, 20.3)
+        .to("#w3a-tile-far", { x: 80, y: -70, rotation: 20, duration: 2.9, ease: "none" }, 20.3);
 
-      tl.to("#breathing-vignette", { opacity: 0.72, duration: 0.3 }, 26.38);
-      tl.set("#w3-char-shock", { opacity: 1 }, 26.38);
-      addPendulumSway("#w3-char-shock", 26.38, 28.08, -4.5, 1.8, 0.9);
-      popIn("#w3-guard-badge", 26.45, 1, -1);
-      tl.to("#w3-char-shock", { opacity: 0, duration: 0.1 }, 28.1)
-        .to("#w3-guard-badge", { opacity: 0, scale: 0.85, duration: 0.18 }, 28.1);
+      depthDive("#w3a-api-hero", 20.28, { fromScale: 0.62, fromBlur: 12, toRot: -1, dur: 0.46 });
+      tl.set("#w3a-sweep", { x: -220 }, 20.28)
+        .to("#w3a-sweep", { x: 860, duration: 0.55, ease: "power2.inOut" }, 20.62);
+      swoopSlide("#w3a-char-point", 20.24, { fromX: 180, fromY: 30, fromRot: 5, toRot: 3.8, dur: 0.44 });
+      addPendulumSway("#w3a-char-point", 20.7, 23.3, 3.8, 1.3, 1.5);
 
-      tl.to("#breathing-vignette", { opacity: 0.25, duration: 0.35 }, 28.25);
-      tl.set("#w3-char-talk", { opacity: 1 }, 28.22);
-      addPendulumSway("#w3-char-talk", 28.22, 31.5, 4.0, 1.3, 1.5);
+      // 3B: Glide sideways onto Textured Blueprint Graph-Paper Board (23.34s -> 31.56s)
+      tl.to("#spatial-world", { x: -5080, y: 0, duration: 0.72, ease: "expo.inOut" }, 23.34)
+        .to("#camera-rig", { scale: 1.02, rotation: 0.4, duration: 0.72, ease: "expo.inOut" }, 23.34)
+        .to("#w3b-blueprint-board", { opacity: 1, duration: 0.45 }, 23.40);
 
-      tl.to("#w3-req-path", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 28.3);
-      popIn("#w3-packet-req", 28.55, 1, 0);
-      tl.to("#w3-packet-req", { x: 460, duration: 1.1, ease: "power2.inOut" }, 28.92)
-        .to("#w3-packet-req", { opacity: 0, duration: 0.12 }, 30.05);
+      tl.to("#w3b-blueprint-board", { y: 140, duration: 8.1, ease: "none" }, 23.45);
 
-      popIn("#w3-packet-res", 30.15, 1, 0);
-      tl.to("#w3-packet-res", { x: -460, duration: 1.0, ease: "power2.inOut" }, 30.52);
+      cardTiltIn("#w3b-app-a", 23.55, { fromRotY: 28, toRotZ: -1.5, dur: 0.46 });
+      depthDive("#w3b-api-pill", 23.85, { fromScale: 0.75, fromBlur: 6, toRot: 0, dur: 0.4 });
+      cardTiltIn("#w3b-app-b", 24.05, { fromRotY: -28, toRotZ: 1.5, dur: 0.46 });
+      tl.set("#w3b-pill-sweep", { x: -200 }, 24.0)
+        .to("#w3b-pill-sweep", { x: 600, duration: 0.5, ease: "power2.inOut" }, 24.3);
 
-      // ACT 4 (31.56s -> 42.90s)
+      // 26.38s: Guard + Shock + Bold SVG X cross-out over direct access!
+      tl.to("#breathing-vignette", { opacity: 0.66, duration: 0.3 }, 26.36)
+        .to("#camera-rig", { scale: 1.09, rotation: -0.7, duration: 0.45, ease: "power2.out" }, 26.38);
+      tl.to("#w3b-x-1", { strokeDashoffset: 0, duration: 0.24, ease: "power3.out" }, 26.42)
+        .to("#w3b-x-2", { strokeDashoffset: 0, duration: 0.24, ease: "power3.out" }, 26.62);
+      elasticDrop("#w3b-guard-badge", 26.45, { fromY: -50, rot: -1.5 });
+      swoopSlide("#w3b-char-shock", 26.38, { fromX: 160, fromRot: 7, toRot: -4.4, dur: 0.38 });
+      addPendulumSway("#w3b-char-shock", 26.78, 28.08, -4.4, 1.8, 0.9);
+
+      // 28.10s: Swap Bold X -> Crisp Checkmark + Request/Response Flow
+      tl.to(["#w3b-guard-badge", "#w3b-char-shock", "#w3b-x-1", "#w3b-x-2"], { opacity: 0, duration: 0.16 }, 28.10)
+        .to("#breathing-vignette", { opacity: 0.26, duration: 0.3 }, 28.20)
+        .to("#camera-rig", { scale: 1.0, rotation: 0, duration: 0.48, ease: "power2.out" }, 28.22);
+
+      swoopSlide("#w3b-char-talk", 28.22, { fromX: 120, fromRot: 5, toRot: 4.0, dur: 0.36 });
+      addPendulumSway("#w3b-char-talk", 28.60, 31.50, 4.0, 1.3, 1.4);
+      tl.to("#w3b-req-arc", { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, 28.32)
+        .to("#w3b-check", { strokeDashoffset: 0, duration: 0.38, ease: "power3.out" }, 28.36);
+
+      swoopSlide("#w3b-packet-req", 28.55, { fromX: -120, fromY: 20, fromRot: -4, toRot: 0, dur: 0.32 });
+      tl.to("#w3b-packet-req", { x: 520, y: -24, duration: 1.05, ease: "power2.inOut" }, 28.92)
+        .to("#w3b-packet-req", { opacity: 0, scale: 0.85, duration: 0.14 }, 30.02);
+
+      swoopSlide("#w3b-packet-res", 30.12, { fromX: 120, fromY: -20, fromRot: 4, toRot: 0, dur: 0.3 });
+      tl.to("#w3b-packet-res", { x: -510, y: 12, duration: 0.98, ease: "power2.inOut" }, 30.46);
+
+      // =========================================================
+      // ACT 4: 3D IPHONE DIVE-IN & TABBY (31.56s -> 42.90s)
+      // =========================================================
       retinalFlash(31.54);
-      tl.to("#spatial-world", { x: -4720, duration: 0.65, ease: "power3.out" }, 31.56)
-        .to("#grid-layer", { x: -2360, duration: 0.65, ease: "power3.out" }, 31.56)
-        .to("#camera-rig", { scale: 1.0, duration: 0.65, ease: "power2.out" }, 31.56);
+      tl.to("#spatial-world", { x: -6400, y: 0, duration: 0.7, ease: "expo.out" }, 31.56)
+        .to("#camera-rig", { scale: 1.02, rotation: -0.8, duration: 0.7, ease: "expo.out" }, 31.56);
 
-      popIn("#w4-phone", 31.65, 1, -1);
+      cardTiltIn("#w4-phone", 31.64, { fromRotY: -22, fromRotX: 10, toRotZ: -2, dur: 0.55 });
+      tl.to("#w4-phone", { rotation: 0, duration: 1.8, ease: "sine.inOut" }, 32.2);
+      swoopSlide("#w4-badge-a", 31.72, { fromX: -110, fromY: 50, fromRot: -14, toRot: -6, dur: 0.5 });
+      swoopSlide("#w4-badge-b", 31.86, { fromX: -130, fromY: -30, fromRot: 12, toRot: 6, dur: 0.5 });
 
-      popIn("#w4-flork-card", 33.8, 1, -3);
-      tl.to("#w4-tabby-btn", { scale: 0.93, duration: 0.08, ease: "power2.in" }, 34.45)
-        .to("#w4-tabby-btn", { scale: 1.04, duration: 0.14, ease: "power2.out" }, 34.53)
-        .to("#w4-tabby-btn", { scale: 1.0, duration: 0.12, ease: "power1.out" }, 34.67);
+      // 33.78s: DEEP ZOOM DIVE directly onto the "الدفع عبر تابي" button (full-bleed phone UI focus!)
+      tl.to("#camera-rig", { scale: 1.44, rotation: 0.3, duration: 0.65, ease: "expo.inOut" }, 33.76)
+        .to("#spatial-world", { x: -6400, y: -150, duration: 0.65, ease: "expo.inOut" }, 33.76)
+        .to(["#w4-badge-a", "#w4-badge-b"], { x: -160, opacity: 0, duration: 0.4 }, 33.78);
 
-      tl.to("#w4-flork-card", { opacity: 0, scale: 0.85, duration: 0.16 }, 35.38);
-      popIn("#w4-tabby-api-box", 35.65, 1, 0);
+      // 34.45s: Tactile Squish & Ripple Haptics on Tabby Button!
+      tl.to("#w4-tabby-btn", { scale: 0.92, duration: 0.06, ease: "power2.in" }, 34.45)
+        .to("#w4-tabby-btn", { scale: 1.05, duration: 0.14, ease: "back.out(2)" }, 34.51)
+        .to("#w4-tabby-btn", { scale: 1.0, duration: 0.12, ease: "power1.out" }, 34.65);
+      tl.set("#w4-tap-ring", { opacity: 0.9, scale: 0.3 }, 34.45)
+        .to("#w4-tap-ring", { opacity: 0, scale: 1.9, duration: 0.42, ease: "power2.out" }, 34.46);
+      tl.set("#w4-btn-sweep", { x: -200 }, 34.48)
+        .to("#w4-btn-sweep", { x: 750, duration: 0.45, ease: "power2.inOut" }, 34.52);
 
-      popIn("#w4-inst-1", 39.66, 1, 0);
-      popIn("#w4-inst-2", 39.88, 1, 0);
-      popIn("#w4-inst-3", 40.10, 1, 0);
-      popIn("#w4-inst-4", 40.32, 1, 0);
+      // 35.50s: Pan right & isolate Tabby API Processing Hub cleanly (no phone edge sliver!)
+      tl.to("#camera-rig", { scale: 0.96, rotation: 0, duration: 0.72, ease: "expo.inOut" }, 35.50)
+        .to("#spatial-world", { x: -7380, y: 0, duration: 0.72, ease: "expo.inOut" }, 35.50);
+      cardTiltIn("#w4-tabby-api-box", 35.62, { fromRotY: -24, toRotZ: 0, dur: 0.48 });
 
-      // Show "تم الدفع بنجاح ✓" at 41.35s so it stays readable > 1.5s before Act 5
-      popIn("#w4-paid-stamp", 41.35, 1, 0);
-      popIn("#w4-flork-celebrate", 41.45, 1, -4);
-      popIn("#w4-cat-cool", 41.68, 1, 4);
+      // 39.66s: 4 Installment Cards cascade in
+      elasticDrop("#w4-inst-1", 39.66, { fromY: -70, rot: -2 });
+      elasticDrop("#w4-inst-2", 39.88, { fromY: -70, rot: 1 });
+      elasticDrop("#w4-inst-3", 40.10, { fromY: -70, rot: -1 });
+      elasticDrop("#w4-inst-4", 40.32, { fromY: -70, rot: 2 });
 
-      // ACT 5 (42.90s -> 50.00s)
+      // 41.12s: Hide API panel, glide back to frame Phone "تم الدفع بنجاح ✓" + Celebratory Flork & Cool Cat (0% clipping!)
+      tl.to("#w4-tabby-api-box", { opacity: 0, scale: 0.92, duration: 0.22 }, 41.10)
+        .to("#spatial-world", { x: -6580, y: -20, duration: 0.62, ease: "expo.out" }, 41.12)
+        .to("#camera-rig", { scale: 0.92, rotation: -0.4, duration: 0.62, ease: "expo.out" }, 41.12);
+      depthDive("#w4-paid-stamp", 41.28, { fromScale: 1.4, fromBlur: 8, toRot: 0, dur: 0.36 });
+      elasticDrop("#w4-flork-celebrate", 41.40, { fromY: 80, rot: -4 });
+      cardTiltIn("#w4-cat-cool", 41.58, { fromRotY: 30, toRotZ: 4, dur: 0.4 });
+
+      // =========================================================
+      // ACT 5: MINIMALIST BRIDGE & INTIMATE FINALE (42.90s -> 50.00s)
+      // =========================================================
       retinalFlash(42.88);
-      tl.to("#camera-rig", { scale: 1.0, duration: 0.5, ease: "power3.out" }, 42.9)
-        .to("#spatial-world", { x: -6200, duration: 0.65, ease: "power3.out" }, 42.9)
-        .to("#grid-layer", { x: -3100, duration: 0.65, ease: "power3.out" }, 42.9);
+      tl.to("#spatial-world", { x: -8500, y: 0, duration: 0.68, ease: "expo.out" }, 42.90)
+        .to("#camera-rig", { scale: 1.06, rotation: 0, duration: 0.68, ease: "expo.out" }, 42.90);
 
-      popIn("#w5-bridge-stage", 42.98, 1, 0);
-      tl.to("#w5-bridge-arch", { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 43.4)
-        .to("#w5-bridge-deck", { strokeDashoffset: 0, duration: 0.7, ease: "power2.out" }, 43.5);
+      // Pull-back starts cleanly AFTER arrival tween finishes (43.59s -> 47.04s)
+      tl.to("#camera-rig", { scale: 0.96, rotation: 0.4, duration: 3.45, ease: "sine.inOut" }, 43.59);
 
-      popIn("#w5-privacy-badge", 45.64, 1, 0);
+      swoopSlide("#w5-node-l", 42.96, { fromX: -180, fromRot: -6, toRot: 0, dur: 0.44 });
+      swoopSlide("#w5-node-r", 43.04, { fromX: 180, fromRot: 6, toRot: 0, dur: 0.44 });
+      tl.to("#w5-bridge-arch", { strokeDashoffset: 0, duration: 0.85, ease: "power2.out" }, 43.38)
+        .to("#w5-bridge-deck", { strokeDashoffset: 0, duration: 0.65, ease: "power2.out" }, 43.48);
+      depthDive("#w5-bridge-pill", 43.65, { fromScale: 0.65, fromBlur: 8, toRot: 0, dur: 0.38 });
+      elasticDrop("#w5-privacy-badge", 45.64, { fromY: 50, rot: 0 });
 
-      tl.to("#w5-bridge-stage", { opacity: 0, y: -40, duration: 0.3, ease: "power2.in" }, 47.05);
-      tl.to("#camera-rig", { scale: 1.04, duration: 2.2, ease: "power1.out" }, 47.36);
+      // 47.20s: Smooth upward sweep to Intimate Closing Callout
+      tl.to("#w5-bridge-stage", { opacity: 0, y: -90, scale: 0.9, duration: 0.32, ease: "power3.in" }, 47.05)
+        .to("#camera-rig", { scale: 1.07, rotation: -0.5, duration: 2.35, ease: "power1.out" }, 47.34);
 
-      popIn("#w5-cta-card", 47.42, 1, -2);
-      popIn("#w5-sticker-point", 47.65, 1, 3);
-      tl.set("#w5-char-point-you", { opacity: 1 }, 47.36);
-      addPendulumSway("#w5-char-point-you", 47.36, 49.95, 4.0, 1.5, 1.3);
+      swoopSlide("#w5-cta-card", 47.38, { fromX: -200, fromY: 20, fromRot: -5, toRot: -2, dur: 0.44 });
+      tl.set("#w5-cta-sweep", { x: -220 }, 47.4)
+        .to("#w5-cta-sweep", { x: 820, duration: 0.55, ease: "power2.inOut" }, 47.72);
+      cardTiltIn("#w5-sticker-point", 47.58, { fromRotY: -26, toRotZ: 3, dur: 0.44 });
+      elasticDrop("#w5-char-point-you", 47.36, { fromY: 90, rot: 4.0 });
+      addPendulumSway("#w5-char-point-you", 47.82, 49.95, 4.0, 1.5, 1.3);
 
-      // KINETIC INVERTED-POP CAPTIONS (Non-overlapping sweep exit)
+      // =========================================================
+      // KINETIC INVERTED-POP CAPTIONS (Phrases 1..28, zero overlap!)
+      // =========================================================
       phraseEls.forEach((p, idx) => {
         const enterT = p.start;
         const exitT = idx < phraseEls.length - 1 ? Math.max(enterT + 0.1, p.end - 0.08) : p.end;
 
-        tl.set(p.div, { opacity: 0, y: 12, filter: "blur(0px)" }, Math.max(0, enterT - 0.01))
+        tl.set(p.div, { opacity: 0, y: 14, filter: "blur(0px)" }, Math.max(0, enterT - 0.01))
           .to(p.div, { opacity: 1, y: 0, duration: 0.1, ease: "power2.out" }, enterT);
 
         p.words.forEach((wItem) => {
@@ -1079,18 +1325,18 @@
           const we = Math.max(ws + 0.08, Math.min(exitT, wItem.e));
           tl.set(wItem.el, {
             opacity: 0,
-            scale: 0.85,
-            y: 10,
-            filter: "blur(5px)",
+            scale: 0.84,
+            y: 12,
+            filter: "blur(6px)",
             backgroundColor: "#000000",
             color: "#ffffff",
           }, Math.max(0, ws - 0.015))
             .to(wItem.el, {
               opacity: 1,
-              scale: 1.06,
+              scale: 1.07,
               y: -2,
               filter: "blur(0px)",
-              duration: 0.07,
+              duration: 0.075,
               ease: "power3.out",
             }, ws)
             .to(wItem.el, {
@@ -1098,7 +1344,7 @@
               y: 0,
               backgroundColor: "rgba(0,0,0,0)",
               color: "#27272a",
-              opacity: 0.72,
+              opacity: 0.74,
               duration: 0.07,
               ease: "power1.out",
             }, we);
@@ -1106,9 +1352,9 @@
 
         if (idx < phraseEls.length - 1) {
           tl.to(p.div, {
-            y: -28,
+            y: -30,
             opacity: 0,
-            filter: "blur(4px)",
+            filter: "blur(5px)",
             duration: 0.075,
             ease: "power2.in",
           }, exitT);
