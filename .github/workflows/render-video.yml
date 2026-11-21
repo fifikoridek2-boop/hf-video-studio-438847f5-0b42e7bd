@@ -1,0 +1,109 @@
+name: Hyperframes Cloud Render
+run-name: "Render ${{ inputs.video_id }} [${{ inputs.run_tag }}]"
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_id:
+        description: "Video composition folder inside videos/"
+        required: true
+        type: string
+      quality:
+        description: "Render quality preset"
+        required: false
+        default: "high"
+        type: string
+      fps:
+        description: "Frames per second"
+        required: false
+        default: "30"
+        type: string
+      run_tag:
+        description: "Unique release and tracking tag"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  render-video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: تجهيز ملفات المشروع والفيديو
+        uses: actions/checkout@v4
+
+      - name: إعداد بيئة Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: استرجاع ذاكرة Hyperframes المؤقتة
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ~/.cache/hyperframes
+          key: ${{ runner.os }}-hyperframes-0.9.43-${{ hashFiles('videos/*/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-hyperframes-0.9.43-
+
+      - name: تثبيت أدوات الصوت والفيديو (FFmpeg & Chromium libs)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg libnss3 libgbm1 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2
+          sudo apt-get install -y -qq libasound2t64 || sudo apt-get install -y -qq libasound2 || true
+          ffmpeg -version | head -n 2
+
+      - name: التحقق من بيئة الفيديو والعناصر المشتركة
+        env:
+          VIDEO_ID: ${{ inputs.video_id }}
+        run: |
+          if [ ! -d "videos/${VIDEO_ID}" ] || [ ! -f "videos/${VIDEO_ID}/index.html" ]; then
+            echo "Missing composition directory videos/${VIDEO_ID}"
+            exit 1
+          fi
+          mkdir -p "videos/${VIDEO_ID}/assets/fonts" "videos/${VIDEO_ID}/assets/sfx" "renders"
+          if [ ! -f "videos/${VIDEO_ID}/assets/gsap.min.js" ] && [ -f "shared-assets/gsap.min.js" ]; then
+            cp "shared-assets/gsap.min.js" "videos/${VIDEO_ID}/assets/gsap.min.js"
+          fi
+          if [ ! -f "videos/${VIDEO_ID}/assets/fonts/Cairo.ttf" ] && [ -f "shared-assets/fonts/Cairo.ttf" ]; then
+            cp "shared-assets/fonts/Cairo.ttf" "videos/${VIDEO_ID}/assets/fonts/Cairo.ttf"
+          fi
+          npx --yes hyperframes@0.9.43 lint "videos/${VIDEO_ID}"
+
+      - name: رندر الفيديو إلى MP4 بجودة عالية
+        env:
+          VIDEO_ID: ${{ inputs.video_id }}
+          QUALITY: ${{ inputs.quality }}
+          FPS: ${{ inputs.fps }}
+        run: |
+          npx --yes hyperframes@0.9.43 render "videos/${VIDEO_ID}" \
+            -o "renders/${VIDEO_ID}.mp4" \
+            -f "${FPS}" \
+            -q "${QUALITY}" \
+            -w 2 \
+            --no-browser-gpu
+          ls -lh "renders/${VIDEO_ID}.mp4"
+
+      - name: حفظ نسخة احتياطية من الفيديو
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-${{ inputs.video_id }}-${{ inputs.run_tag }}
+          path: renders/${VIDEO_ID}.mp4
+          retention-days: 30
+
+      - name: نشر الفيديو برابط تحميل مباشر (GitHub Release)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VIDEO_ID: ${{ inputs.video_id }}
+          RUN_TAG: ${{ inputs.run_tag }}
+          QUALITY: ${{ inputs.quality }}
+          FPS: ${{ inputs.fps }}
+        run: |
+          gh release create "${RUN_TAG}" "renders/${VIDEO_ID}.mp4" \
+            --target "${GITHUB_SHA}" \
+            --title "Render ${VIDEO_ID} (${QUALITY} · ${FPS}fps)" \
+            --notes "Rendered automatically via Hyperframes Cloud Render."

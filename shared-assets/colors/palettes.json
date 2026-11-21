@@ -1,0 +1,32 @@
+{
+  "active_palette": "pure_ink_monochrome",
+  "palettes": {
+    "pure_ink_monochrome": {
+      "name": "الحبر النقي والورق التدرجي (Pure Ink & Monochrome Paper)",
+      "description": "الهوية البصرية الرسمية المعتمدة للمشروع: أساس أبيض نقي مع خطوط وحبر أسود فاحم يتخلله درجات الرمادي والظلال الشبكية فائقة التباين والحدة",
+      "background_canvas": "#ffffff",
+      "background_card": "#f8f9fa",
+      "border_subtle": "#e4e4e7",
+      "border_strong": "#000000",
+      "text_primary": "#050505",
+      "text_secondary": "#52525b",
+      "text_muted": "#a1a1aa",
+      "gray_screentone_light": "#e4e4e7",
+      "gray_screentone_mid": "#71717a",
+      "gray_screentone_dark": "#27272a",
+      "ink_solid": "#000000",
+      "paper_pure": "#ffffff",
+      "shadow_contact": "rgba(0, 0, 0, 0.45)",
+      "shadow_diffuse": "rgba(0, 0, 0, 0.12)"
+    }
+  },
+  "color_rules": {
+    "philosophy": "White with Black (وليس أسود مع أبيض) - اللوحة الأساسية دائماً بيضاء نقية كصفحة الرسم، والعناصر تُرسم عليها بخطوط حبرية سوداء فاحمة تتخللها طبقات تظليل رمادية متوازنة",
+    "hierarchy": [
+      { "role": "خلفية اللوحة والمشاهد", "color": "#ffffff", "usage": "الفضاء اللانهائي للمشاهد والبطاقات الأساسية" },
+      { "role": "الحبر الأساسي والخطوط والأيقونات", "color": "#000000 / #050505", "usage": "النصوص الرئيسية، حدود العناصر (Outlines)، وحبر الشخصيات والأيقونات" },
+      { "role": "الرمادي المتوسط والتظليل التفاعلي", "color": "#71717a / #a1a1aa", "usage": "النصوص الثانوية، شبكات التظليل المتدرجة، وحالات الهدوء" },
+      { "role": "الرمادي الفاتح والفواصل والبطاقات", "color": "#f4f4f5 / #e4e4e7", "usage": "خلفيات الصناديق الفرعية، تباين الشاشات، وفواصل الجداول" }
+    ]
+  }
+}
