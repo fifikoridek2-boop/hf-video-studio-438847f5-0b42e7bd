@@ -7,9 +7,9 @@
     <script src="./assets/gsap.min.js"></script>
     <style>
       @font-face {
-        font-family: "CairoLocal";
-        src: url("./assets/fonts/Cairo.ttf") format("truetype");
-        font-weight: 200 900;
+        font-family: "NotoSansArabicLocal";
+        src: url("./assets/fonts/NotoSansArabic.ttf") format("truetype");
+        font-weight: 100 900;
         font-style: normal;
         font-display: block;
       }
@@ -23,7 +23,7 @@
         --gray-dark: #27272a;
         --gray-mid: #71717a;
         --gray-light: #e4e4e7;
-        --font-display: "CairoLocal", sans-serif;
+        --font-display: "NotoSansArabicLocal", "Noto Sans Arabic", sans-serif;
       }
 
       * {
@@ -163,7 +163,7 @@
         transform: rotate(12deg);
       }
 
-      /* Tactile 3D App Tile (Strict Monochrome Paper & Ink) */
+      /* Tactile 3D App Tile & Clean Floating Prop Styling */
       .app-tile-3d {
         position: absolute;
         border-radius: 56px;
@@ -172,6 +172,7 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
+        overflow: hidden;
         box-shadow:
           0 16px 24px rgba(0, 0, 0, 0.34),
           0 42px 76px rgba(0, 0, 0, 0.24),
@@ -189,6 +190,27 @@
         background: linear-gradient(155deg, #27272a 0%, #09090b 100%);
         border: 4.5px solid #000000;
         color: #ffffff;
+      }
+
+      .app-tile-full {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .floating-prop {
+        position: absolute;
+        pointer-events: none;
+        will-change: transform, opacity;
+      }
+
+      .floating-prop img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.26));
+        display: block;
       }
 
       /* =========================================================
@@ -327,24 +349,24 @@
         );
       }
 
-      /* Deep Graph-Paper Desk tilted organically in 3D space (NO fake rounded TV border!) */
+      /* Deep Graph-Paper Desk tilted organically in 3D space (overflow visible so upward pans never show dark bg!) */
       #w3b-board-stage {
         position: absolute;
         left: 1120px;
         top: 0;
-        width: 2460px;
+        width: 2800px;
         height: 1920px;
-        overflow: hidden;
+        overflow: visible;
         perspective: 1400px;
         opacity: 0;
       }
 
       #w3b-blueprint-board {
         position: absolute;
-        left: -120px;
-        top: -320px;
-        width: 2900px;
-        height: 2560px;
+        left: -600px;
+        top: -900px;
+        width: 3800px;
+        height: 3500px;
         background-color: #ecedf0;
         background-image:
           radial-gradient(ellipse 68% 58% at 50% 48%, rgba(255, 255, 255, 0.82) 0%, rgba(188, 192, 198, 0.56) 100%),
@@ -368,13 +390,13 @@
           radial-gradient(ellipse 64% 56% at 50% 48%, #ffffff 0%, #f1f2f5 46%, #d5d7dd 100%);
       }
 
-      /* Glowing Standalone Tabby Tile in Infinite Studio Space */
+      /* Glowing Standalone Tabby Tile in Infinite Studio Space (Borderless Mint Aura) */
       .tabby-halo {
+        background: #3bffc1;
         box-shadow:
-          0 0 0 2px #000000,
-          0 0 54px rgba(0, 0, 0, 0.16),
-          0 24px 48px rgba(0, 0, 0, 0.32),
-          0 48px 86px rgba(0, 0, 0, 0.18);
+          0 0 68px rgba(59, 255, 193, 0.55),
+          0 24px 48px rgba(0, 0, 0, 0.22),
+          0 48px 86px rgba(0, 0, 0, 0.12);
       }
 
       /* Embossed Minimalist Payment Pill (Reference 40.5s!) */
@@ -525,7 +547,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        filter: grayscale(100%) contrast(1.22) brightness(1.03);
         display: block;
       }
 
@@ -596,6 +617,10 @@
       <audio id="sfx-whoosh-pan" src="./assets/sfx/whoosh.wav" data-start="11.78" data-duration="0.28" data-volume="0.26" preload="auto"></audio>
       <audio id="sfx-pop-3" src="./assets/sfx/pop.wav" data-start="14.18" data-duration="0.09" data-volume="0.24" preload="auto"></audio>
       <audio id="sfx-whoosh-2" src="./assets/sfx/whoosh.wav" data-start="20.14" data-duration="0.28" data-volume="0.25" preload="auto"></audio>
+      <audio id="sfx-swap-1" src="./assets/sfx/pop.wav" data-start="23.38" data-duration="0.09" data-volume="0.22" preload="auto"></audio>
+      <audio id="sfx-swap-2" src="./assets/sfx/pop.wav" data-start="23.88" data-duration="0.09" data-volume="0.22" preload="auto"></audio>
+      <audio id="sfx-swap-3" src="./assets/sfx/pop.wav" data-start="24.40" data-duration="0.09" data-volume="0.22" preload="auto"></audio>
+      <audio id="sfx-swap-4" src="./assets/sfx/pop.wav" data-start="24.92" data-duration="0.09" data-volume="0.22" preload="auto"></audio>
       <audio id="sfx-pop-4" src="./assets/sfx/pop.wav" data-start="26.42" data-duration="0.09" data-volume="0.24" preload="auto"></audio>
       <audio id="sfx-whoosh-3" src="./assets/sfx/whoosh.wav" data-start="31.34" data-duration="0.28" data-volume="0.25" preload="auto"></audio>
       <audio id="sfx-click-1" src="./assets/sfx/click.wav" data-start="34.48" data-duration="0.055" data-volume="0.30" preload="auto"></audio>
@@ -675,7 +700,7 @@
                   <rect x="48" y="108" width="36" height="28" fill="#f4f4f5" stroke="#000000" stroke-width="4"/>
                   <rect x="156" y="108" width="36" height="28" fill="#f4f4f5" stroke="#000000" stroke-width="4"/>
                   <rect x="66" y="16" width="108" height="42" rx="10" fill="#000000"/>
-                  <text data-layout-ignore="true" x="120" y="45" fill="#ffffff" font-size="25" font-weight="900" text-anchor="middle" font-family="CairoLocal, sans-serif">مطعم</text>
+                  <text data-layout-ignore="true" x="120" y="45" fill="#ffffff" font-size="25" font-weight="900" text-anchor="middle" font-family="NotoSansArabicLocal, sans-serif">مطعم</text>
                 </svg>
               </div>
 
@@ -725,7 +750,7 @@
               <svg id="w2-comm-svg" style="position: absolute; left: 710px; top: 800px; pointer-events: none; opacity: 0;" width="1020" height="170" viewBox="0 0 1020 170" fill="none">
                 <path id="w2-comm-line" d="M 30 90 Q 510 10 990 90" stroke="#000000" stroke-width="7" stroke-dasharray="1060" stroke-dashoffset="1060" stroke-linecap="round"/>
                 <circle id="w2-comm-q" cx="510" cy="52" r="46" fill="#000000" opacity="0"/>
-                <text id="w2-comm-qt" data-layout-ignore="true" x="510" y="69" fill="#ffffff" font-size="46" font-weight="900" text-anchor="middle" font-family="CairoLocal, sans-serif" opacity="0">؟</text>
+                <text id="w2-comm-qt" data-layout-ignore="true" x="510" y="69" fill="#ffffff" font-size="46" font-weight="900" text-anchor="middle" font-family="NotoSansArabicLocal, sans-serif" opacity="0">؟</text>
               </svg>
             </div>
 
@@ -734,7 +759,7 @@
               <img id="img-w2-think" src="./assets/img/char_think.png" alt="الشخصية تفكر" />
             </div>
 
-            <!-- Kitchen Stop Reaction Frame + "صح؟" Punch -->
+            <!-- Kitchen Stop Reaction Frame -->
             <div id="w2-stop-sticker" class="sticker-card" data-layout-allow-overflow="true" style="left: 1650px; top: 240px; width: 420px; height: 410px; opacity: 0; z-index: 38;">
               <img id="img-stop" src="./assets/img/sticker_stop.webp" alt="ممنوع دخول المطبخ" />
               <div style="position: absolute; bottom: 0; left: 0; right: 0; background: #000000; color: #ffffff; text-align: center; padding: 12px; font-size: 30px; font-weight: 900;">
@@ -742,37 +767,29 @@
               </div>
             </div>
 
-            <div id="w2-sah-stamp" class="ink-badge-inverted" data-layout-allow-overflow="true" style="position: absolute; left: 1850px; top: 1110px; padding: 16px 48px; opacity: 0; z-index: 52;">
-              <span style="font-size: 76px; font-weight: 900; color: #ffffff;">صح؟</span>
+            <!-- Translucent Background Wash + Boxless Black "صح؟" Typography -->
+            <div id="w2-sah-wash" data-layout-ignore="true" style="position: absolute; inset: -1900px; background: rgba(255, 255, 255, 0.80); opacity: 0; pointer-events: none; z-index: 49;"></div>
+
+            <div id="w2-sah-stamp" data-layout-allow-overflow="true" style="position: absolute; left: 1640px; top: 940px; width: 600px; text-align: center; opacity: 0; z-index: 54;">
+              <span style="font-size: 136px; font-weight: 900; color: #000000; text-shadow: 0 10px 28px rgba(0,0,0,0.08);">صح؟</span>
             </div>
 
             <!-- Waiter Flork Hero Foreground -->
             <div id="w2-waiter-rig" class="flork-rig" data-layout-allow-overflow="true" style="left: 1090px; top: 640px; width: 340px; height: 430px; opacity: 0; z-index: 44;">
               <img id="img-w2-waiter" src="./assets/img/flork_point.webp" alt="النادل الوسيط" style="height: 300px;" />
-              <svg style="position: absolute; left: 124px; top: 254px;" width="92" height="40" viewBox="0 0 96 44" fill="none">
-                <polygon points="8,6 44,22 8,38" fill="#000000"/>
-                <polygon points="88,6 52,22 88,38" fill="#000000"/>
-                <circle cx="48" cy="22" r="8" fill="#ffffff" stroke="#000000" stroke-width="4"/>
-              </svg>
+              <img src="./assets/img/bowtie_icon.svg" alt="" data-layout-ignore="true" style="position: absolute; left: 132px; top: 242px; width: 76px; height: 44px; object-fit: contain;" />
               <div class="ink-badge-inverted" style="position: absolute; left: 25px; top: 312px; width: 290px; padding: 12px 18px; text-align: center;">
                 <span style="font-size: 32px; font-weight: 900; color: #ffffff;">النادل (الوسيط)</span>
               </div>
             </div>
 
-            <!-- Order Ticket & Cloche Dish -->
-            <div id="w2-order-ticket" class="ink-card-3d" data-layout-allow-overflow="true" style="position: absolute; left: 690px; top: 670px; width: 215px; height: 122px; display: flex; align-items: center; justify-content: center; gap: 12px; opacity: 0; z-index: 48;">
-              <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.6">
-                <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/>
-                <path d="M8 7h8M8 11h8M8 15h5"/>
-              </svg>
-              <span style="font-size: 32px; font-weight: 900;">الطلب</span>
+            <!-- Real Internet Paper Order & Real Internet Burger Props (NO boxes!) -->
+            <div id="w2-order-ticket" class="floating-prop" data-layout-ignore="true" style="left: 715px; top: 715px; width: 148px; height: 148px; opacity: 0; z-index: 48;">
+              <img src="./assets/img/order_paper.png" alt="ورقة الطلب" />
             </div>
 
-            <div id="w2-food-dome" class="ink-card-3d" data-layout-allow-overflow="true" style="position: absolute; left: 1580px; top: 660px; width: 215px; height: 124px; display: flex; align-items: center; justify-content: center; gap: 12px; opacity: 0; z-index: 48;">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.6">
-                <path d="M2 18h20M4 18a8 8 0 0 1 16 0M12 10V7M10 7h4"/>
-              </svg>
-              <span style="font-size: 32px; font-weight: 900;">الأكل</span>
+            <div id="w2-food-dome" class="floating-prop" data-layout-ignore="true" style="left: 1565px; top: 710px; width: 156px; height: 156px; opacity: 0; z-index: 48;">
+              <img src="./assets/img/burger.png" alt="البرجر" />
             </div>
 
             <!-- Beat 19.35s -> 20.18s: MACRO CLOSE-UP on Smiling Hero + "بسيطة صح؟" (Reference 19.6s!) -->
@@ -787,130 +804,107 @@
           </div>
 
           <!-- =========================================================
-               WORLD 3: 3D DARK API -> PANNING BLUEPRINT SHOWCASE (x = 4000 .. 7500) [20.14s - 31.56s]
+               WORLD 3: 3D DARK API -> STATIONARY IN-PLACE APP SWAP & BLUEPRINT DESK (x = 4000 .. 7500) [20.14s - 31.56s]
                ========================================================= -->
           <div class="world-zone clip" id="world-3" data-start="20.14" data-duration="11.46" data-layout-allow-overflow="true" style="left: 4000px; width: 3500px;">
             <div id="w3a-dark-bg" data-layout-allow-overflow="true"></div>
 
-            <!-- Part 3A (20.22s -> 23.32s): Dark 3D Luminous API Title + Counter-Moving Blurred Corner App Tiles -->
+            <!-- Part 3A (20.22s -> 23.32s): Dark Studio + Luminous Text + Real Original Blurred 3D App Tiles -->
             <div id="w3a-stage" data-layout-allow-overflow="true" style="position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; perspective: 1200px;">
-              <!-- DoF Foreground/Corner Blurred Monochrome App Tiles (Counter-Motion like Reference 22.0s - 23.1s!) -->
-              <div id="w3a-tile-tl" data-layout-ignore="true" class="app-tile-3d app-tile-light" style="left: 40px; top: 180px; width: 250px; height: 250px; filter: blur(5px); opacity: 0; transform: rotateY(22deg) rotateZ(-14deg);">
-                <svg width="108" height="108" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-                <span style="font-size: 28px; font-weight: 900;">خرائط</span>
+              <div id="w3a-tile-tl" data-layout-ignore="true" class="app-tile-3d app-tile-light" style="left: 50px; top: 190px; width: 250px; height: 250px; padding: 34px; filter: blur(4px); opacity: 0; transform: rotateY(22deg) rotateZ(-14deg);">
+                <img src="./assets/img/google_maps.svg" alt="Google Maps" style="width: 100%; height: 100%; object-fit: contain;" />
               </div>
 
-              <div id="w3a-tile-br" data-layout-ignore="true" class="app-tile-3d app-tile-dark" style="right: 30px; top: 1260px; width: 260px; height: 260px; filter: blur(4px); opacity: 0; transform: rotateY(-20deg) rotateZ(12deg);">
-                <svg width="106" height="106" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2">
-                  <rect x="2" y="4" width="20" height="14" rx="3"/>
-                  <path d="m8 9 3 2-3 2M13 13h4"/>
-                </svg>
-                <span style="font-size: 30px; font-weight: 900; direction: ltr;">UBER</span>
+              <div id="w3a-tile-br" data-layout-ignore="true" class="app-tile-3d app-tile-dark" style="right: 45px; top: 1250px; width: 255px; height: 255px; filter: blur(4px); opacity: 0; transform: rotateY(-20deg) rotateZ(12deg);">
+                <img class="app-tile-full" src="./assets/img/app_uber.jpg" alt="Uber" />
               </div>
 
-              <div id="w3a-tile-bl" data-layout-ignore="true" class="app-tile-3d app-tile-light" style="left: 70px; top: 1320px; width: 215px; height: 215px; filter: blur(3px); opacity: 0;">
-                <span style="font-size: 86px; font-weight: 900; color: #000000; direction: ltr;">H</span>
+              <div id="w3a-tile-bl" data-layout-ignore="true" class="app-tile-3d" style="left: 70px; top: 1310px; width: 225px; height: 225px; border: 4px solid #3f2214; filter: blur(3px); opacity: 0;">
+                <img class="app-tile-full" src="./assets/img/app_hungerstation.jpg" alt="HungerStation" />
               </div>
 
-              <!-- Crisp Luminous Centered Hero Text (Exactly matching Reference 20.6s - 22.8s!) -->
               <div id="w3a-api-title" style="position: absolute; left: 70px; right: 70px; top: 840px; text-align: center; font-size: 76px; font-weight: 900; color: #ffffff; text-shadow: 0 0 32px rgba(255,255,255,0.42), 0 12px 32px rgba(0,0,0,0.85); opacity: 0; z-index: 25;">
                 الـ API هو نفسه بالضبط
               </div>
             </div>
 
-            <!-- Part 3B (x = 1080 .. 3500): Continuous Perspective Graph-Paper Showcase (ZERO CRT Rounded Corners!) -->
+            <!-- Part 3B (x = 1120 .. 3580): Perspective Graph-Paper Desk
+                 1. Apps swap IN PLACE at center (left=380, top=560) ending on Tamara (#w3b-swap-4).
+                 2. Apple Pay sits UPPER-RIGHT (left=1095, top=185) inside coffee cup ring.
+                 3. All back-and-forth interactions connect between THAT SAME Tamara tile and Apple Pay!
+            -->
             <div id="w3b-board-stage" data-layout-allow-overflow="true">
               <div id="w3b-blueprint-board" data-layout-allow-overflow="true">
-                <!-- Authentic Faint Coffee Cup Rings on Graph Paper -->
-                <svg style="position: absolute; left: 760px; top: 440px; opacity: 0.16; pointer-events: none;" width="300" height="300" viewBox="0 0 280 280" fill="none">
+                <!-- Authentic Coffee Cup Rings on Graph Paper (coordinates relative to -600,-900 board) -->
+                <svg style="position: absolute; left: 960px; top: 1020px; opacity: 0.16; pointer-events: none;" width="300" height="300" viewBox="0 0 280 280" fill="none">
                   <circle cx="140" cy="140" r="118" stroke="#52525b" stroke-width="7"/>
                   <circle cx="145" cy="135" r="114" stroke="#71717a" stroke-width="2" stroke-dasharray="30 16"/>
                 </svg>
-                <svg style="position: absolute; left: 1960px; top: 820px; opacity: 0.18; pointer-events: none;" width="340" height="340" viewBox="0 0 340 340" fill="none">
+                <svg style="position: absolute; left: 1670px; top: 1060px; opacity: 0.24; pointer-events: none;" width="380" height="380" viewBox="0 0 340 340" fill="none">
                   <circle cx="170" cy="170" r="144" stroke="#3f3f46" stroke-width="7"/>
                   <circle cx="164" cy="176" r="138" stroke="#71717a" stroke-width="2.5" stroke-dasharray="22 14"/>
                 </svg>
-                <svg style="position: absolute; left: 1320px; top: 1060px; opacity: 0.14; pointer-events: none;" width="260" height="260" viewBox="0 0 240 240" fill="none">
+                <svg style="position: absolute; left: 1420px; top: 1580px; opacity: 0.14; pointer-events: none;" width="260" height="260" viewBox="0 0 240 240" fill="none">
                   <circle cx="120" cy="120" r="96" stroke="#3f3f46" stroke-width="6"/>
                 </svg>
               </div>
 
-              <!-- HERO CAROUSEL OF BIG MONOCHROME APP TILES ON BLUEPRINT BOARD (23.35s -> 31.48s)
-                   Camera tracks sequentially across Hero 1 -> Hero 2 -> Hero 3 -> Hero 4 (Apple Pay)! -->
-              <!-- Tile 1: Maps & Location (x = 390) -->
-              <div id="w3b-hero-1" class="app-tile-3d app-tile-light" style="left: 390px; top: 680px; width: 300px; height: 300px; z-index: 20;">
-                <svg width="132" height="132" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.2">
-                  <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
-                  <circle cx="14" cy="9" r="3.5" fill="#000000"/>
-                </svg>
-                <span style="font-size: 32px; font-weight: 900;">خرائط</span>
+              <!-- CENTERED IN-PLACE SWAPPING APP TILES (x = 380, top = 560 -> Dead Center when cam x = -5120!) -->
+              <div id="w3b-swap-1" class="app-tile-3d app-tile-light" style="left: 380px; top: 560px; width: 320px; height: 320px; padding: 48px; z-index: 22; opacity: 0;">
+                <img src="./assets/img/google_maps.svg" alt="Google Maps" style="width: 100%; height: 100%; object-fit: contain;" />
               </div>
 
-              <!-- Tile 2: Salla Store / API (x = 890) -->
-              <div id="w3b-hero-2" class="app-tile-3d app-tile-light" style="left: 890px; top: 680px; width: 310px; height: 310px; z-index: 20;">
-                <svg width="128" height="128" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.3">
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                  <path d="M3 6h18"/>
-                  <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-                <span style="font-size: 34px; font-weight: 900;">سلة · Salla</span>
+              <div id="w3b-swap-2" data-layout-ignore="true" class="app-tile-3d" style="left: 380px; top: 560px; width: 320px; height: 320px; border: 4.5px solid #09353c; z-index: 23; opacity: 0;">
+                <img class="app-tile-full" src="./assets/img/app_salla.jpg" alt="سلة Salla" />
               </div>
 
-              <!-- Tile 3: Dual Dots Merchant Core (x = 1350) -->
-              <div id="w3b-hero-3" class="app-tile-3d app-tile-light" style="left: 1350px; top: 680px; width: 310px; height: 310px; z-index: 20;">
-                <svg width="160" height="110" viewBox="0 0 160 110" fill="none">
-                  <path d="M26 30 H62 A24 24 0 0 1 62 78 H50 Z" fill="#000000"/>
-                  <circle cx="114" cy="54" r="24" fill="#000000"/>
-                </svg>
-                <div style="font-size: 32px; font-weight: 900;">بوابة المتاجر</div>
+              <div id="w3b-swap-3" data-layout-ignore="true" class="app-tile-3d app-tile-light" style="left: 380px; top: 560px; width: 320px; height: 320px; border: 4.5px solid #0a4f2d; z-index: 24; opacity: 0;">
+                <img class="app-tile-full" src="./assets/img/app_absher.jpg" alt="أبشر Absher" />
               </div>
 
-              <!-- Tile 4: Real Monochrome Apple Pay Core (x = 1860) -->
-              <div id="w3b-hero-apple" class="app-tile-3d app-tile-dark" style="left: 1860px; top: 670px; width: 330px; height: 330px; z-index: 24;">
-                <div style="display: flex; align-items: center; gap: 10px; direction: ltr;">
-                  <svg width="64" height="64" viewBox="0 0 24 24" fill="#ffffff">
-                    <path d="M16.36 1.43c0 1.14-.49 2.2-1.17 2.95-.74.82-1.85 1.46-2.99 1.37-.14-1.1.44-2.22 1.13-2.96.76-.82 1.98-1.42 3.03-1.36Zm3.68 15.61c-.54 1.24-.8 1.79-1.5 2.89-.98 1.54-2.36 3.45-4.08 3.47-1.53.02-1.92-.99-4.0-.98-2.08.01-2.51 1-4.04.98-1.72-.02-3.03-1.75-4.01-3.28-2.75-4.29-3.04-9.32-1.34-11.98 1.2-1.88 3.11-2.98 4.91-2.98 1.82 0 2.96 1.01 4.46 1.01 1.46 0 2.34-1.01 4.44-1.01 1.61 0 3.31.89 4.51 2.41-3.97 2.18-3.32 7.86.65 9.47Z"/>
-                  </svg>
-                  <span style="font-size: 68px; font-weight: 800; color: #ffffff; letter-spacing: -1px;">Pay</span>
-                </div>
-                <div style="font-size: 30px; font-weight: 800; color: #d4d4d8;">بيانات حساسة</div>
-                <div class="light-sweep" id="w3b-apple-sweep" data-layout-ignore="true"></div>
+              <!-- Final In-Place Swapped App: Tamara (stays anchored here for the rest of Blueprint Act!) -->
+              <div id="w3b-swap-4" data-layout-allow-overflow="true" class="app-tile-3d" style="left: 380px; top: 560px; width: 320px; height: 320px; border: 4.5px solid #18181b; z-index: 25; opacity: 0;">
+                <img class="app-tile-full" src="./assets/img/app_tamara.jpg" alt="تمارا Tamara" />
               </div>
 
-              <!-- Masking-Tape Notes traveling along board -->
-              <div id="w3b-tape-general" class="tape-note" style="position: absolute; left: 910px; top: 1055px; z-index: 36;">
+              <!-- Tape 1 & Tape 2 GLUED PHYSICALLY TO GRAPH PAPER directly below that SAME swap slot! -->
+              <div id="w3b-tape-general" class="tape-note" style="position: absolute; left: 325px; top: 930px; transform: rotate(-1.5deg); z-index: 36;">
                 التطبيقات بشكل عام
               </div>
 
-              <div id="w3b-tape-waiter" class="tape-note" style="position: absolute; left: 1440px; top: 1055px; opacity: 0; z-index: 38;">
+              <div id="w3b-tape-waiter" class="tape-note" style="position: absolute; left: 365px; top: 930px; transform: rotate(1.5deg); opacity: 0; z-index: 38;">
                 نرجع للنادل!
               </div>
 
-              <!-- Organic Painterly Hand-Brushed Ink X right over Apple Pay (26.40s -> 28.15s) -->
-              <svg style="position: absolute; left: 1790px; top: 615px; pointer-events: none; z-index: 32;" width="470" height="440" viewBox="0 0 470 440" fill="none">
-                <path id="w3b-x-1" d="M 55 58 C 145 148 310 285 418 386" stroke="#000000" stroke-width="34" stroke-linecap="round" stroke-dasharray="560" stroke-dashoffset="560"/>
-                <path id="w3b-x-2" d="M 412 52 C 308 158 148 296 52 384" stroke="#000000" stroke-width="34" stroke-linecap="round" stroke-dasharray="560" stroke-dashoffset="560"/>
-                <!-- High-Contrast White Halo + Crisp Ink Checkmark beside Apple Pay (29.8s+) -->
+              <!-- Target Secure Tile: Official Apple Pay sitting UPPER-RIGHT inside coffee ring (left = 1095, top = 185) -->
+              <div id="w3b-hero-apple" data-layout-allow-overflow="true" class="app-tile-3d app-tile-dark" style="left: 1095px; top: 185px; width: 330px; height: 330px; z-index: 24;">
+                <img src="./assets/img/apple_pay_white.svg" alt="Apple Pay" style="width: 220px; height: auto; object-fit: contain;" />
+                <div style="font-size: 32px; font-weight: 800; color: #d4d4d8;">بيانات حساسة</div>
+                <div class="light-sweep" id="w3b-apple-sweep" data-layout-ignore="true"></div>
+              </div>
+
+              <!-- Painterly Brush Red X & High-Contrast Green Checkmark right over Apple Pay -->
+              <svg style="position: absolute; left: 1025px; top: 130px; pointer-events: none; z-index: 32; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.28));" width="470" height="440" viewBox="0 0 470 440" fill="none">
+                <path id="w3b-x-1" d="M 55 58 C 145 148 310 285 418 386" stroke="#dc2626" stroke-width="34" stroke-linecap="round" stroke-dasharray="560" stroke-dashoffset="560"/>
+                <path id="w3b-x-2" d="M 412 52 C 308 158 148 296 52 384" stroke="#dc2626" stroke-width="34" stroke-linecap="round" stroke-dasharray="560" stroke-dashoffset="560"/>
                 <path id="w3b-check-halo" d="M 55 245 L 135 330 L 315 130" stroke="#ffffff" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="430" stroke-dashoffset="430"/>
-                <path id="w3b-check" d="M 55 245 L 135 330 L 315 130" stroke="#000000" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="430" stroke-dashoffset="430"/>
+                <path id="w3b-check" d="M 55 245 L 135 330 L 315 130" stroke="#16a34a" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="430" stroke-dashoffset="430"/>
               </svg>
 
-              <!-- Guard Reaction + Miniature Flork Couriers dashing around Apple Pay (Reference 29.5s - 30.8s!) -->
-              <div id="w3b-guard-badge" class="ink-card" style="position: absolute; left: 1860px; top: 1050px; width: 330px; height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; z-index: 34;">
-                <div class="flork-rig" style="position: relative; width: 140px; height: 140px;">
+              <!-- Guard Badge below Apple Pay -->
+              <div id="w3b-guard-badge" class="ink-card" style="position: absolute; left: 1095px; top: 555px; width: 330px; height: 215px; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; z-index: 34;">
+                <div class="flork-rig" style="position: relative; width: 136px; height: 136px;">
                   <img id="img-w3-guard" src="./assets/img/flork_guard.webp" alt="حماية" />
                 </div>
                 <div style="font-size: 30px; font-weight: 900; color: #000000;">بدون تفاصيل سرية!</div>
               </div>
 
-              <!-- Running Courier Florks flanking Apple Pay (29.4s -> 31.2s) -->
-              <div id="w3b-flork-courier" data-layout-ignore="true" class="flork-rig" style="left: 1695px; top: 720px; width: 175px; height: 175px; opacity: 0; z-index: 35;">
+              <!-- Courier Waiter Flork holding Real Burger & Card Flork dashing beside Apple Pay -->
+              <div id="w3b-flork-courier" data-layout-ignore="true" class="flork-rig" style="left: 910px; top: 235px; width: 185px; height: 185px; opacity: 0; z-index: 35;">
                 <img id="img-w3-run" src="./assets/img/flork_run.webp" alt="النادل الوسيط" />
+                <img src="./assets/img/burger.png" alt="" style="position: absolute; right: -24px; top: 68px; width: 76px; height: 76px; object-fit: contain;" />
               </div>
-              <div id="w3b-flork-card" data-layout-ignore="true" class="flork-rig" style="left: 2210px; top: 730px; width: 195px; height: 195px; opacity: 0; z-index: 35;">
+              <div id="w3b-flork-card" data-layout-ignore="true" class="flork-rig" style="left: 1410px; top: 245px; width: 190px; height: 190px; opacity: 0; z-index: 35;">
                 <img id="img-w3-card" src="./assets/img/flork_card.webp" alt="الطلب" />
               </div>
             </div>
@@ -918,29 +912,26 @@
 
           <!-- =========================================================
                WORLD 4: 3D PHONE COLLAGE -> CARDLESS TABBY MACRO STAGE (x = 7600 .. 9800) [31.34s - 42.90s]
-               NO HTML CARD BOXES! Objects float freely across open studio canvas!
+               Real downloaded app icons & 3D objects everywhere!
                ========================================================= -->
           <div class="world-zone clip" id="world-4" data-start="31.34" data-duration="11.58" data-layout-allow-overflow="true" style="left: 7600px; width: 2200px;">
             <div id="w4-studio-bg" data-layout-allow-overflow="true"></div>
 
-            <!-- Surrounding Multi-Depth Blurred Storefront Badges around Upright Phone (31.5s - 34.0s) -->
-            <div id="w4-badge-salla" data-layout-ignore="true" class="app-tile-3d app-tile-light" style="left: 74px; top: 330px; width: 175px; height: 175px; border-radius: 44px; filter: blur(1.5px); opacity: 0; z-index: 15;">
-              <span style="font-size: 54px; font-weight: 900;">سلة</span>
+            <!-- Surrounding Multi-Depth Blurred REAL Store & Payment App Tiles (31.5s - 34.0s) -->
+            <div id="w4-badge-salla" data-layout-ignore="true" class="app-tile-3d" style="left: 74px; top: 330px; width: 175px; height: 175px; border-radius: 44px; border: 4px solid #09353c; filter: blur(1.5px); opacity: 0; z-index: 15;">
+              <img class="app-tile-full" src="./assets/img/app_salla.jpg" alt="Salla" />
             </div>
-            <div id="w4-badge-noon" data-layout-ignore="true" class="app-tile-3d app-tile-dark" style="left: 96px; top: 690px; width: 155px; height: 155px; border-radius: 36px; filter: blur(2.5px); opacity: 0; z-index: 15;">
-              <span style="font-size: 56px; font-weight: 900; direction: ltr;">n</span>
+            <div id="w4-badge-noon" data-layout-ignore="true" class="app-tile-3d" style="left: 96px; top: 690px; width: 160px; height: 160px; border-radius: 38px; border: 4px solid #3b1c6d; filter: blur(2.5px); opacity: 0; z-index: 15;">
+              <img class="app-tile-full" src="./assets/img/app_stcpay.jpg" alt="STC Pay" />
             </div>
-            <div id="w4-badge-amzn" data-layout-ignore="true" class="app-tile-3d app-tile-dark" style="left: 60px; top: 1020px; width: 175px; height: 175px; border-radius: 50%; filter: blur(2px); opacity: 0; z-index: 15;">
-              <span style="font-size: 64px; font-weight: 900; direction: ltr;">a</span>
+            <div id="w4-badge-amzn" data-layout-ignore="true" class="app-tile-3d" style="left: 60px; top: 1020px; width: 175px; height: 175px; border-radius: 44px; border: 4px solid #27272a; filter: blur(2px); opacity: 0; z-index: 15;">
+              <img class="app-tile-full" src="./assets/img/app_amazon.jpg" alt="Amazon" />
             </div>
-            <div id="w4-badge-apay" data-layout-ignore="true" class="app-tile-3d app-tile-light" style="left: 830px; top: 270px; width: 170px; height: 170px; border-radius: 38px; filter: blur(2px); opacity: 0; z-index: 15;">
-              <span style="font-size: 40px; font-weight: 900; direction: ltr;"> Pay</span>
+            <div id="w4-badge-apay" data-layout-ignore="true" class="app-tile-3d app-tile-dark" style="left: 830px; top: 270px; width: 175px; height: 175px; border-radius: 40px; padding: 26px; filter: blur(2px); opacity: 0; z-index: 15;">
+              <img src="./assets/img/apple_pay_white.svg" alt="Apple Pay" style="width: 100%; height: 100%; object-fit: contain;" />
             </div>
-            <div id="w4-badge-bag" data-layout-ignore="true" class="app-tile-3d app-tile-light" style="left: 840px; top: 1120px; width: 165px; height: 165px; border-radius: 40px; filter: blur(2.5px); opacity: 0; z-index: 15;">
-              <svg width="78" height="78" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.4">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                <path d="M3 6h18M16 10a4 4 0 0 1-8 0"/>
-              </svg>
+            <div id="w4-badge-bag" data-layout-ignore="true" class="app-tile-3d app-tile-light" style="left: 840px; top: 1120px; width: 170px; height: 170px; border-radius: 40px; padding: 24px; filter: blur(2.5px); opacity: 0; z-index: 15;">
+              <img src="./assets/img/shopping_bag.png" alt="تسوق" style="width: 100%; height: 100%; object-fit: contain;" />
             </div>
 
             <!-- Floating 3D iPhone (x = 260 .. 820) -->
@@ -949,96 +940,71 @@
 
               <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2.5px solid #e4e4e7; padding-bottom: 14px;">
                 <span style="font-size: 32px; font-weight: 900;">سلة التسوق</span>
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5">
-                  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-                  <path d="M3 6h18M16 10a4 4 0 0 1-8 0"/>
-                </svg>
+                <img src="./assets/img/cart_ui.svg" alt="" style="width: 38px; height: 38px; object-fit: contain;" />
               </div>
 
-              <!-- Clean Product Summary -->
-              <div class="ink-card-soft" style="padding: 22px; display: flex; align-items: center; justify-content: space-between;">
-                <div>
-                  <div style="font-size: 34px; font-weight: 900;">لابتوب احترافي</div>
+              <!-- Real Laptop Product Summary -->
+              <div class="ink-card-soft" style="padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                <img src="./assets/img/laptop_3d.png" alt="لابتوب" style="width: 96px; height: 78px; object-fit: contain; flex-shrink: 0;" />
+                <div style="flex: 1;">
+                  <div style="font-size: 32px; font-weight: 900;">لابتوب احترافي</div>
                   <div style="font-size: 30px; font-weight: 700; color: #52525b;">فاتورة #402</div>
                 </div>
-                <div style="font-size: 36px; font-weight: 900; direction: ltr;">400 SAR</div>
+                <div style="font-size: 32px; font-weight: 900; direction: ltr;">400 SAR</div>
               </div>
 
-              <!-- Tactile Checkout Bar + Macro Zoom Target: "tabby" -->
+              <!-- Tactile Checkout Bar + Macro Zoom Target: Official Tabby Wordmark Button -->
               <div style="display: flex; flex-direction: column; gap: 16px; position: relative;">
                 <div style="font-size: 30px; font-weight: 800; color: #52525b;">وسيلة الدفع:</div>
-                <div id="w4-tabby-btn" class="ink-badge-inverted" style="padding: 24px 26px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: hidden;">
+                <div id="w4-tabby-btn" class="ink-badge-inverted" style="padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: hidden;">
                   <div>
-                    <div style="font-size: 34px; font-weight: 900; color: #ffffff;">الدفع عبر تابي</div>
+                    <div style="font-size: 32px; font-weight: 900; color: #ffffff;">الدفع عبر تابي</div>
                     <div style="font-size: 30px; font-weight: 700; color: #d4d4d8;">4 دفعات شهرية</div>
                   </div>
-                  <div style="background: #ffffff; color: #000000; padding: 10px 20px; border-radius: 14px; font-size: 34px; font-weight: 900; direction: ltr;">
-                    tabby
+                  <div style="display: flex; align-items: center; justify-content: center; background: #3bffc1; padding: 10px 20px; border-radius: 14px; direction: ltr;">
+                    <img src="./assets/img/tabby_wordmark.svg" alt="tabby" style="height: 30px; width: auto; display: block;" />
                   </div>
                   <div class="light-sweep" id="w4-btn-sweep" data-layout-ignore="true" style="opacity: 0;"></div>
                 </div>
                 <div id="w4-tap-ring" data-layout-ignore="true" style="position: absolute; left: 32px; top: 70px; width: 82px; height: 82px; border-radius: 50%; border: 5px solid #000000; opacity: 0; pointer-events: none;"></div>
               </div>
 
-              <div id="w4-paid-stamp" style="background: #000000; color: #ffffff; border-radius: 22px; padding: 20px; display: flex; align-items: center; justify-content: center; gap: 14px; opacity: 0;">
-                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="m9 12 2 2 4-4"/>
-                </svg>
+              <div id="w4-paid-stamp" style="background: #16a34a; color: #ffffff; border-radius: 22px; padding: 18px; display: flex; align-items: center; justify-content: center; gap: 14px; opacity: 0;">
+                <img src="./assets/img/check_circle.svg" alt="" style="width: 40px; height: 40px; object-fit: contain;" />
                 <span style="font-size: 34px; font-weight: 900;">تم الدفع بنجاح ✓</span>
               </div>
             </div>
 
-            <!-- 6 Crisp Ink Checkmarks Bursting around Phone at 41.8s -> 42.8s (Reference 42.0s!) -->
+            <!-- 6 Crisp Bursting Checkmarks around Phone at 41.8s -> 42.8s -->
             <svg id="w4-check-burst" style="position: absolute; left: 100px; top: 140px; pointer-events: none; z-index: 36;" width="880" height="1260" viewBox="0 0 880 1260" fill="none">
-              <path id="w4-cb-1" d="M 30 220 L 74 266 L 154 180" stroke="#000000" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
-              <path id="w4-cb-2" d="M 730 130 L 774 176 L 850 92" stroke="#000000" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
-              <path id="w4-cb-3" d="M 24 620 L 66 664 L 142 580" stroke="#000000" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
-              <path id="w4-cb-4" d="M 744 650 L 788 694 L 864 610" stroke="#000000" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
-              <path id="w4-cb-5" d="M 48 1060 L 92 1104 L 168 1020" stroke="#000000" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
-              <path id="w4-cb-6" d="M 716 1110 L 760 1154 L 836 1070" stroke="#000000" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-1" d="M 30 220 L 74 266 L 154 180" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-2" d="M 730 130 L 774 176 L 850 92" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-3" d="M 24 620 L 66 664 L 142 580" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-4" d="M 744 650 L 788 694 L 864 610" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-5" d="M 48 1060 L 92 1104 L 168 1020" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-6" d="M 716 1110 L 760 1154 L 836 1070" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
             </svg>
 
-            <!-- =========================================================
-                 CARDLESS OPEN STUDIO TABBY MACRO FLOW (x = 950 .. 2180)
-                 ZERO BOX CONTAINERS! Pure standalone floating 3D objects in luminous studio space:
-                 1. Courier Flork meets standalone glowing Tabby emblem tile (x=1140)
-                 2. Free-floating spinning 3D Mechanical Gear + orbiting arrows (x=1560, y=560)
-                 3. 4 Minimalist vertically-stacked 100 SAR capsules (x=1620, y=820)
-                 ========================================================= -->
             <div id="w4-flork-run" data-layout-ignore="true" class="flork-rig" style="left: 880px; top: 780px; width: 235px; height: 235px; opacity: 0; z-index: 32;">
               <img id="img-w4-run" src="./assets/img/flork_run.webp" alt="النادل يرسل الطلب" />
             </div>
 
-            <!-- Object 1: Standalone Floating Glowing 3D Tabby Tile (NO outer card!) -->
-            <div id="w4-tabby-tile" data-layout-allow-overflow="true" class="app-tile-3d app-tile-light tabby-halo" style="left: 1120px; top: 750px; width: 250px; height: 250px; border-radius: 56px; opacity: 0; z-index: 28;">
-              <svg width="128" height="128" viewBox="0 0 120 120" fill="none">
-                <path d="M56 20 V90 C56 98 62 102 72 102 H88" stroke="#000000" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M36 48 L84 40" stroke="#000000" stroke-width="14" stroke-linecap="round"/>
-              </svg>
+            <!-- Object 1: Official Borderless Glowing Mint Tabby 3D App Tile -->
+            <div id="w4-tabby-tile" data-layout-allow-overflow="true" class="app-tile-3d tabby-halo" style="left: 1120px; top: 750px; width: 250px; height: 250px; border-radius: 56px; border: none; opacity: 0; z-index: 28;">
+              <img class="app-tile-full" src="./assets/img/tabby_tile.svg" alt="Tabby" />
               <div class="light-sweep" id="w4-tile-sweep" data-layout-ignore="true" style="opacity: 0;"></div>
             </div>
 
-            <!-- Object 2: Free-Floating Rotating Mechanical Gear + Orbiting Arrows (NO container box!) -->
+            <!-- Object 2: Real 3D Gear + Orbiting Cycle SVG Icon (NO hand-drawn SVG paths!) -->
             <div id="w4-gear-stage" data-layout-allow-overflow="true" style="position: absolute; left: 1520px; top: 470px; width: 320px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; z-index: 28;">
-              <div style="position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 18px 34px rgba(0,0,0,0.28));">
-                <!-- Outer Orbiting Curved Arrows -->
-                <svg id="w4-orbit-ring" width="240" height="240" viewBox="0 0 160 160" fill="none" style="position: absolute; inset: 0; transform-origin: center;">
-                  <path d="M 28 80 A 52 52 0 0 1 124 44" stroke="#000000" stroke-width="7" stroke-linecap="round"/>
-                  <polygon points="130,30 132,54 110,48" fill="#000000"/>
-                  <path d="M 132 80 A 52 52 0 0 1 36 116" stroke="#000000" stroke-width="7" stroke-linecap="round"/>
-                  <polygon points="30,130 28,106 50,112" fill="#000000"/>
-                </svg>
-                <!-- Inner 3D Monochrome Gear -->
-                <svg id="w4-gear-spin" width="128" height="128" viewBox="0 0 24 24" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform-origin: center;">
-                  <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" fill="#000000"/>
-                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>
-                </svg>
+              <div style="position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 18px 34px rgba(0,0,0,0.22));">
+                <img id="w4-orbit-ring" src="./assets/img/tabby_arrow.svg" alt="" style="position: absolute; inset: 0; width: 240px; height: 240px; opacity: 0.52; transform-origin: center;" />
+                <img id="w4-gear-spin" src="./assets/img/gear_3d.png" alt="معالجة" style="width: 156px; height: 156px; object-fit: contain; transform-origin: center;" />
               </div>
               <div style="margin-top: 12px; font-size: 36px; font-weight: 900; color: #000000;">معالجة الطلب</div>
             </div>
 
-            <!-- Object 3: 4 Minimalist Embossed Payment Pills Stacked Vertically (Reference 40.5s - ZERO enclosing frame!) -->
+            <!-- Object 3: 4 Minimalist Embossed Payment Pills Stacked Vertically -->
             <div id="w4-pills-stack" data-layout-allow-overflow="true" style="position: absolute; left: 1720px; top: 810px; width: 360px; display: flex; flex-direction: column; gap: 16px; z-index: 30;">
               <div id="w4-pill-1" class="installment-pill" style="opacity: 0;">
                 <span style="font-size: 34px; font-weight: 900;">100 ريال</span>
@@ -1058,7 +1024,6 @@
               </div>
             </div>
 
-            <!-- Celebrating Flork beside Phone on Confirmation -->
             <div id="w4-flork-celebrate" data-layout-allow-overflow="true" class="flork-rig" style="left: 830px; top: 720px; width: 250px; height: 250px; opacity: 0; z-index: 34;">
               <img id="img-w4-celebrate" src="./assets/img/flork_celebrate.webp" alt="تم الدفع" />
             </div>
@@ -1066,43 +1031,43 @@
 
           <!-- =========================================================
                WORLD 5: OBSIDIAN BRIDGE & INTIMATE FINALE (x = 9900 .. 10980) [42.84s - 50.00s]
+               100% GPU-Composited Zero-Lag Bridge!
                ========================================================= -->
           <div class="world-zone clip" id="world-5" data-start="42.84" data-duration="7.16" data-layout-allow-overflow="true" style="left: 9900px; width: 1080px;">
             <div id="w5-dark-bg" data-layout-allow-overflow="true"></div>
 
-            <!-- Beat 1 (42.90s -> 44.35s): Crisp Luminous Intro Title -->
+            <!-- Beat 1 (42.90s -> 44.32s): Crisp Luminous Intro Title -->
             <div id="w5-title-intro" style="position: absolute; left: 60px; right: 60px; top: 820px; text-align: center; font-size: 80px; font-weight: 900; color: #ffffff; text-shadow: 0 0 30px rgba(255,255,255,0.42), 0 10px 28px rgba(0,0,0,0.85); opacity: 0;">
               وهذا هو الـ API
             </div>
 
-            <!-- Beat 2 (44.40s -> 47.25s): Minimalist Luminous Bridge + Word Reveal (Camera zooms along bridge!) -->
-            <div id="w5-bridge-stage" data-layout-allow-overflow="true" style="position: absolute; left: 40px; top: 680px; width: 1000px; height: 480px; opacity: 0;">
-              <div id="w5-node-l" class="app-tile-3d app-tile-light" style="position: absolute; left: 0; top: 100px; width: 220px; height: 220px; border-radius: 48px;">
-                <span style="font-size: 88px; font-weight: 900; color: #000000; direction: ltr;">H</span>
+            <!-- Beat 2 (44.32s -> 47.25s): Real Official Icons + Smooth Zero-Lag GPU Bridge! -->
+            <div id="w5-bridge-stage" data-layout-allow-overflow="true" style="position: absolute; left: 40px; top: 680px; width: 1000px; height: 480px; opacity: 0; will-change: transform, opacity;">
+              <!-- Pre-baked static glow backdrop (ZERO per-frame SVG filter recalculation lag!) -->
+              <div id="w5-bridge-glow" data-layout-ignore="true" style="position: absolute; left: 160px; top: 10px; width: 680px; height: 320px; background: radial-gradient(ellipse 68% 58% at 50% 52%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 54%, transparent 100%); pointer-events: none;"></div>
+
+              <div id="w5-node-l" class="app-tile-3d" style="position: absolute; left: 0; top: 100px; width: 220px; height: 220px; border-radius: 48px; border: 4px solid #facc15;">
+                <img class="app-tile-full" src="./assets/img/app_hungerstation.jpg" alt="HungerStation" />
               </div>
 
-              <div id="w5-node-r" class="app-tile-3d app-tile-dark" style="position: absolute; right: 0; top: 100px; width: 220px; height: 220px; border-radius: 48px; border-color: #ffffff;">
-                <div style="display: flex; align-items: center; gap: 6px; direction: ltr;">
-                  <svg width="46" height="46" viewBox="0 0 24 24" fill="#ffffff">
-                    <path d="M16.36 1.43c0 1.14-.49 2.2-1.17 2.95-.74.82-1.85 1.46-2.99 1.37-.14-1.1.44-2.22 1.13-2.96.76-.82 1.98-1.42 3.03-1.36Zm3.68 15.61c-.54 1.24-.8 1.79-1.5 2.89-.98 1.54-2.36 3.45-4.08 3.47-1.53.02-1.92-.99-4.0-.98-2.08.01-2.51 1-4.04.98-1.72-.02-3.03-1.75-4.01-3.28-2.75-4.29-3.04-9.32-1.34-11.98 1.2-1.88 3.11-2.98 4.91-2.98 1.82 0 2.96 1.01 4.46 1.01 1.46 0 2.34-1.01 4.44-1.01 1.61 0 3.31.89 4.51 2.41-3.97 2.18-3.32 7.86.65 9.47Z"/>
-                  </svg>
-                  <span style="font-size: 50px; font-weight: 800; color: #ffffff;">Pay</span>
-                </div>
+              <div id="w5-node-r" class="app-tile-3d app-tile-dark" style="position: absolute; right: 0; top: 100px; width: 220px; height: 220px; border-radius: 48px; border-color: #ffffff; padding: 28px;">
+                <img src="./assets/img/apple_pay_white.svg" alt="Apple Pay" style="width: 100%; height: 100%; object-fit: contain;" />
               </div>
 
-              <!-- Suspension Bridge Arch in Glowing White Ink (Matching Reference 44.5s - 47.0s!) -->
-              <svg style="position: absolute; left: 215px; top: 35px; pointer-events: none; filter: drop-shadow(0 0 18px rgba(255,255,255,0.45));" width="570" height="270" viewBox="0 0 570 270" fill="none">
-                <line x1="95" y1="60" x2="95" y2="215" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
-                <line x1="475" y1="60" x2="475" y2="215" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
-                <path id="w5-bridge-arch" d="M 10 205 Q 95 70 95 70 Q 285 185 475 70 Q 475 70 560 205" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-dasharray="840" stroke-dashoffset="840"/>
-                <line id="w5-bridge-deck" x1="10" y1="205" x2="560" y2="205" stroke="#ffffff" stroke-width="11" stroke-dasharray="560" stroke-dashoffset="560"/>
-                <line x1="185" y1="125" x2="185" y2="205" stroke="#ffffff" stroke-width="5"/>
-                <line x1="285" y1="150" x2="285" y2="205" stroke="#ffffff" stroke-width="5"/>
-                <line x1="385" y1="125" x2="385" y2="205" stroke="#ffffff" stroke-width="5"/>
-              </svg>
+              <!-- Pure GPU-Scaled Crisp Suspension Bridge (NO animated SVG filter or dashoffset stutter!) -->
+              <div id="w5-bridge-core" data-layout-allow-overflow="true" style="position: absolute; left: 215px; top: 35px; width: 570px; height: 270px; transform-origin: 50% 60%; will-change: transform, opacity;">
+                <svg width="570" height="270" viewBox="0 0 570 270" fill="none" shape-rendering="geometricPrecision">
+                  <line x1="95" y1="60" x2="95" y2="215" stroke="#ffffff" stroke-width="11" stroke-linecap="round"/>
+                  <line x1="475" y1="60" x2="475" y2="215" stroke="#ffffff" stroke-width="11" stroke-linecap="round"/>
+                  <path d="M 10 205 Q 95 70 95 70 Q 285 185 475 70 Q 475 70 560 205" stroke="#ffffff" stroke-width="9.5" stroke-linecap="round"/>
+                  <line x1="10" y1="205" x2="560" y2="205" stroke="#ffffff" stroke-width="11.5" stroke-linecap="round"/>
+                  <line x1="185" y1="125" x2="185" y2="205" stroke="#ffffff" stroke-width="5.5"/>
+                  <line x1="285" y1="150" x2="285" y2="205" stroke="#ffffff" stroke-width="5.5"/>
+                  <line x1="385" y1="125" x2="385" y2="205" stroke="#ffffff" stroke-width="5.5"/>
+                </svg>
+              </div>
 
-              <!-- Privacy Text under Bridge (Clean Unboxed Typography sliding RTL!) -->
-              <div id="w5-privacy-line" style="position: absolute; left: 40px; right: 40px; top: 370px; text-align: center; font-size: 56px; font-weight: 900; color: #ffffff; text-shadow: 0 0 24px rgba(255,255,255,0.38), 0 8px 20px rgba(0,0,0,0.8); opacity: 0;">
+              <div id="w5-privacy-line" style="position: absolute; left: 40px; right: 40px; top: 370px; text-align: center; font-size: 56px; font-weight: 900; color: #ffffff; text-shadow: 0 0 24px rgba(255,255,255,0.38), 0 8px 20px rgba(0,0,0,0.8); opacity: 0; will-change: transform, opacity;">
                 بدون ما يشوف أحد تفاصيل الثاني
               </div>
             </div>
@@ -1308,9 +1273,14 @@
       cardTiltIn("#w2-stop-sticker", 8.94, { fromRotY: -22, fromRotX: 8, toRotZ: -2.5, dur: 0.66 });
       tl.to("#camera-rig", { scale: 1.28, rotation: -0.9, duration: 2.0, ease: "sine.inOut" }, 9.05);
 
-      cushionDrop("#w2-sah-stamp", 11.12, { fromY: 36, rot: -3, dur: 0.34 });
-      tl.to(["#w2-stop-sticker", "#w2-sah-stamp"], { opacity: 0, scale: 0.9, duration: 0.20 }, 11.68)
-        .to("#optical-vignette", { opacity: 0.26, duration: 0.30 }, 11.72);
+      // 10.82s: Translucent background wash -> 11.02s: Boxless black "صح؟" appears cleanly -> fades out before 11.76s whip-pan!
+      tl.set("#w2-sah-wash", { opacity: 0 }, 10.80)
+        .to("#w2-sah-wash", { opacity: 1, duration: 0.24, ease: "power2.out" }, 10.82)
+        .to("#optical-vignette", { opacity: 0.24, duration: 0.24, ease: "power2.out" }, 10.82)
+        .set("#w2-sah-stamp", { opacity: 0, scale: 0.72, y: 26, rotation: 0 }, 11.00)
+        .to("#w2-sah-stamp", { opacity: 1, scale: 1.0, y: 0, duration: 0.32, ease: "back.out(1.65)" }, 11.02)
+        .to("#w2-sah-stamp", { opacity: 0, scale: 0.88, y: -16, duration: 0.20, ease: "power2.in" }, 11.52)
+        .to(["#w2-sah-wash", "#w2-stop-sticker"], { opacity: 0, duration: 0.20, ease: "power2.out" }, 11.54);
 
       // 11.76s: Horizontal Motion-Blur Whip-Pan into Wide Panorama!
       whipPanStreak(11.76, 0.30);
@@ -1338,26 +1308,28 @@
       silkScaleIn("#w2-waiter-rig", 14.14, { fromScale: 0.74, toRot: 2.2, dur: 0.66 });
       addPendulumSway("#w2-waiter-rig", 14.16, 19.22, 2.2, 1.5, 1.5);
 
-      // 15.52s: Order Ticket -> Kitchen Doors
+      // 15.52s: Order Paper emerges beside customer -> travels with Waiter to Kitchen & disappears into door!
       tl.to("#w2-bg-stage", { opacity: 0.85, duration: 0.4 }, 15.48);
-      silkGlide("#w2-order-ticket", 15.52, { fromX: -120, fromY: 30, toRot: -2, dur: 0.56 });
-      tl.to("#w2-order-ticket", { x: 260, y: -36, rotation: 3, duration: 0.84, ease: "power2.inOut" }, 15.96);
+      silkGlide("#w2-order-ticket", 15.52, { fromX: -90, fromY: 20, toRot: -6, dur: 0.50 });
+      tl.to("#w2-order-ticket", { x: 255, y: -14, rotation: 6, duration: 0.60, ease: "power2.inOut" }, 16.05);
 
       tl.to("#spatial-world", { x: -2440, y: -100, duration: 0.90, ease: "power2.inOut" }, 16.70)
         .to("#camera-rig", { scale: 1.16, rotation: -0.6, duration: 0.90, ease: "power2.inOut" }, 16.70)
         .to("#w2-waiter-rig", { x: 420, duration: 0.94, ease: "power2.inOut" }, 16.70)
-        .to("#w2-order-ticket", { x: 860, y: -60, opacity: 0, duration: 0.72, ease: "power2.in" }, 16.84);
+        .to("#w2-order-ticket", { x: 845, y: -32, rotation: 10, duration: 0.88, ease: "power2.inOut" }, 16.70)
+        .to("#w2-order-ticket", { scale: 0.58, opacity: 0, duration: 0.36, ease: "power2.in" }, 17.34);
 
-      // 18.00s: Food Cloche BACK to Customer
-      silkGlide("#w2-food-dome", 18.00, { fromX: 110, fromY: -25, toRot: 2, dur: 0.52 });
+      // 18.00s: Fresh Burger emerges from Kitchen -> carried smoothly back -> delivered cleanly to Customer Table!
+      silkGlide("#w2-food-dome", 17.98, { fromX: 85, fromY: -18, toRot: -3, dur: 0.48 });
       tl.to("#spatial-world", { x: -1620, y: -120, duration: 0.94, ease: "power2.inOut" }, 18.28)
         .to("#camera-rig", { scale: 1.14, rotation: 0.6, duration: 0.94, ease: "power2.inOut" }, 18.28)
         .to("#w2-waiter-rig", { x: -280, duration: 0.94, ease: "power2.inOut" }, 18.28)
-        .to("#w2-food-dome", { x: -940, y: 12, duration: 0.94, ease: "power2.inOut" }, 18.28)
-        .to("#w2-bg-stage", { opacity: 1, duration: 0.45 }, 18.42);
+        .to("#w2-food-dome", { x: -910, y: 12, rotation: 0, duration: 0.92, ease: "power2.inOut" }, 18.28)
+        .to("#w2-bg-stage", { opacity: 1, duration: 0.45 }, 18.42)
+        .to("#w2-food-dome", { scale: 0.78, opacity: 0, duration: 0.24, ease: "power2.in" }, 19.06);
 
       // 19.32s: Sharp Cut into MACRO CLOSE-UP of smiling character + "بسيطة صح؟" (Reference 19.6s!)
-      tl.to(["#w2-waiter-rig", "#w2-food-dome", "#w2-bg-stage"], { opacity: 0, duration: 0.14 }, 19.28)
+      tl.to(["#w2-waiter-rig", "#w2-bg-stage"], { opacity: 0, duration: 0.14 }, 19.28)
         .set("#camera-rig", { scale: 1.0, rotation: 0 }, 19.34)
         .set("#spatial-world", { x: -1280, y: 0 }, 19.34)
         .set("#w2-macro-wrap", { opacity: 1 }, 19.34);
@@ -1369,61 +1341,81 @@
       retinalFlash(20.14, 1.0);
 
       // =========================================================
-      // ACT 3: DARK 3D API -> PERSPECTIVE BLUEPRINT CAROUSEL (20.22s -> 31.50s)
+      // ACT 3: DARK 3D API -> IN-PLACE SWAP & PAN TO APPLE PAY (20.22s -> 31.50s)
       // =========================================================
       tl.set("#spatial-world", { x: -4000, y: 0 }, 20.20)
         .set("#camera-rig", { scale: 1.0, rotation: 0 }, 20.20)
         .to("#optical-vignette", { opacity: 0.48, duration: 0.32 }, 20.22);
 
-      // 3A (20.22s -> 23.32s): Dark studio space + Luminous text + Counter-moving blurred tiles!
+      // 3A (20.22s -> 23.32s): Dark studio space + Luminous text + Counter-moving blurred real app tiles!
       silkScaleIn("#w3a-api-title", 20.26, { fromScale: 0.80, toRot: 0, dur: 0.56 });
       tl.to("#camera-rig", { scale: 1.14, rotation: -0.45, duration: 2.85, ease: "sine.inOut" }, 20.32);
 
-      tl.to("#w3a-tile-tl", { opacity: 0.82, x: -75, y: -55, duration: 1.65, ease: "power2.out" }, 21.45)
-        .to("#w3a-tile-br", { opacity: 0.85, x: 85, y: 75, duration: 1.65, ease: "power2.out" }, 21.55)
-        .to("#w3a-tile-bl", { opacity: 0.85, x: -60, y: 65, duration: 1.55, ease: "power2.out" }, 21.75);
+      tl.to("#w3a-tile-tl", { opacity: 0.86, x: -75, y: -55, duration: 1.65, ease: "power2.out" }, 21.45)
+        .to("#w3a-tile-br", { opacity: 0.88, x: 85, y: 75, duration: 1.65, ease: "power2.out" }, 21.55)
+        .to("#w3a-tile-bl", { opacity: 0.88, x: -60, y: 65, duration: 1.55, ease: "power2.out" }, 21.75);
 
-      // Smooth Corner-Sweep into Graph-Paper Showcase (23.22s -> 23.56s)
+      // Smooth Corner-Sweep into Graph-Paper Showcase (23.18s -> 23.66s)
       curvedSweep(23.18, { tone: "light", dur: 0.48 });
 
-      // 3B (23.36s -> 31.48s): Continuous Panning Carousel across Hero App Tiles on Blueprint Desk
-      // Reveal #w3b-board-stage strictly at 23.30s so it never bleeds into 3A!
+      // 3B (23.34s -> 25.48s): CAMERA STAYS STILL ON SWAP SLOT while Apps Swap IN PLACE above Glued Masking Tape!
       tl.set("#w3b-board-stage", { opacity: 1 }, 23.30)
-        .set("#spatial-world", { x: -5120, y: 40 }, 23.38)
-        .set("#camera-rig", { scale: 1.06, rotation: 0.35 }, 23.38)
-        .to("#optical-vignette", { opacity: 0.38, duration: 0.45 }, 23.42);
+        .set("#spatial-world", { x: -5120, y: 120 }, 23.32)
+        .set("#camera-rig", { scale: 1.04, rotation: 0 }, 23.32)
+        .to("#optical-vignette", { opacity: 0.36, duration: 0.45 }, 23.38);
 
-      // Continuous steady kinetic camera slide rightward across Hero 1 -> Hero 2 -> Hero 3 -> Apple Pay!
-      tl.to("#spatial-world", { x: -5640, y: 15, duration: 1.35, ease: "power1.inOut" }, 23.48)
-        .to("#spatial-world", { x: -6480, y: -15, duration: 1.65, ease: "power1.inOut" }, 24.85)
-        .to("#camera-rig", { scale: 1.12, rotation: -0.35, duration: 2.8, ease: "sine.inOut" }, 23.50);
+      // Gentle Z-breathing ONLY during in-place app swapping (ZERO X/Y sliding & ZERO tape movement!)
+      tl.to("#camera-rig", { scale: 1.08, duration: 2.05, ease: "sine.inOut" }, 23.38);
 
-      // Keep "التطبيقات بشكل عام" sliding smoothly with camera along Tiles 1-3!
-      tl.set("#w3b-tape-general", { x: -160 }, 23.42)
-        .to("#w3b-tape-general", { x: 480, duration: 2.6, ease: "power1.inOut" }, 23.50);
+      // Icon 1: Google Maps (23.36s -> 23.86s)
+      tl.set("#w3b-swap-1", { opacity: 1, scale: 0.84 }, 23.36)
+        .to("#w3b-swap-1", { scale: 1.05, duration: 0.16, ease: "power3.out" }, 23.36)
+        .to("#w3b-swap-1", { scale: 1.0, duration: 0.18, ease: "power2.out" }, 23.52)
+        .set("#w3b-swap-1", { opacity: 0 }, 23.86);
 
-      // Specular gleam sweeps across Apple Pay as it settles into center at 26.2s!
-      tl.set("#w3b-apple-sweep", { x: -240 }, 25.8)
+      // Icon 2: Salla (23.86s -> 24.38s)
+      tl.set("#w3b-swap-2", { opacity: 1, scale: 0.82 }, 23.86)
+        .to("#w3b-swap-2", { scale: 1.06, duration: 0.16, ease: "back.out(1.8)" }, 23.86)
+        .to("#w3b-swap-2", { scale: 1.0, duration: 0.18, ease: "power2.out" }, 24.02)
+        .set("#w3b-swap-2", { opacity: 0 }, 24.38);
+
+      // Icon 3: Absher (24.38s -> 24.90s)
+      tl.set("#w3b-swap-3", { opacity: 1, scale: 0.82 }, 24.38)
+        .to("#w3b-swap-3", { scale: 1.06, duration: 0.16, ease: "back.out(1.8)" }, 24.38)
+        .to("#w3b-swap-3", { scale: 1.0, duration: 0.18, ease: "power2.out" }, 24.54)
+        .set("#w3b-swap-3", { opacity: 0 }, 24.90);
+
+      // Icon 4 (Final Swapped App): Tamara (24.90s onwards — stays anchored on blueprint desk!)
+      tl.set("#w3b-swap-4", { opacity: 1, scale: 0.82 }, 24.90)
+        .to("#w3b-swap-4", { scale: 1.06, duration: 0.18, ease: "back.out(1.8)" }, 24.90)
+        .to("#w3b-swap-4", { scale: 1.0, duration: 0.20, ease: "power2.out" }, 25.08);
+
+      // 25.48s -> 26.32s: Pan diagonally UP-RIGHT directly onto Apple Pay (left=1095, top=185), Tamara peeking bottom-left!
+      tl.to("#w3b-tape-general", { opacity: 0, duration: 0.34, ease: "power2.out" }, 25.52)
+        .to("#spatial-world", { x: -5700, y: 440, duration: 0.86, ease: "power2.inOut" }, 25.48)
+        .to("#camera-rig", { scale: 1.08, rotation: -0.35, duration: 0.86, ease: "power2.inOut" }, 25.48);
+
+      // Specular gleam sweeps across Apple Pay as it settles!
+      tl.set("#w3b-apple-sweep", { x: -240 }, 25.85)
         .to("#w3b-apple-sweep", { x: 760, duration: 0.58, ease: "power2.inOut" }, 26.05);
 
-      // 26.42s: Painterly Organic Ink Brush X slashes right across Apple Pay + Guard pops!
-      tl.to("#w3b-tape-general", { opacity: 0, duration: 0.22 }, 26.35)
-        .to("#optical-vignette", { opacity: 0.58, duration: 0.38 }, 26.38)
-        .to("#camera-rig", { scale: 1.18, rotation: -0.75, duration: 0.72, ease: "power2.out" }, 26.40);
+      // 26.42s: Painterly Red X slashes right across Apple Pay + Guard pops!
+      tl.to("#optical-vignette", { opacity: 0.58, duration: 0.38 }, 26.38)
+        .to("#camera-rig", { scale: 1.14, rotation: -0.70, duration: 0.72, ease: "power2.out" }, 26.40);
       tl.to("#w3b-x-1", { strokeDashoffset: 0, duration: 0.24, ease: "power3.out" }, 26.44)
         .to("#w3b-x-2", { strokeDashoffset: 0, duration: 0.24, ease: "power3.out" }, 26.64);
       cushionDrop("#w3b-guard-badge", 26.68, { fromY: -40, rot: -1.5, dur: 0.56 });
 
-      // 28.18s: Pan gently left to "نرجع للنادل!", clear X, then dash Couriers + draw Checkmark!
+      // 28.18s: Clear X/Guard -> Show "نرجع للنادل!" tape under THAT SAME Tamara (#w3b-swap-4) -> Pan DOWN-LEFT back to Tamara with Apple Pay in UPPER-RIGHT!
       tl.to(["#w3b-guard-badge", "#w3b-x-1", "#w3b-x-2"], { opacity: 0, duration: 0.24 }, 28.14)
+        .set("#w3b-tape-waiter", { opacity: 1 }, 28.16)
         .to("#optical-vignette", { opacity: 0.34, duration: 0.38 }, 28.20)
-        .to("#spatial-world", { x: -6160, y: 20, duration: 0.76, ease: "power2.inOut" }, 28.22)
-        .to("#camera-rig", { scale: 1.05, rotation: 0.25, duration: 0.76, ease: "power2.inOut" }, 28.22);
-      cushionDrop("#w3b-tape-waiter", 28.26, { fromY: -28, rot: 1.5, dur: 0.48 });
+        .to("#spatial-world", { x: -5320, y: 210, duration: 0.76, ease: "power2.inOut" }, 28.20)
+        .to("#camera-rig", { scale: 0.90, rotation: 0.20, duration: 0.76, ease: "power2.inOut" }, 28.20);
 
-      // 29.28s: Slide right back onto Apple Pay as Running Flork + Card Flork dash beside it & ✓ draws!
-      tl.to("#spatial-world", { x: -6480, y: -10, duration: 0.78, ease: "power2.inOut" }, 29.26)
-        .to("#camera-rig", { scale: 1.12, rotation: -0.25, duration: 0.78, ease: "power2.inOut" }, 29.26);
+      // 29.26s: Pan UP-RIGHT back onto Apple Pay as Waiter Flork + Real Burger + Card Flork dash beside it & Green ✓ draws!
+      tl.to("#spatial-world", { x: -5700, y: 440, duration: 0.78, ease: "power2.inOut" }, 29.26)
+        .to("#camera-rig", { scale: 1.04, rotation: -0.25, duration: 0.78, ease: "power2.inOut" }, 29.26);
 
       silkGlide("#w3b-flork-courier", 29.38, { fromX: -140, fromY: 30, toRot: -4, dur: 0.56 });
       silkGlide("#w3b-flork-card", 29.62, { fromX: 120, fromY: -20, toRot: 4, dur: 0.56 });
@@ -1525,16 +1517,22 @@
       silkScaleIn("#w5-title-intro", 42.92, { fromScale: 0.84, toRot: 0, dur: 0.48 });
       tl.to("#w5-title-intro", { opacity: 0, scale: 0.92, y: -30, duration: 0.24, ease: "power2.in" }, 44.18);
 
-      // 44.38s -> 47.25s: Minimalist Luminous Suspension Bridge + Continuous Push-In Zoom!
-      tl.set("#w5-bridge-stage", { opacity: 1 }, 44.36);
-      silkGlide("#w5-node-l", 44.38, { fromX: -90, fromY: 16, toRot: 0, dur: 0.54 });
-      silkGlide("#w5-node-r", 44.44, { fromX: 90, fromY: 16, toRot: 0, dur: 0.54 });
-      tl.to("#w5-bridge-arch", { strokeDashoffset: 0, duration: 0.78, ease: "power2.inOut" }, 44.52)
-        .to("#w5-bridge-deck", { strokeDashoffset: 0, duration: 0.58, ease: "power2.inOut" }, 44.62);
+      // 44.32s -> 47.25s: Butter-Smooth 100% GPU-Composited Suspension Bridge + Unbroken Push-In Zoom!
+      tl.set("#w5-bridge-stage", { opacity: 0, scale: 0.94 }, 44.28)
+        .to("#w5-bridge-stage", { opacity: 1, scale: 1.0, duration: 0.48, ease: "power2.out" }, 44.30);
 
-      // Continuous Camera Push-In toward the bridge while Privacy phrase illuminates!
-      tl.to("#camera-rig", { scale: 1.38, rotation: 0.25, duration: 2.6, ease: "power1.inOut" }, 44.50);
-      cushionDrop("#w5-privacy-line", 45.28, { fromY: 32, rot: 0, dur: 0.50 });
+      tl.set("#w5-node-l", { opacity: 0, x: -75 }, 44.28)
+        .to("#w5-node-l", { opacity: 1, x: 0, duration: 0.56, ease: "power2.out" }, 44.32)
+        .set("#w5-node-r", { opacity: 0, x: 75 }, 44.28)
+        .to("#w5-node-r", { opacity: 1, x: 0, duration: 0.56, ease: "power2.out" }, 44.34)
+        .set("#w5-bridge-core", { opacity: 0, scaleX: 0.78 }, 44.30)
+        .to("#w5-bridge-core", { opacity: 1, scaleX: 1.0, duration: 0.64, ease: "power2.out" }, 44.36);
+
+      // Single unbroken continuous GPU push-in zoom (NO competing filter blurs or strokeDashoffset stutter!)
+      tl.to("#camera-rig", { scale: 1.24, rotation: 0.18, duration: 2.75, ease: "sine.inOut" }, 44.40);
+
+      tl.set("#w5-privacy-line", { opacity: 0, y: 22 }, 45.20)
+        .to("#w5-privacy-line", { opacity: 1, y: 0, duration: 0.56, ease: "power2.out" }, 45.24);
 
       // 47.26s: Crisp Cut onto Centered Hero Pointing directly at Viewer + Clean Minimalist CTA!
       tl.to("#w5-bridge-stage", { opacity: 0, duration: 0.16 }, 47.22)
