@@ -69,8 +69,8 @@ jobs:
           if [ ! -f "videos/${VIDEO_ID}/assets/gsap.min.js" ] && [ -f "shared-assets/gsap.min.js" ]; then
             cp "shared-assets/gsap.min.js" "videos/${VIDEO_ID}/assets/gsap.min.js"
           fi
-          if [ ! -f "videos/${VIDEO_ID}/assets/fonts/Cairo.ttf" ] && [ -f "shared-assets/fonts/Cairo.ttf" ]; then
-            cp "shared-assets/fonts/Cairo.ttf" "videos/${VIDEO_ID}/assets/fonts/Cairo.ttf"
+          if [ ! -f "videos/${VIDEO_ID}/assets/fonts/NotoSansArabic.ttf" ] && [ -f "shared-assets/fonts/NotoSansArabic.ttf" ]; then
+            cp "shared-assets/fonts/NotoSansArabic.ttf" "videos/${VIDEO_ID}/assets/fonts/NotoSansArabic.ttf"
           fi
           npx --yes hyperframes@0.9.43 lint "videos/${VIDEO_ID}"
 
