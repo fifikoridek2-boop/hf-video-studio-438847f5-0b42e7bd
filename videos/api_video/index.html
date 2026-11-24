@@ -249,7 +249,7 @@
         top: 0;
         width: 1080px;
         height: 1920px;
-        transform-origin: 55% 74%;
+        transform-origin: 50% 62%;
         z-index: 30;
         opacity: 0;
         pointer-events: none;
@@ -274,8 +274,6 @@
       #w1-hero-thumbs {
         position: absolute;
         inset: 0;
-        transform-origin: 520px 1920px;
-        transform: translate(-24px, 0px) scale(0.855);
         opacity: 0;
       }
 
@@ -684,7 +682,7 @@
             <div id="w1-hero-stage" data-layout-allow-overflow="true">
               <div id="w1-hero-halo" data-layout-ignore="true"></div>
               <div id="w1-hero-gun" class="puppet-rig waist-fade" data-layout-allow-overflow="true" style="inset: 0;">
-                <img id="img-w1-gun" src="./assets/img/char_point_you.webp" alt="الشخصية الرئيسية" />
+                <img id="img-w1-gun" src="./assets/img/char_hook_gun.webp" alt="الشخصية الرئيسية" />
               </div>
               <div id="w1-hero-thumbs" class="puppet-rig waist-fade" data-layout-allow-overflow="true">
                 <img id="img-w1-thumbs" src="./assets/img/char_thumbs.webp" alt="أبسط مما تتوقع" />
@@ -1019,13 +1017,12 @@
               <div class="light-sweep" id="w4-tile-sweep" data-layout-ignore="true" style="opacity: 0;"></div>
             </div>
 
-            <!-- Object 2: Real 3D Gear + Orbiting Cycle SVG Icon (NO hand-drawn SVG paths!) -->
+            <!-- Object 2: Clean Drawn Vector Cycle Arrows Processing Icon -->
             <div id="w4-gear-stage" data-layout-allow-overflow="true" style="position: absolute; left: 1520px; top: 470px; width: 320px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; z-index: 28;">
-              <div style="position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 18px 34px rgba(0,0,0,0.22));">
-                <img id="w4-orbit-ring" src="./assets/img/tabby_arrow.svg" alt="" style="position: absolute; inset: 0; width: 240px; height: 240px; opacity: 0.52; transform-origin: center;" />
-                <img id="w4-gear-spin" src="./assets/img/gear_3d.webp" alt="معالجة" style="width: 156px; height: 156px; object-fit: contain; transform-origin: center;" />
+              <div style="position: relative; width: 220px; height: 220px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 14px 26px rgba(0,0,0,0.16));">
+                <img id="w4-orbit-ring" src="./assets/img/tabby_arrow.svg" alt="معالجة الطلب" style="width: 210px; height: 210px; object-fit: contain; transform-origin: center;" />
               </div>
-              <div style="margin-top: 12px; font-size: 36px; font-weight: 900; color: #000000;">معالجة الطلب</div>
+              <div style="margin-top: 14px; font-size: 36px; font-weight: 900; color: #000000;">معالجة الطلب</div>
             </div>
 
             <!-- Object 3: 4 Minimalist Embossed Payment Pills Stacked Vertically -->
@@ -1229,12 +1226,11 @@
       tl.to("#w1-dof-a", { x: -45, y: -30, duration: 3.3, ease: "sine.inOut" }, 0)
         .to("#w1-dof-b", { x: 45, y: 35, duration: 3.3, ease: "sine.inOut" }, 0);
 
-      // Smooth subtle camera breathing across Act 1
-      tl.to("#camera-rig", { scale: 1.08, rotation: -0.28, duration: 1.02, ease: "power2.inOut" }, 0)
-        .to("#camera-rig", { scale: 1.02, rotation: 0.25, duration: 2.24, ease: "power2.inOut" }, 1.10)
-        .to("#camera-rig", { scale: 1.05, rotation: 0, duration: 2.05, ease: "sine.inOut" }, 3.42);
+      // Smooth continuous camera breathing across Act 1 (zero abrupt stops)
+      tl.to("#camera-rig", { scale: 1.055, rotation: -0.22, duration: 3.25, ease: "sine.inOut" }, 0)
+        .to("#camera-rig", { scale: 1.0, rotation: 0, duration: 2.31, ease: "sine.inOut" }, 3.25);
 
-      // Beat 1 (0.00s -> 1.24s): "وش" "يعني" "API؟" -> rises upward and fades out!
+      // Beat 1 (0.00s -> 1.42s): "وش" "يعني" "API؟" -> silky velocity ascent high into the upper area and fade out!
       tl.set("#hk-w0", { opacity: 1, scale: 1.0, y: 0 }, 0);
       tl.set("#hk-w1", { opacity: 0, scale: 0.84, y: 28 }, 0.24)
         .to("#hk-w1", { opacity: 1, scale: 1.04, y: 0, duration: 0.16, ease: "power3.out" }, 0.25)
@@ -1244,38 +1240,41 @@
         .to("#hk-w2", { opacity: 1, scale: 1.06, y: 0, duration: 0.18, ease: "power3.out" }, 0.54)
         .to("#hk-w2", { scale: 1.0, duration: 0.14, ease: "power2.out" }, 0.72);
 
-      // Rise UP smoothly and fade out after finishing "وش يعني API؟"
-      tl.to("#hook-line-1", { y: -155, opacity: 0, duration: 0.30, ease: "power2.inOut" }, 0.94);
+      // Lift #hook-line-1 high into the upper zone (y: -640 -> top ~190px) briskly and smoothly with trailing fade
+      tl.to("#hook-line-1", { y: -640, duration: 0.50, ease: "power2.out" }, 0.84)
+        .to("#hook-line-1", { opacity: 0, duration: 0.28, ease: "power2.in" }, 1.06);
 
-      // Beat 2 (1.04s -> 3.62s): Reverse animation — rises UP from below with fade-in, then glides RTL!
-      tl.set("#hook-line-2-wrap", { opacity: 0, y: 155, scale: 1 }, 1.02)
+      // Beat 2 (1.04s -> 3.60s): Reverse vertical rise-from-below + silky RTL tracking!
+      tl.set("#hook-line-2-wrap", { opacity: 0, y: 460, scale: 1 }, 1.02)
         .set("#hook-line-2", { x: -535 }, 1.02)
-        .to("#hook-line-2-wrap", { opacity: 1, y: 0, duration: 0.34, ease: "power2.out" }, 1.04)
-        .to("#hook-line-2", { x: 475, duration: 2.24, ease: "power1.inOut" }, 1.24)
-        // Shrink slightly as it disappears cleanly while hero enters
-        .to("#hook-line-2-wrap", { scale: 0.78, opacity: 0, duration: 0.36, ease: "power2.inOut" }, 3.26);
+        .to("#hook-line-2-wrap", { y: 0, duration: 0.50, ease: "power3.out" }, 1.04)
+        .to("#hook-line-2-wrap", { opacity: 1, duration: 0.36, ease: "power2.out" }, 1.04)
+        .to("#hook-line-2", { x: 475, duration: 2.24, ease: "sine.inOut" }, 1.20)
+        // Smooth shrink-out while hero enters
+        .to("#hook-line-2-wrap", { scale: 0.76, opacity: 0, duration: 0.38, ease: "power2.inOut" }, 3.22);
 
-      // Beat 3 (3.28s -> 5.56s): Merged Dark Background -> Large Hero Gun fades in smoothly to center
-      // -> Smooth Chest-Up Zoom -> Morph to Visible Thumbs-Up on "أبسط" (4.44s)!
-      tl.to(["#w1-dof-a", "#w1-dof-b"], { opacity: 0, duration: 0.36, ease: "power2.out" }, 3.28);
+      // Beat 3 (3.24s -> 5.56s): Merged Dark Background -> Side-looking Finger-Gun Hero fades in large,
+      // glides smoothly into center, then ramps cleanly (zero tween overlap!) into chest-up close-up -> seamless morph to Thumbs-Up!
+      tl.to(["#w1-dof-a", "#w1-dof-b"], { opacity: 0, duration: 0.42, ease: "power2.out" }, 3.24);
 
-      tl.set("#w1-hero-stage", { opacity: 0, scale: 1.44, x: 0, y: 120 }, 3.26)
-        .set("#w1-hero-gun", { opacity: 1 }, 3.26)
-        .set("#w1-hero-thumbs", { opacity: 0 }, 3.26)
-        .to("#w1-hero-stage", { opacity: 1, duration: 0.44, ease: "power2.out" }, 3.28)
-        .to("#w1-hero-stage", { scale: 1.00, x: 0, y: -120, duration: 0.64, ease: "power3.out" }, 3.28)
-        // Smooth chest-up zoom right before & during "بس صدقني إنها..." (ends cleanly at 4.42s before morph)
-        .to("#w1-hero-stage", { scale: 1.29, x: -44, y: 12, duration: 0.48, ease: "power2.inOut" }, 3.94)
-        // Smooth morph to Thumbs-Up at "أبسط" (4.42s) — thumb 100% visible inside frame!
-        .to("#w1-hero-gun", { opacity: 0, duration: 0.12, ease: "power2.inOut" }, 4.42)
-        .to("#w1-hero-thumbs", { opacity: 1, duration: 0.12, ease: "power2.inOut" }, 4.42)
-        .to("#w1-hero-stage", { scale: 1.32, duration: 0.24, ease: "back.out(1.3)" }, 4.44)
-        .to("#w1-hero-stage", { scale: 1.29, duration: 0.80, ease: "sine.inOut" }, 4.70);
+      tl.set("#w1-hero-stage", { opacity: 0, scale: 1.42, x: 0, y: 75 }, 3.24)
+        .set("#w1-hero-gun", { opacity: 1 }, 3.24)
+        .set("#w1-hero-thumbs", { opacity: 0 }, 3.24)
+        .to("#w1-hero-stage", { opacity: 1, duration: 0.50, ease: "power2.out" }, 3.26)
+        // Phase A: Large fade-in gliding smoothly to center framing (3.26s -> 3.96s)
+        .to("#w1-hero-stage", { scale: 1.0, x: -30, y: -95, duration: 0.70, ease: "power2.out" }, 3.26)
+        // Phase B: Seamless handoff at 3.96s into chest-and-up close-up with full fingertip margin (3.96s -> 4.72s)
+        .to("#w1-hero-stage", { scale: 1.20, x: -120, y: 78, duration: 0.76, ease: "sine.inOut" }, 3.96)
+        // Seamless morph to Thumbs-Up right as voice hits "أبسط" (4.42s)
+        .to("#w1-hero-gun", { opacity: 0, duration: 0.18, ease: "sine.inOut" }, 4.42)
+        .to("#w1-hero-thumbs", { opacity: 1, duration: 0.18, ease: "sine.inOut" }, 4.42)
+        // Continuous gentle micro push-in through end of Act 1 so camera velocity never dies
+        .to("#w1-hero-stage", { scale: 1.24, y: 70, duration: 0.84, ease: "sine.inOut" }, 4.72);
 
-      addPendulumSway("#w1-hero-stage", 3.34, 5.54, 1.2, 1.1, 1.8);
+      addPendulumSway("#w1-hero-stage", 3.34, 5.54, 0.8, 0.9, 1.9);
 
-      tl.set("#w1-simple-seal", { opacity: 0, y: 24, scale: 0.92 }, 4.40)
-        .to("#w1-simple-seal", { opacity: 1, y: 0, scale: 1.0, duration: 0.42, ease: "power3.out" }, 4.44);
+      tl.set("#w1-simple-seal", { opacity: 0, y: 28, scale: 0.92 }, 4.40)
+        .to("#w1-simple-seal", { opacity: 1, y: 0, scale: 1.0, duration: 0.46, ease: "power3.out" }, 4.44);
 
       // Sealed Pure-White Optical Bloom at exact Act 1 -> Act 2 cut (5.56s)
       retinalFlash(5.56, 1.0);
@@ -1528,10 +1527,8 @@
         .to("#camera-rig", { scale: 1.24, rotation: -0.35, duration: 0.96, ease: "power2.inOut" }, 37.48);
 
       silkScaleIn("#w4-gear-stage", 37.52, { fromScale: 0.72, toRot: 0, dur: 0.60 });
-      tl.set("#w4-gear-spin", { rotation: 0 }, 37.50)
-        .to("#w4-gear-spin", { rotation: 720, duration: 3.8, ease: "none" }, 37.50)
-        .set("#w4-orbit-ring", { rotation: 0 }, 37.50)
-        .to("#w4-orbit-ring", { rotation: -540, duration: 3.8, ease: "none" }, 37.50);
+      tl.set("#w4-orbit-ring", { rotation: 0 }, 37.50)
+        .to("#w4-orbit-ring", { rotation: 540, duration: 3.8, ease: "none" }, 37.50);
 
       // 39.55s: Camera glides smoothly down-right onto 4 Stacked Monochrome Installment Pills (Reference 40.5s!)
       tl.to("#spatial-world", { x: -8960, y: -60, duration: 0.68, ease: "power2.inOut" }, 39.55)
