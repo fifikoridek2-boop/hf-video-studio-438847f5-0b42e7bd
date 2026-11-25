@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=1080, height=1920" />
     <title>وش يعني API؟ — شرح تفاعلي</title>
     <script src="./assets/gsap.min.js"></script>
+    <script src="./assets/js/three-studio.min.js"></script>
     <style>
       @font-face {
         font-family: "Noto Sans Arabic";
@@ -81,86 +82,49 @@
         direction: rtl;
       }
 
-      /* Pure Ink Monochrome Components & Dual-Tier Floating Shadows */
-      .ink-card {
-        background: #ffffff;
-        border: 4px solid #000000;
-        border-radius: 26px;
-        box-shadow:
-          0 5px 10px rgba(0, 0, 0, 0.34),
-          0 24px 52px rgba(0, 0, 0, 0.16);
+      /* Hand-Drawn Editorial Ink & Masking-Tape Typography (ZERO generic AI boxes!) */
+      .editorial-label {
         position: relative;
-        overflow: hidden;
-      }
-
-      .ink-card-3d {
-        background: linear-gradient(160deg, #ffffff 0%, #eff0f3 100%);
-        border: 4px solid #000000;
-        border-radius: 30px;
-        box-shadow:
-          0 10px 18px rgba(0, 0, 0, 0.36),
-          0 34px 66px rgba(0, 0, 0, 0.2),
-          inset 0 2px 0 rgba(255, 255, 255, 0.95);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .ink-card-soft {
-        background: #f8f9fa;
-        border: 3.5px solid #000000;
-        border-radius: 22px;
-        box-shadow:
-          0 4px 8px rgba(0, 0, 0, 0.28),
-          0 16px 34px rgba(0, 0, 0, 0.12);
-      }
-
-      .ink-badge-inverted {
-        background: linear-gradient(155deg, #1d1e22 0%, #050507 100%);
-        color: #ffffff;
-        border: 4px solid #000000;
-        border-radius: 26px;
-        box-shadow:
-          0 8px 16px rgba(0, 0, 0, 0.42),
-          0 30px 56px rgba(0, 0, 0, 0.22),
-          inset 0 1.5px 0 rgba(255, 255, 255, 0.16);
-      }
-
-      /* Physical Masking-Tape Paper Label (Like Reference 3.mp4 Blueprint Board) */
-      .tape-note {
-        position: relative;
-        background: #eaecef;
-        border: 3px solid #18181b;
-        border-radius: 8px;
-        padding: 12px 30px;
-        box-shadow:
-          0 7px 14px rgba(0, 0, 0, 0.24),
-          0 2px 4px rgba(0, 0, 0, 0.3);
-        font-size: 38px;
-        font-weight: 900;
-        color: #000000;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
         white-space: nowrap;
       }
 
-      .tape-note::before,
-      .tape-note::after {
-        content: "";
+      .editorial-label-text {
+        font-size: 54px;
+        font-weight: 900;
+        color: #09090b;
+        letter-spacing: -0.01em;
+        text-shadow: 0 3px 0 rgba(255, 255, 255, 0.9);
+      }
+
+      /* Torn-Edge Masking Tape Strip (Organic Paper Silhouette) */
+      .torn-tape-wrap {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 48px;
+        filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.22));
+      }
+
+      .torn-tape-wrap svg.tape-bg {
         position: absolute;
-        top: -12px;
-        width: 44px;
-        height: 20px;
-        background: rgba(255, 255, 255, 0.78);
-        border: 1.5px solid rgba(0, 0, 0, 0.2);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
       }
 
-      .tape-note::before {
-        left: 18px;
-        transform: rotate(-13deg);
-      }
-
-      .tape-note::after {
-        right: 18px;
-        transform: rotate(12deg);
+      .torn-tape-text {
+        position: relative;
+        z-index: 2;
+        font-size: 38px;
+        font-weight: 900;
+        color: #111114;
+        white-space: nowrap;
       }
 
       /* Tactile 3D App Tile & Clean Floating Prop Styling */
@@ -271,9 +235,17 @@
         pointer-events: none;
       }
 
+      #w1-hero-squash {
+        position: absolute;
+        inset: 0;
+        transform-origin: 48% 90%;
+        will-change: transform;
+      }
+
       #w1-hero-thumbs {
         position: absolute;
         inset: 0;
+        top: 84px;
         opacity: 0;
       }
 
@@ -282,7 +254,7 @@
         position: absolute;
         left: 60px;
         right: 60px;
-        top: 830px;
+        top: 850px;
         height: 210px;
         display: flex;
         align-items: center;
@@ -420,22 +392,35 @@
           0 48px 86px rgba(0, 0, 0, 0.12);
       }
 
-      /* Embossed Minimalist Payment Pill (Reference 40.5s!) */
-      .installment-pill {
-        width: 340px;
-        height: 82px;
-        border-radius: 20px;
-        background: linear-gradient(170deg, #ffffff 0%, #e8eaee 100%);
-        border: 3.5px solid #18181b;
+      /* Perforated Sculptural Payment Ticket Badge (ZERO boxy HTML pills!) */
+      .tabby-ticket-item {
+        position: relative;
+        width: 390px;
+        height: 92px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 30px;
-        box-shadow:
-          0 8px 14px rgba(0, 0, 0, 0.28),
-          0 22px 42px rgba(0, 0, 0, 0.16),
-          inset 0 2px 0 rgba(255, 255, 255, 0.9);
+        padding: 0 34px 0 28px;
+        filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.20));
         will-change: transform, opacity;
+      }
+
+      .tabby-ticket-item svg.ticket-shell {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .tabby-ticket-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        direction: rtl;
       }
 
       /* =========================================================
@@ -521,8 +506,8 @@
       }
 
       .waist-fade img {
-        -webkit-mask-image: linear-gradient(to bottom, #000000 84%, rgba(0, 0, 0, 0) 99%);
-        mask-image: linear-gradient(to bottom, #000000 84%, rgba(0, 0, 0, 0) 99%);
+        -webkit-mask-image: linear-gradient(to bottom, #000000 90%, rgba(0, 0, 0, 0) 100%);
+        mask-image: linear-gradient(to bottom, #000000 90%, rgba(0, 0, 0, 0) 100%);
       }
 
       /* Flork Rig (Clean isolation without breaking dark scenes) */
@@ -535,11 +520,16 @@
         will-change: transform, opacity;
       }
 
-      .flork-rig img {
+      .flork-rig > img:first-child {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        filter: contrast(1.08) brightness(1.03);
+        filter: contrast(1.35) brightness(1.15);
+        display: block;
+      }
+
+      .flork-rig > img:not(:first-child) {
+        object-fit: contain;
         display: block;
       }
 
@@ -678,18 +668,20 @@
               <div id="hook-line-2">الكلمة ممكن تبان معقدة وتقنية شوي</div>
             </div>
 
-            <!-- Beat 3 (3.28s -> 5.56s): Merged Dark Stage + Hero Finger-Gun -> Chest-Up Zoom -> Visible Thumbs-Up Morph! -->
+            <!-- Beat 3 (3.26s -> 5.56s): Merged Dark Stage + Original 10_gun_point Pose -> Chest-Up Zoom -> Squash & Stretch Pose Swap to Thumbs-Up! -->
             <div id="w1-hero-stage" data-layout-allow-overflow="true">
               <div id="w1-hero-halo" data-layout-ignore="true"></div>
-              <div id="w1-hero-gun" class="puppet-rig waist-fade" data-layout-allow-overflow="true" style="inset: 0;">
-                <img id="img-w1-gun" src="./assets/img/char_hook_gun.webp" alt="الشخصية الرئيسية" />
-              </div>
-              <div id="w1-hero-thumbs" class="puppet-rig waist-fade" data-layout-allow-overflow="true">
-                <img id="img-w1-thumbs" src="./assets/img/char_thumbs.webp" alt="أبسط مما تتوقع" />
+              <div id="w1-hero-squash" data-layout-allow-overflow="true">
+                <div id="w1-hero-gun" class="puppet-rig waist-fade" data-layout-allow-overflow="true" style="inset: 0;">
+                  <img id="img-w1-gun" src="./assets/img/10_gun_point.webp" alt="الشخصية الرئيسية" />
+                </div>
+                <div id="w1-hero-thumbs" class="puppet-rig waist-fade" data-layout-allow-overflow="true">
+                  <img id="img-w1-thumbs" src="./assets/img/char_thumbs.webp" alt="أبسط مما تتوقع" />
+                </div>
               </div>
             </div>
 
-            <div id="w1-simple-seal" style="position: absolute; left: 80px; right: 80px; top: 360px; text-align: center; font-size: 72px; font-weight: 900; color: #ffffff; text-shadow: 0 0 28px rgba(255,255,255,0.4), 0 10px 28px rgba(0,0,0,0.85); opacity: 0; z-index: 36;">
+            <div id="w1-simple-seal" style="position: absolute; left: 80px; right: 80px; top: 380px; text-align: center; font-size: 72px; font-weight: 900; color: #ffffff; text-shadow: 0 0 28px rgba(255,255,255,0.4), 0 10px 28px rgba(0,0,0,0.85); opacity: 0; z-index: 36;">
               أبسط مما تتوقع!
             </div>
           </div>
@@ -723,7 +715,7 @@
                 </svg>
               </div>
 
-              <!-- Customer seated at Table (Left) -->
+              <!-- Customer seated at Table (Left) — Hand-drawn Editorial Typography -->
               <div id="w2-customer-group" data-layout-allow-overflow="true" style="position: absolute; left: 320px; top: 700px; width: 490px; height: 550px; opacity: 0;">
                 <div class="flork-rig" style="left: 18px; top: 8px; width: 265px; height: 265px;">
                   <img id="img-flork-table" src="./assets/img/flork_table.webp" alt="الزبون" />
@@ -734,12 +726,16 @@
                   <line x1="135" y1="56" x2="135" y2="148" stroke="#000000" stroke-width="7"/>
                   <ellipse cx="135" cy="150" rx="64" ry="12" fill="#000000"/>
                 </svg>
-                <div class="ink-card-soft" style="position: absolute; left: 48px; top: 416px; padding: 12px 32px; white-space: nowrap;">
-                  <span style="font-size: 54px; font-weight: 900; color: #000000;">أنت (الطاولة)</span>
+                <div class="editorial-label" style="position: absolute; left: 56px; top: 416px;">
+                  <span class="editorial-label-text">أنت (الطاولة)</span>
+                  <svg width="290" height="24" viewBox="0 0 290 24" fill="none" style="overflow: visible;">
+                    <path d="M 10 15 Q 92 4 192 14 T 278 10" stroke="#09090b" stroke-width="6.5" stroke-linecap="round"/>
+                    <path d="M 38 22 Q 145 14 252 19" stroke="#71717a" stroke-width="3" stroke-linecap="round"/>
+                  </svg>
                 </div>
               </div>
 
-              <!-- Swinging Kitchen Doors & Animated Steam (Right) -->
+              <!-- Swinging Kitchen Doors & Animated Steam (Right) — Hand-drawn Editorial Typography -->
               <div id="w2-kitchen-group" data-layout-allow-overflow="true" style="position: absolute; left: 1680px; top: 610px; width: 520px; height: 620px; opacity: 0;">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                   <svg id="w2-steam" width="180" height="72" viewBox="0 0 180 72" fill="none">
@@ -755,13 +751,17 @@
                     <rect x="128" y="135" width="10" height="44" rx="4" fill="#000000"/>
                     <rect x="172" y="135" width="10" height="44" rx="4" fill="#000000"/>
                   </svg>
-                  <div class="ink-card-soft" style="margin-top: 16px; padding: 12px 32px; white-space: nowrap;">
-                    <span style="font-size: 54px; font-weight: 900; color: #000000;">المطبخ (الأكل)</span>
+                  <div class="editorial-label" style="margin-top: 16px;">
+                    <span class="editorial-label-text">المطبخ (الأكل)</span>
+                    <svg width="310" height="24" viewBox="0 0 310 24" fill="none" style="overflow: visible;">
+                      <path d="M 12 13 Q 115 22 215 9 T 296 14" stroke="#09090b" stroke-width="6.5" stroke-linecap="round"/>
+                      <path d="M 46 21 Q 160 14 268 20" stroke="#71717a" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
                   </div>
                 </div>
               </div>
 
-              <!-- Panorama Animated Question Marks above BOTH Customer & Kitchen (Reference 12.5s - 14.0s!) -->
+              <!-- Panorama Animated Question Marks above BOTH Customer & Kitchen -->
               <div id="w2-q-left" data-layout-ignore="true" style="position: absolute; left: 480px; top: 530px; font-size: 74px; font-weight: 900; color: #000000; opacity: 0;">؟ ؟</div>
               <div id="w2-q-right" data-layout-ignore="true" style="position: absolute; left: 1850px; top: 470px; font-size: 74px; font-weight: 900; color: #000000; opacity: 0;">؟ ؟</div>
 
@@ -778,11 +778,16 @@
               <img id="img-w2-think" src="./assets/img/char_think.webp" alt="الشخصية تفكر" />
             </div>
 
-            <!-- Kitchen Stop Reaction Frame -->
-            <div id="w2-stop-sticker" class="sticker-card" data-layout-allow-overflow="true" style="left: 1650px; top: 240px; width: 420px; height: 410px; opacity: 0; z-index: 38;">
-              <img id="img-stop" src="./assets/img/sticker_stop.webp" alt="ممنوع دخول المطبخ" />
-              <div style="position: absolute; bottom: 0; left: 0; right: 0; background: #000000; color: #ffffff; text-align: center; padding: 12px; font-size: 30px; font-weight: 900;">
-                ممنوع تدخل المطبخ!
+            <!-- Kitchen Stop Reaction Frame — Clean photo sticker + hand-painted diagonal ink ribbon (ZERO solid black rectangle bar!) -->
+            <div id="w2-stop-sticker" class="sticker-card" data-layout-allow-overflow="true" style="left: 1650px; top: 305px; width: 420px; height: 390px; opacity: 0; overflow: visible; background: transparent; border: none; box-shadow: none; z-index: 38;">
+              <div style="width: 100%; height: 360px; border-radius: 30px; overflow: hidden; border: 4px solid #09090b; box-shadow: 0 14px 28px rgba(0,0,0,0.28), 0 32px 54px rgba(0,0,0,0.16); background: #ffffff;">
+                <img id="img-stop" src="./assets/img/sticker_stop.webp" alt="ممنوع دخول المطبخ" style="width: 100%; height: 100%; object-fit: cover;" />
+              </div>
+              <div style="position: relative; margin: -24px auto 0; width: 390px; height: 72px; display: flex; align-items: center; justify-content: center; transform: rotate(-2.2deg); filter: drop-shadow(0 8px 14px rgba(0,0,0,0.28));">
+                <svg viewBox="0 0 390 72" width="390" height="72" fill="none" style="position: absolute; inset: 0;">
+                  <path d="M 10 14 Q 195 4 380 12 L 372 60 Q 195 68 18 58 Z" fill="#111114" stroke="#dc2626" stroke-width="3.5" stroke-linejoin="round"/>
+                </svg>
+                <span style="position: relative; z-index: 2; font-size: 32px; font-weight: 900; color: #ffffff;">ممنوع تدخل المطبخ!</span>
               </div>
             </div>
 
@@ -793,22 +798,26 @@
               <span style="font-size: 136px; font-weight: 900; color: #000000; text-shadow: 0 10px 28px rgba(0,0,0,0.08);">صح؟</span>
             </div>
 
-            <!-- Waiter Flork Hero Foreground -->
-            <div id="w2-waiter-rig" class="flork-rig" data-layout-allow-overflow="true" style="left: 1090px; top: 640px; width: 340px; height: 430px; opacity: 0; z-index: 44;">
-              <img id="img-w2-waiter" src="./assets/img/flork_point.webp" alt="النادل الوسيط" style="height: 300px;" />
-              <img src="./assets/img/bowtie_icon.svg" alt="" data-layout-ignore="true" style="position: absolute; left: 132px; top: 242px; width: 76px; height: 44px; object-fit: contain;" />
-              <div class="ink-badge-inverted" style="position: absolute; left: 25px; top: 312px; width: 290px; padding: 12px 18px; text-align: center;">
-                <span style="font-size: 32px; font-weight: 900; color: #ffffff;">النادل (الوسيط)</span>
+            <!-- Waiter Flork Hero Foreground — Order Paper & Burger nested directly inside Flork's chest/hands! -->
+            <div id="w2-waiter-rig" class="flork-rig" data-layout-allow-overflow="true" style="left: 1060px; top: 630px; width: 380px; height: 420px; opacity: 0; z-index: 44;">
+              <img id="img-w2-waiter" src="./assets/img/flork_point.webp" alt="النادل الوسيط" style="width: 380px; height: 320px; object-fit: contain;" />
+              <img src="./assets/img/bowtie_icon.svg" alt="" data-layout-ignore="true" style="position: absolute; left: 146px; top: 214px; width: 70px; height: 40px; object-fit: contain;" />
+
+              <!-- Nested Order Ticket & Burger locked steady right between Flork's outstretched hands / chest! -->
+              <div id="w2-order-ticket" class="floating-prop" data-layout-ignore="true" style="left: 128px; top: 204px; width: 108px; height: 108px; opacity: 0; z-index: 6;">
+                <img src="./assets/img/order_paper.webp" alt="ورقة الطلب" />
               </div>
-            </div>
 
-            <!-- Real Internet Paper Order & Real Internet Burger Props (NO boxes!) -->
-            <div id="w2-order-ticket" class="floating-prop" data-layout-ignore="true" style="left: 715px; top: 715px; width: 148px; height: 148px; opacity: 0; z-index: 48;">
-              <img src="./assets/img/order_paper.webp" alt="ورقة الطلب" />
-            </div>
+              <div id="w2-food-dome" class="floating-prop" data-layout-ignore="true" style="left: 124px; top: 198px; width: 116px; height: 116px; opacity: 0; z-index: 7;">
+                <img src="./assets/img/burger.webp" alt="البرجر" />
+              </div>
 
-            <div id="w2-food-dome" class="floating-prop" data-layout-ignore="true" style="left: 1565px; top: 710px; width: 156px; height: 156px; opacity: 0; z-index: 48;">
-              <img src="./assets/img/burger.webp" alt="البرجر" />
+              <div class="editorial-label" style="position: absolute; left: 20px; top: 324px; width: 340px;">
+                <span style="font-size: 40px; font-weight: 900; color: #09090b;">النادل (الوسيط)</span>
+                <svg width="260" height="20" viewBox="0 0 260 20" fill="none">
+                  <path d="M 10 12 Q 130 2 250 13" stroke="#09090b" stroke-width="5.5" stroke-linecap="round"/>
+                </svg>
+              </div>
             </div>
 
             <!-- Beat 19.35s -> 20.18s: MACRO CLOSE-UP on Smiling Hero + "بسيطة صح؟" (Reference 19.6s!) -->
@@ -889,20 +898,36 @@
                 <img class="app-tile-full" src="./assets/img/app_tamara.jpg" alt="تمارا Tamara" />
               </div>
 
-              <!-- Tape 1 & Tape 2 GLUED PHYSICALLY TO GRAPH PAPER directly below that SAME swap slot! -->
-              <div id="w3b-tape-general" class="tape-note" style="position: absolute; left: 325px; top: 930px; transform: rotate(-1.5deg); z-index: 36;">
-                التطبيقات بشكل عام
+              <!-- Torn-Edge Masking Tape Strips GLUED TO GRAPH PAPER directly below swap slot! -->
+              <div id="w3b-tape-general" class="torn-tape-wrap" style="position: absolute; left: 280px; top: 922px; transform: rotate(-1.8deg); z-index: 36;">
+                <svg class="tape-bg" viewBox="0 0 420 92" preserveAspectRatio="none" fill="none">
+                  <path d="M 14 10 L 6 24 L 15 38 L 7 54 L 14 70 L 8 83 L 408 81 L 414 66 L 405 50 L 415 34 L 407 18 L 413 8 Z" fill="#efe9b8"/>
+                  <path d="M 14 10 L 413 8 M 8 83 L 408 81" stroke="rgba(24,24,27,0.16)" stroke-width="2"/>
+                </svg>
+                <span class="torn-tape-text">التطبيقات بشكل عام</span>
               </div>
 
-              <div id="w3b-tape-waiter" class="tape-note" style="position: absolute; left: 365px; top: 930px; transform: rotate(1.5deg); opacity: 0; z-index: 38;">
-                نرجع للنادل!
+              <div id="w3b-tape-waiter" class="torn-tape-wrap" style="position: absolute; left: 345px; top: 922px; transform: rotate(1.6deg); opacity: 0; z-index: 38;">
+                <svg class="tape-bg" viewBox="0 0 320 92" preserveAspectRatio="none" fill="none">
+                  <path d="M 12 10 L 5 26 L 14 42 L 6 58 L 13 74 L 7 84 L 308 82 L 314 66 L 305 49 L 315 32 L 306 16 L 312 8 Z" fill="#efe9b8"/>
+                  <path d="M 12 10 L 312 8 M 7 84 L 308 82" stroke="rgba(24,24,27,0.16)" stroke-width="2"/>
+                </svg>
+                <span class="torn-tape-text">نرجع للنادل!</span>
               </div>
 
-              <!-- Target Secure Tile: Official Apple Pay sitting UPPER-RIGHT inside coffee ring (left = 1095, top = 185) -->
+              <!-- Target Secure Tile: Pure Sleek Official Apple Pay UPPER-RIGHT (no crowded inside caption!) -->
               <div id="w3b-hero-apple" data-layout-allow-overflow="true" class="app-tile-3d app-tile-dark" style="left: 1095px; top: 185px; width: 330px; height: 330px; z-index: 24;">
-                <img src="./assets/img/apple_pay_white.svg" alt="Apple Pay" style="width: 220px; height: auto; object-fit: contain;" />
-                <div style="font-size: 32px; font-weight: 800; color: #d4d4d8;">بيانات حساسة</div>
+                <img src="./assets/img/apple_pay_white.svg" alt="Apple Pay" style="width: 240px; height: auto; object-fit: contain;" />
                 <div class="light-sweep" id="w3b-apple-sweep" data-layout-ignore="true"></div>
+              </div>
+
+              <!-- Hand-Drawn Ink Callout beside Apple Pay ("بيانات حساسة" — editorial pen annotation!) -->
+              <div id="w3b-sensitive-note" data-layout-allow-overflow="true" style="position: absolute; left: 1085px; top: 82px; display: flex; align-items: center; gap: 14px; z-index: 28;">
+                <span style="font-size: 38px; font-weight: 900; color: #111114; text-shadow: 0 2px 0 rgba(255,255,255,0.85);">بيانات حساسة</span>
+                <svg width="76" height="58" viewBox="0 0 76 58" fill="none">
+                  <path d="M 6 12 Q 48 8 56 46" stroke="#111114" stroke-width="4.5" stroke-linecap="round"/>
+                  <path d="M 43 36 L 56 48 L 66 33" stroke="#111114" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </div>
 
               <!-- Painterly Brush Red X & High-Contrast Green Checkmark right over Apple Pay -->
@@ -913,98 +938,80 @@
                 <path id="w3b-check" d="M 55 245 L 135 330 L 315 130" stroke="#16a34a" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="430" stroke-dashoffset="430"/>
               </svg>
 
-              <!-- Guard Badge below Apple Pay -->
-              <div id="w3b-guard-badge" class="ink-card" style="position: absolute; left: 1095px; top: 555px; width: 330px; height: 215px; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; z-index: 34;">
-                <div class="flork-rig" style="position: relative; width: 136px; height: 136px;">
-                  <img id="img-w3-guard" src="./assets/img/flork_guard.webp" alt="حماية" />
+              <!-- Unboxed Hand-Drawn Guard Flork & Shield Annotation below Apple Pay -->
+              <div id="w3b-guard-badge" data-layout-allow-overflow="true" style="position: absolute; left: 1045px; top: 535px; width: 430px; height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; mix-blend-mode: multiply; opacity: 0; z-index: 34;">
+                <div style="position: relative; width: 170px; height: 170px; display: flex; align-items: center; justify-content: center;">
+                  <svg viewBox="0 0 170 170" width="170" height="170" fill="none" style="position: absolute; inset: 0; opacity: 0.24;">
+                    <path d="M 85 10 L 146 34 V 84 C 146 122 119 148 85 160 C 51 148 24 122 24 84 V 34 Z" fill="none" stroke="#09090b" stroke-width="6" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="flork-rig" style="position: relative; width: 150px; height: 150px; mix-blend-mode: normal;">
+                    <img id="img-w3-guard" src="./assets/img/flork_guard.webp" alt="حماية" />
+                  </div>
                 </div>
-                <div style="font-size: 30px; font-weight: 900; color: #000000;">بدون تفاصيل سرية!</div>
+                <div class="editorial-label" style="margin-top: 2px;">
+                  <span style="font-size: 38px; font-weight: 900; color: #09090b;">بدون تفاصيل سرية!</span>
+                  <svg width="260" height="16" viewBox="0 0 260 16" fill="none">
+                    <path d="M 8 10 Q 130 2 252 10" stroke="#dc2626" stroke-width="5" stroke-linecap="round"/>
+                  </svg>
+                </div>
               </div>
 
               <!-- Courier Waiter Flork holding Real Burger & Card Flork dashing beside Apple Pay -->
-              <div id="w3b-flork-courier" data-layout-ignore="true" class="flork-rig" style="left: 910px; top: 235px; width: 185px; height: 185px; opacity: 0; z-index: 35;">
+              <div id="w3b-flork-courier" data-layout-ignore="true" class="flork-rig" style="left: 855px; top: 238px; width: 185px; height: 185px; opacity: 0; z-index: 35;">
                 <img id="img-w3-run" src="./assets/img/flork_run.webp" alt="النادل الوسيط" />
-                <img src="./assets/img/burger.webp" alt="" style="position: absolute; right: -24px; top: 68px; width: 76px; height: 76px; object-fit: contain;" />
+                <img src="./assets/img/burger.webp" alt="" style="position: absolute; right: -8px; top: 68px; width: 74px; height: 74px; object-fit: contain;" />
               </div>
-              <div id="w3b-flork-card" data-layout-ignore="true" class="flork-rig" style="left: 1410px; top: 245px; width: 190px; height: 190px; opacity: 0; z-index: 35;">
+              <div id="w3b-flork-card" data-layout-ignore="true" class="flork-rig" style="left: 1455px; top: 245px; width: 190px; height: 190px; opacity: 0; z-index: 35;">
                 <img id="img-w3-card" src="./assets/img/flork_card.webp" alt="الطلب" />
               </div>
             </div>
           </div>
 
           <!-- =========================================================
-               WORLD 4: 3D PHONE COLLAGE -> CARDLESS TABBY MACRO STAGE (x = 7600 .. 9800) [31.46s - 42.88s]
-               Real downloaded app icons & 3D objects everywhere!
+               WORLD 4: REAL THREE.JS 3D PHONE + DEPTH-BLURRED TILES -> CARDLESS TABBY MACRO STAGE (x = 7600 .. 9800) [31.46s - 42.88s]
                ========================================================= -->
           <div class="world-zone clip" id="world-4" data-start="31.46" data-duration="11.42" data-layout-allow-overflow="true" style="left: 7600px; width: 2200px;">
             <div id="w4-studio-bg" data-layout-allow-overflow="true"></div>
 
-            <!-- Surrounding Multi-Depth Blurred REAL Store & Payment App Tiles (31.5s - 34.0s) -->
-            <div id="w4-badge-salla" data-layout-ignore="true" class="app-tile-3d" style="left: 74px; top: 330px; width: 175px; height: 175px; border-radius: 44px; border: 4px solid #09353c; filter: blur(1.5px); opacity: 0; z-index: 15;">
+            <!-- Surrounding Multi-Depth Blurred Store & Payment Icons Matching 3.mp4 Sheet 4 Frame 6 -->
+            <!-- Top-Left: Dark Noon 'n' rounded square (smaller, deeper blur) -->
+            <div id="w4-badge-noon" data-layout-ignore="true" class="app-tile-3d" style="left: 92px; top: 335px; width: 152px; height: 152px; border-radius: 36px; border: 3px solid #27272e; filter: blur(2.2px); opacity: 0; z-index: 15;">
+              <img class="app-tile-full" src="./assets/img/noon_tile.svg" alt="Noon" />
+            </div>
+
+            <!-- Mid-Left: Circular glossy Amazon 'a' badge (larger, closer, light blur) -->
+            <div id="w4-badge-amzn" data-layout-ignore="true" class="app-tile-3d" style="left: 34px; top: 695px; width: 222px; height: 222px; border-radius: 50%; border: 3px solid #27272a; filter: blur(1.2px); opacity: 0; z-index: 17;">
+              <img class="app-tile-full" src="./assets/img/amazon_circle.svg" alt="Amazon" />
+            </div>
+
+            <!-- Bottom-Left: Deep Purple Striped foreground bokeh icon (largest, strong DoF blur) -->
+            <div id="w4-badge-purp" data-layout-ignore="true" class="app-tile-3d" style="left: 16px; top: 1095px; width: 266px; height: 212px; border-radius: 48px; border: 3px solid #3b0764; filter: blur(4.2px); opacity: 0; z-index: 18;">
+              <img class="app-tile-full" src="./assets/img/purple_stripe_tile.svg" alt="Store" />
+            </div>
+
+            <!-- Top-Right Edge Peek: Salla dark teal tile (DoF blur) -->
+            <div id="w4-badge-apay" data-layout-ignore="true" class="app-tile-3d" style="left: 855px; top: 270px; width: 170px; height: 170px; border-radius: 40px; border: 3px solid #09353c; filter: blur(3.0px); opacity: 0; z-index: 15;">
               <img class="app-tile-full" src="./assets/img/app_salla.jpg" alt="Salla" />
             </div>
-            <div id="w4-badge-noon" data-layout-ignore="true" class="app-tile-3d" style="left: 96px; top: 690px; width: 160px; height: 160px; border-radius: 38px; border: 4px solid #3b1c6d; filter: blur(2.5px); opacity: 0; z-index: 15;">
-              <img class="app-tile-full" src="./assets/img/app_stcpay.jpg" alt="STC Pay" />
-            </div>
-            <div id="w4-badge-amzn" data-layout-ignore="true" class="app-tile-3d" style="left: 60px; top: 1020px; width: 175px; height: 175px; border-radius: 44px; border: 4px solid #27272a; filter: blur(2px); opacity: 0; z-index: 15;">
-              <img class="app-tile-full" src="./assets/img/app_amazon.jpg" alt="Amazon" />
-            </div>
-            <div id="w4-badge-apay" data-layout-ignore="true" class="app-tile-3d app-tile-dark" style="left: 830px; top: 270px; width: 175px; height: 175px; border-radius: 40px; padding: 26px; filter: blur(2px); opacity: 0; z-index: 15;">
-              <img src="./assets/img/apple_pay_white.svg" alt="Apple Pay" style="width: 100%; height: 100%; object-fit: contain;" />
-            </div>
-            <div id="w4-badge-bag" data-layout-ignore="true" class="app-tile-3d app-tile-light" style="left: 840px; top: 1120px; width: 170px; height: 170px; border-radius: 40px; padding: 24px; filter: blur(2.5px); opacity: 0; z-index: 15;">
+
+            <!-- Bottom-Right Edge Peek: Dark Tamara/Bag tile (DoF blur) -->
+            <div id="w4-badge-bag" data-layout-ignore="true" class="app-tile-3d app-tile-light" style="left: 842px; top: 1125px; width: 174px; height: 174px; border-radius: 42px; padding: 22px; filter: blur(2.8px); opacity: 0; z-index: 15;">
               <img src="./assets/img/shopping_bag.webp" alt="تسوق" style="width: 100%; height: 100%; object-fit: contain;" />
             </div>
 
-            <!-- Floating 3D iPhone (x = 260 .. 820) -->
-            <div id="w4-phone" data-layout-allow-overflow="true" class="ink-card-3d" style="position: absolute; left: 260px; top: 250px; width: 560px; height: 1060px; border-width: 11px; border-radius: 62px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; background: #ffffff; z-index: 25;">
-              <div style="width: 150px; height: 22px; background: #000000; border-radius: 12px; margin: 0 auto;"></div>
-
-              <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2.5px solid #e4e4e7; padding-bottom: 14px;">
-                <span style="font-size: 32px; font-weight: 900;">سلة التسوق</span>
-                <img src="./assets/img/cart_ui.svg" alt="" style="width: 38px; height: 38px; object-fit: contain;" />
-              </div>
-
-              <!-- Real Laptop Product Summary -->
-              <div class="ink-card-soft" style="padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-                <img src="./assets/img/laptop_3d.png" alt="لابتوب" style="width: 96px; height: 78px; object-fit: contain; flex-shrink: 0;" />
-                <div style="flex: 1;">
-                  <div style="font-size: 32px; font-weight: 900;">لابتوب احترافي</div>
-                  <div style="font-size: 30px; font-weight: 700; color: #52525b;">فاتورة #402</div>
-                </div>
-                <div style="font-size: 32px; font-weight: 900; direction: ltr;">400 SAR</div>
-              </div>
-
-              <!-- Tactile Checkout Bar + Macro Zoom Target: Official Tabby Wordmark Button -->
-              <div style="display: flex; flex-direction: column; gap: 16px; position: relative;">
-                <div style="font-size: 30px; font-weight: 800; color: #52525b;">وسيلة الدفع:</div>
-                <div id="w4-tabby-btn" class="ink-badge-inverted" style="padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: hidden;">
-                  <div>
-                    <div style="font-size: 32px; font-weight: 900; color: #ffffff;">الدفع عبر تابي</div>
-                    <div style="font-size: 30px; font-weight: 700; color: #d4d4d8;">4 دفعات شهرية</div>
-                  </div>
-                  <div style="display: flex; align-items: center; justify-content: center; background: #3bffc1; padding: 10px 20px; border-radius: 14px; direction: ltr;">
-                    <img src="./assets/img/tabby_wordmark.svg" alt="tabby" style="height: 30px; width: auto; display: block;" />
-                  </div>
-                  <div class="light-sweep" id="w4-btn-sweep" data-layout-ignore="true" style="opacity: 0;"></div>
-                </div>
-                <div id="w4-tap-ring" data-layout-ignore="true" style="position: absolute; left: 32px; top: 70px; width: 82px; height: 82px; border-radius: 50%; border: 5px solid #000000; opacity: 0; pointer-events: none;"></div>
-              </div>
-
-              <div id="w4-paid-stamp" style="background: #16a34a; color: #ffffff; border-radius: 22px; padding: 18px; display: flex; align-items: center; justify-content: center; gap: 14px; opacity: 0;">
-                <img src="./assets/img/check_circle.svg" alt="" style="width: 40px; height: 40px; object-fit: contain;" />
-                <span style="font-size: 34px; font-weight: 900;">تم الدفع بنجاح ✓</span>
-              </div>
+            <!-- REAL THREE.JS PROCEDURAL 3D SMARTPHONE (Deterministic WebGL Canvas synced to GSAP `tl`) -->
+            <div id="w4-phone-stage" data-layout-allow-overflow="true" style="position: absolute; left: 0px; top: 0px; width: 1080px; height: 1920px; pointer-events: none; z-index: 25;">
+              <canvas id="w4-phone-canvas" width="1080" height="1920" style="width: 1080px; height: 1920px; display: block;"></canvas>
             </div>
 
-            <!-- 6 Crisp Bursting Checkmarks around Phone at 41.8s -> 42.8s -->
-            <svg id="w4-check-burst" style="position: absolute; left: 100px; top: 140px; pointer-events: none; z-index: 36;" width="880" height="1260" viewBox="0 0 880 1260" fill="none">
-              <path id="w4-cb-1" d="M 30 220 L 74 266 L 154 180" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
-              <path id="w4-cb-2" d="M 730 130 L 774 176 L 850 92" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
-              <path id="w4-cb-3" d="M 24 620 L 66 664 L 142 580" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
-              <path id="w4-cb-4" d="M 744 650 L 788 694 L 864 610" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
-              <path id="w4-cb-5" d="M 48 1060 L 92 1104 L 168 1020" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
-              <path id="w4-cb-6" d="M 716 1110 L 760 1154 L 836 1070" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+            <!-- 6 Crisp Bursting Hand-Drawn Checkmarks cleanly outside 3D Phone at 41.4s -> 42.8s -->
+            <svg id="w4-check-burst" style="position: absolute; left: 0px; top: 0px; pointer-events: none; z-index: 36;" width="1080" height="1920" viewBox="0 0 1080 1920" fill="none">
+              <path id="w4-cb-1" d="M 24 250 L 62 290 L 128 216" stroke="#16a34a" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-2" d="M 930 235 L 970 276 L 1044 198" stroke="#16a34a" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-3" d="M 20 790 L 58 830 L 124 756" stroke="#16a34a" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-4" d="M 936 740 L 976 780 L 1048 704" stroke="#16a34a" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-5" d="M 28 1480 L 66 1520 L 132 1446" stroke="#16a34a" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
+              <path id="w4-cb-6" d="M 922 1515 L 962 1555 L 1036 1478" stroke="#16a34a" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="220" stroke-dashoffset="220"/>
             </svg>
 
             <div id="w4-flork-run" data-layout-ignore="true" class="flork-rig" style="left: 880px; top: 780px; width: 235px; height: 235px; opacity: 0; z-index: 32;">
@@ -1017,35 +1024,82 @@
               <div class="light-sweep" id="w4-tile-sweep" data-layout-ignore="true" style="opacity: 0;"></div>
             </div>
 
-            <!-- Object 2: Clean Drawn Vector Cycle Arrows Processing Icon -->
-            <div id="w4-gear-stage" data-layout-allow-overflow="true" style="position: absolute; left: 1520px; top: 470px; width: 320px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; z-index: 28;">
-              <div style="position: relative; width: 220px; height: 220px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 14px 26px rgba(0,0,0,0.16));">
+            <!-- Object 2: Hand-Drawn Cycle Arrows Processing Stage + Sketchy Orbital Ring -->
+            <div id="w4-gear-stage" data-layout-allow-overflow="true" style="position: absolute; left: 1500px; top: 455px; width: 360px; height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; z-index: 28;">
+              <div style="position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 14px 26px rgba(0,0,0,0.16));">
+                <svg viewBox="0 0 240 240" width="240" height="240" fill="none" style="position: absolute; inset: 0; opacity: 0.25;">
+                  <circle cx="120" cy="120" r="108" stroke="#111114" stroke-width="4" stroke-dasharray="14 10" stroke-linecap="round"/>
+                </svg>
                 <img id="w4-orbit-ring" src="./assets/img/tabby_arrow.svg" alt="معالجة الطلب" style="width: 210px; height: 210px; object-fit: contain; transform-origin: center;" />
               </div>
-              <div style="margin-top: 14px; font-size: 36px; font-weight: 900; color: #000000;">معالجة الطلب</div>
-            </div>
-
-            <!-- Object 3: 4 Minimalist Embossed Payment Pills Stacked Vertically -->
-            <div id="w4-pills-stack" data-layout-allow-overflow="true" style="position: absolute; left: 1720px; top: 810px; width: 360px; display: flex; flex-direction: column; gap: 16px; z-index: 30;">
-              <div id="w4-pill-1" class="installment-pill" style="opacity: 0;">
-                <span style="font-size: 34px; font-weight: 900;">100 ريال</span>
-                <span style="font-size: 30px; font-weight: 800; color: #52525b;">01</span>
-              </div>
-              <div id="w4-pill-2" class="installment-pill" style="opacity: 0;">
-                <span style="font-size: 34px; font-weight: 900;">100 ريال</span>
-                <span style="font-size: 30px; font-weight: 800; color: #52525b;">02</span>
-              </div>
-              <div id="w4-pill-3" class="installment-pill" style="opacity: 0;">
-                <span style="font-size: 34px; font-weight: 900;">100 ريال</span>
-                <span style="font-size: 30px; font-weight: 800; color: #52525b;">03</span>
-              </div>
-              <div id="w4-pill-4" class="installment-pill" style="opacity: 0;">
-                <span style="font-size: 34px; font-weight: 900;">100 ريال</span>
-                <span style="font-size: 30px; font-weight: 800; color: #52525b;">04</span>
+              <div class="editorial-label" style="margin-top: 10px;">
+                <span style="font-size: 40px; font-weight: 900; color: #09090b;">معالجة الطلب</span>
+                <svg width="210" height="14" viewBox="0 0 210 14" fill="none">
+                  <path d="M 8 9 Q 105 2 202 10" stroke="#3bffc1" stroke-width="6" stroke-linecap="round"/>
+                </svg>
               </div>
             </div>
 
-            <div id="w4-flork-celebrate" data-layout-allow-overflow="true" class="flork-rig" style="left: 830px; top: 720px; width: 250px; height: 250px; opacity: 0; z-index: 34;">
+            <!-- Hand-Drawn SVG Branching Timeline splitting Tabby Processing -> 4 Sculptural Tickets -->
+            <svg id="w4-branch-svg" data-layout-ignore="true" style="position: absolute; left: 1530px; top: 775px; pointer-events: none; z-index: 26;" width="220" height="450" viewBox="0 0 220 450" fill="none">
+              <path id="w4-br-1" d="M 10 20 C 75 20 85 52 195 52" stroke="#111114" stroke-width="5" stroke-linecap="round" stroke-dasharray="260" stroke-dashoffset="260"/>
+              <path id="w4-br-2" d="M 10 20 C 65 95 95 162 195 162" stroke="#111114" stroke-width="5" stroke-linecap="round" stroke-dasharray="300" stroke-dashoffset="300"/>
+              <path id="w4-br-3" d="M 10 20 C 55 180 85 272 195 272" stroke="#111114" stroke-width="5" stroke-linecap="round" stroke-dasharray="380" stroke-dashoffset="380"/>
+              <path id="w4-br-4" d="M 10 20 C 45 275 80 382 195 382" stroke="#111114" stroke-width="5" stroke-linecap="round" stroke-dasharray="470" stroke-dashoffset="470"/>
+            </svg>
+
+            <!-- Object 3: 4 Illustrated Perforated Sculptural Payment Tickets (ZERO boxy HTML rectangles!) -->
+            <div id="w4-pills-stack" data-layout-allow-overflow="true" style="position: absolute; left: 1710px; top: 778px; width: 400px; display: flex; flex-direction: column; gap: 18px; z-index: 30;">
+              <div id="w4-pill-1" class="tabby-ticket-item" style="opacity: 0;">
+                <svg class="ticket-shell" viewBox="0 0 390 92" preserveAspectRatio="none" fill="none">
+                  <path d="M 24 4 H 366 C 378 4 386 12 386 24 V 33 A 13 13 0 0 0 386 59 V 68 C 386 80 378 88 366 88 H 24 C 12 88 4 80 4 68 V 59 A 13 13 0 0 0 4 33 V 24 C 4 12 12 4 24 4 Z" fill="#ffffff" stroke="#111114" stroke-width="4"/>
+                  <rect x="342" y="14" width="22" height="64" rx="11" fill="#3bffc1"/>
+                  <line x1="126" y1="16" x2="126" y2="76" stroke="#d4d4d8" stroke-width="3" stroke-dasharray="6 6"/>
+                </svg>
+                <div class="tabby-ticket-content">
+                  <span style="font-size: 36px; font-weight: 900; color: #09090b; padding-right: 16px;">١٠٠ ريال</span>
+                  <span style="font-size: 28px; font-weight: 900; color: #52525b;">دفعة ١</span>
+                </div>
+              </div>
+
+              <div id="w4-pill-2" class="tabby-ticket-item" style="opacity: 0;">
+                <svg class="ticket-shell" viewBox="0 0 390 92" preserveAspectRatio="none" fill="none">
+                  <path d="M 24 4 H 366 C 378 4 386 12 386 24 V 33 A 13 13 0 0 0 386 59 V 68 C 386 80 378 88 366 88 H 24 C 12 88 4 80 4 68 V 59 A 13 13 0 0 0 4 33 V 24 C 4 12 12 4 24 4 Z" fill="#ffffff" stroke="#111114" stroke-width="4"/>
+                  <rect x="342" y="14" width="22" height="64" rx="11" fill="#3bffc1"/>
+                  <line x1="126" y1="16" x2="126" y2="76" stroke="#d4d4d8" stroke-width="3" stroke-dasharray="6 6"/>
+                </svg>
+                <div class="tabby-ticket-content">
+                  <span style="font-size: 36px; font-weight: 900; color: #09090b; padding-right: 16px;">١٠٠ ريال</span>
+                  <span style="font-size: 28px; font-weight: 900; color: #52525b;">دفعة ٢</span>
+                </div>
+              </div>
+
+              <div id="w4-pill-3" class="tabby-ticket-item" style="opacity: 0;">
+                <svg class="ticket-shell" viewBox="0 0 390 92" preserveAspectRatio="none" fill="none">
+                  <path d="M 24 4 H 366 C 378 4 386 12 386 24 V 33 A 13 13 0 0 0 386 59 V 68 C 386 80 378 88 366 88 H 24 C 12 88 4 80 4 68 V 59 A 13 13 0 0 0 4 33 V 24 C 4 12 12 4 24 4 Z" fill="#ffffff" stroke="#111114" stroke-width="4"/>
+                  <rect x="342" y="14" width="22" height="64" rx="11" fill="#3bffc1"/>
+                  <line x1="126" y1="16" x2="126" y2="76" stroke="#d4d4d8" stroke-width="3" stroke-dasharray="6 6"/>
+                </svg>
+                <div class="tabby-ticket-content">
+                  <span style="font-size: 36px; font-weight: 900; color: #09090b; padding-right: 16px;">١٠٠ ريال</span>
+                  <span style="font-size: 28px; font-weight: 900; color: #52525b;">دفعة ٣</span>
+                </div>
+              </div>
+
+              <div id="w4-pill-4" class="tabby-ticket-item" style="opacity: 0;">
+                <svg class="ticket-shell" viewBox="0 0 390 92" preserveAspectRatio="none" fill="none">
+                  <path d="M 24 4 H 366 C 378 4 386 12 386 24 V 33 A 13 13 0 0 0 386 59 V 68 C 386 80 378 88 366 88 H 24 C 12 88 4 80 4 68 V 59 A 13 13 0 0 0 4 33 V 24 C 4 12 12 4 24 4 Z" fill="#ffffff" stroke="#111114" stroke-width="4"/>
+                  <rect x="342" y="14" width="22" height="64" rx="11" fill="#3bffc1"/>
+                  <line x1="126" y1="16" x2="126" y2="76" stroke="#d4d4d8" stroke-width="3" stroke-dasharray="6 6"/>
+                </svg>
+                <div class="tabby-ticket-content">
+                  <span style="font-size: 36px; font-weight: 900; color: #09090b; padding-right: 16px;">١٠٠ ريال</span>
+                  <span style="font-size: 28px; font-weight: 900; color: #52525b;">دفعة ٤</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="w4-flork-celebrate" data-layout-allow-overflow="true" class="flork-rig" style="left: 850px; top: 1095px; width: 205px; height: 205px; opacity: 0; z-index: 34;">
               <img id="img-w4-celebrate" src="./assets/img/flork_celebrate.webp" alt="تم الدفع" />
             </div>
           </div>
@@ -1078,13 +1132,14 @@
                 <img src="./assets/img/apple_pay_white.svg" alt="Apple Pay" style="width: 100%; height: 100%; object-fit: contain;" />
               </div>
 
-              <!-- Pure GPU-Scaled Crisp Suspension Bridge -->
+              <!-- Pure GPU-Scaled Crisp Suspension Bridge + Animated Data Flow Pulse -->
               <div id="w5-bridge-core" data-layout-allow-overflow="true" style="position: absolute; left: 215px; top: 35px; width: 570px; height: 270px; transform-origin: 50% 60%; will-change: transform, opacity;">
                 <svg width="570" height="270" viewBox="0 0 570 270" fill="none" shape-rendering="geometricPrecision">
                   <line x1="95" y1="60" x2="95" y2="215" stroke="#ffffff" stroke-width="11" stroke-linecap="round"/>
                   <line x1="475" y1="60" x2="475" y2="215" stroke="#ffffff" stroke-width="11" stroke-linecap="round"/>
                   <path d="M 10 205 Q 95 70 95 70 Q 285 185 475 70 Q 475 70 560 205" stroke="#ffffff" stroke-width="9.5" stroke-linecap="round"/>
                   <line x1="10" y1="205" x2="560" y2="205" stroke="#ffffff" stroke-width="11.5" stroke-linecap="round"/>
+                  <line id="w5-data-pulse" x1="20" y1="205" x2="550" y2="205" stroke="#3bffc1" stroke-width="5" stroke-dasharray="28 42" stroke-dashoffset="0" stroke-linecap="round" opacity="0.72"/>
                   <line x1="185" y1="125" x2="185" y2="205" stroke="#ffffff" stroke-width="5.5"/>
                   <line x1="285" y1="150" x2="285" y2="205" stroke="#ffffff" stroke-width="5.5"/>
                   <line x1="385" y1="125" x2="385" y2="205" stroke="#ffffff" stroke-width="5.5"/>
@@ -1128,7 +1183,518 @@
     </div>
 
     <script>
+      // =========================================================
+      // DETERMINISTIC THREE.JS PROCEDURAL 3D SMARTPHONE ENGINE
+      // Synchronous render synced directly to GSAP timeline `tl`
+      // =========================================================
+      const phone3dState = {
+        visible: 0,
+        posX: 0.25,
+        posY: 0.0,
+        posZ: 0,
+        rotX: 0.14,
+        rotY: -0.44,
+        rotZ: -0.09,
+        camX: 0,
+        camY: 0.0,
+        camZ: 11.2,
+        pressAmt: 0,
+        rippleAmt: 0,
+        paidAmt: 0,
+      };
+
+      const initPhone3D = () => {
+        const stageEl = document.getElementById("w4-phone-stage");
+        const canvasEl = document.getElementById("w4-phone-canvas");
+        const lib = window.THREE_STUDIO;
+        if (!stageEl || !canvasEl || !lib || !lib.THREE) return () => {};
+
+        const { THREE, RoomEnvironment } = lib;
+        const renderer = new THREE.WebGLRenderer({
+          canvas: canvasEl,
+          alpha: true,
+          antialias: true,
+          preserveDrawingBuffer: true,
+          powerPreference: "high-performance",
+        });
+
+        let isSoftwareGl = false;
+        try {
+          const gl = renderer.getContext();
+          const dbg = gl.getExtension("WEBGL_debug_renderer_info");
+          const ren = dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : "";
+          isSoftwareGl = /SwiftShader|llvmpipe|Software Rasterizer/i.test(String(ren));
+        } catch (e) {}
+
+        renderer.setPixelRatio(isSoftwareGl ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setSize(1080, 1920, false);
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.12;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(32, 1080 / 1920, 0.1, 100);
+        camera.position.set(0, 0, 11.2);
+
+        try {
+          const pmrem = new THREE.PMREMGenerator(renderer);
+          scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+          pmrem.dispose();
+        } catch (e) {}
+
+        // 3-Point Studio Lighting + Subtle Mint Tabby Lower-Screen Kiss
+        const ambLight = new THREE.AmbientLight(0xffffff, 0.65);
+        scene.add(ambLight);
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1.85);
+        keyLight.position.set(4.5, 6.2, 7.4);
+        scene.add(keyLight);
+        const rimLight = new THREE.DirectionalLight(0xe0e7ff, 1.15);
+        rimLight.position.set(-5.2, 2.8, -3.5);
+        scene.add(rimLight);
+        const mintAccent = new THREE.PointLight(0x3bffc1, 0.75, 9);
+        mintAccent.position.set(-1.1, -1.6, 2.4);
+        scene.add(mintAccent);
+
+        // Helper: Rounded Rectangle 2D Shape
+        function makeRoundedRectShape(w, h, r) {
+          const s = new THREE.Shape();
+          const hw = w / 2;
+          const hh = h / 2;
+          s.moveTo(-hw + r, -hh);
+          s.lineTo(hw - r, -hh);
+          s.quadraticCurveTo(hw, -hh, hw, -hh + r);
+          s.lineTo(hw, hh - r);
+          s.quadraticCurveTo(hw, hh, hw - r, hh);
+          s.lineTo(-hw + r, hh);
+          s.quadraticCurveTo(-hw, hh, -hw, hh - r);
+          s.lineTo(-hw, -hh + r);
+          s.quadraticCurveTo(-hw, -hh, -hw + r, -hh);
+          return s;
+        }
+
+        // Dynamic High-Res E-Commerce Screen CanvasTexture (1024 x 2048)
+        const scrCanvas = document.createElement("canvas");
+        scrCanvas.width = 1024;
+        scrCanvas.height = 2048;
+        const ctx = scrCanvas.getContext("2d");
+        const scrTex = new THREE.CanvasTexture(scrCanvas);
+        scrTex.colorSpace = THREE.SRGBColorSpace;
+        scrTex.anisotropy = isSoftwareGl ? 1 : 8;
+
+        let laptopImg = null;
+        const imgLoader = new Image();
+        imgLoader.onload = () => {
+          laptopImg = imgLoader;
+          lastDrawnKey = "";
+          syncPhone3D(true);
+        };
+        imgLoader.src = "./assets/img/laptop_3d.png";
+
+        function drawRoundRect(c, x, y, w, h, r) {
+          c.beginPath();
+          c.moveTo(x + r, y);
+          c.lineTo(x + w - r, y);
+          c.quadraticCurveTo(x + w, y, x + w, y + r);
+          c.lineTo(x + w, y + h - r);
+          c.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+          c.lineTo(x + r, y + h);
+          c.quadraticCurveTo(x, y + h, x, y + h - r);
+          c.lineTo(x, y + r);
+          c.quadraticCurveTo(x, y, x + r, y);
+          c.closePath();
+        }
+
+        let lastDrawnKey = "";
+        function drawScreenUI(pressAmt, rippleAmt, paidAmt) {
+          const key = `${Math.round(pressAmt * 40)}_${Math.round(rippleAmt * 40)}_${Math.round(paidAmt * 40)}_${laptopImg ? 1 : 0}`;
+          if (key === lastDrawnKey) return;
+          lastDrawnKey = key;
+
+          const W = 1024;
+          const H = 2048;
+          ctx.save();
+          ctx.clearRect(0, 0, W, H);
+          drawRoundRect(ctx, 0, 0, W, H, 122);
+          ctx.clip();
+
+          // Pure white e-commerce background
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, W, H);
+
+          // Subtle studio status top space & Search pill
+          ctx.fillStyle = "#f4f4f5";
+          drawRoundRect(ctx, 56, 146, W - 112, 86, 43);
+          ctx.fill();
+          ctx.strokeStyle = "#e4e4e7";
+          ctx.lineWidth = 3;
+          ctx.stroke();
+
+          // Magnifying glass icon on right
+          ctx.beginPath();
+          ctx.arc(W - 115, 189, 17, 0, Math.PI * 2);
+          ctx.strokeStyle = "#71717a";
+          ctx.lineWidth = 5;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(W - 127, 201);
+          ctx.lineTo(W - 140, 214);
+          ctx.stroke();
+
+          ctx.fillStyle = "#71717a";
+          ctx.font = '700 32px "Noto Sans Arabic", sans-serif';
+          ctx.textAlign = "right";
+          ctx.textBaseline = "middle";
+          ctx.fillText("ابحث عن منتج...", W - 160, 191);
+
+          // Product Pedestal Showcase
+          const pedGrad = ctx.createRadialGradient(W / 2, 575, 40, W / 2, 575, 420);
+          pedGrad.addColorStop(0, "#ffffff");
+          pedGrad.addColorStop(0.65, "#f4f5f7");
+          pedGrad.addColorStop(1, "#e7e9ee");
+          ctx.fillStyle = pedGrad;
+          drawRoundRect(ctx, 56, 266, W - 112, 620, 48);
+          ctx.fill();
+
+          // Draw real laptop_3d.png inside showcase
+          if (laptopImg && laptopImg.complete && laptopImg.naturalWidth > 0) {
+            const padW = 730;
+            const padH = 520;
+            const aspect = laptopImg.naturalWidth / laptopImg.naturalHeight;
+            let dw = padW;
+            let dh = dw / aspect;
+            if (dh > padH) {
+              dh = padH;
+              dw = dh * aspect;
+            }
+            ctx.drawImage(laptopImg, (W - dw) / 2, 576 - dh / 2, dw, dh);
+          } else {
+            ctx.fillStyle = "#27272a";
+            drawRoundRect(ctx, 240, 410, 544, 320, 20);
+            ctx.fill();
+            ctx.fillStyle = "#d4d4d8";
+            drawRoundRect(ctx, 180, 736, 664, 34, 12);
+            ctx.fill();
+          }
+
+          // Product Info Row (Matching media_1795277149043_18a82013.jpg)
+          ctx.fillStyle = "#09090b";
+          ctx.font = '900 50px "Noto Sans Arabic", sans-serif';
+          ctx.textAlign = "right";
+          ctx.fillText("لابتوب كويس (أتوقع)", W - 64, 968);
+
+          ctx.fillStyle = "#18181b";
+          ctx.font = '900 46px "Noto Sans Arabic", sans-serif';
+          ctx.textAlign = "left";
+          ctx.fillText("٤٠٠٠ ر.س", 64, 968);
+
+          // Subtitle + Gold Stars
+          ctx.fillStyle = "#71717a";
+          ctx.font = '700 30px "Noto Sans Arabic", sans-serif';
+          ctx.textAlign = "right";
+          ctx.fillText("X90 Pro Series  •  المتوفر الآن", W - 64, 1034);
+          ctx.fillStyle = "#f59e0b";
+          ctx.font = "900 32px sans-serif";
+          ctx.textAlign = "left";
+          ctx.fillText("★★★★★", 64, 1034);
+
+          // Quantity Selector Bar
+          ctx.fillStyle = "#f4f4f5";
+          drawRoundRect(ctx, 56, 1110, W - 112, 92, 26);
+          ctx.fill();
+          ctx.strokeStyle = "#e4e4e7";
+          ctx.lineWidth = 3;
+          ctx.stroke();
+
+          ctx.fillStyle = "#18181b";
+          ctx.font = "900 42px sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText("−", 125, 1158);
+          ctx.fillText("١", W / 2, 1158);
+          ctx.fillText("+", W - 125, 1158);
+
+          // Payment Divider Label
+          ctx.fillStyle = "#52525b";
+          ctx.font = '800 32px "Noto Sans Arabic", sans-serif';
+          ctx.textAlign = "right";
+          ctx.fillText("اختر طريقة الدفع السريعة:", W - 64, 1272);
+
+          // 3 Horizontal Checkout Buttons Row (Right: اشتر الآن | Center: Apple Pay | Left: tabby!)
+          const btnY = 1330;
+          const btnH = 148;
+          const btnW = 282;
+
+          // Button Right: اشترِ الآن
+          ctx.fillStyle = "#111114";
+          drawRoundRect(ctx, W - 56 - btnW, btnY, btnW, btnH, 30);
+          ctx.fill();
+          ctx.fillStyle = "#ffffff";
+          ctx.font = '900 36px "Noto Sans Arabic", sans-serif';
+          ctx.textAlign = "center";
+          ctx.fillText("اشترِ الآن", W - 56 - btnW / 2, btnY + btnH / 2 + 2);
+
+          // Button Center: Crisp Synchronous Vector Apple Pay Logo (zero missing glyph boxes!)
+          ctx.fillStyle = "#111114";
+          drawRoundRect(ctx, (W - btnW) / 2, btnY, btnW, btnH, 30);
+          ctx.fill();
+          ctx.save();
+          const applePayPath = new Path2D("M93.552 27.103c-6 7.1-15.602 12.702-25.203 11.901c-1.2-9.6 3.5-19.802 9.001-26.103C83.35 5.601 93.852.4 102.353 0c1 10.001-2.9 19.802-8.8 27.103m8.701 13.802c-13.902-.8-25.803 7.9-32.404 7.9c-6.7 0-16.802-7.5-27.803-7.3c-14.301.2-27.603 8.3-34.904 21.202c-15.002 25.803-3.9 64.008 10.601 85.01c7.101 10.401 15.602 21.802 26.803 21.402c10.602-.4 14.802-6.9 27.604-6.9c12.901 0 16.602 6.9 27.803 6.7c11.601-.2 18.902-10.4 26.003-20.802c8.1-11.801 11.401-23.303 11.601-23.903c-.2-.2-22.402-8.7-22.602-34.304c-.2-21.402 17.502-31.603 18.302-32.203c-10.002-14.802-25.603-16.402-31.004-16.802m80.31-29.004V167.82h24.202v-53.306h33.504c30.603 0 52.106-21.002 52.106-51.406c0-30.403-21.103-51.206-51.306-51.206zm24.202 20.403h27.903c21.003 0 33.004 11.201 33.004 30.903s-12.001 31.004-33.104 31.004h-27.803zM336.58 169.019c15.202 0 29.303-7.7 35.704-19.902h.5v18.702h22.403V90.21c0-22.502-18.002-37.004-45.706-37.004c-25.703 0-44.705 14.702-45.405 34.904h21.803c1.8-9.601 10.7-15.902 22.902-15.902c14.802 0 23.103 6.901 23.103 19.603v8.6l-30.204 1.8c-28.103 1.7-43.304 13.202-43.304 33.205c0 20.202 15.701 33.603 38.204 33.603m6.5-18.502c-12.9 0-21.102-6.2-21.102-15.702c0-9.8 7.901-15.501 23.003-16.401l26.903-1.7v8.8c0 14.602-12.401 25.003-28.803 25.003m82.01 59.707c23.603 0 34.704-9 44.405-36.304L512 54.706h-24.603l-28.503 92.11h-.5l-28.503-92.11h-25.303l41.004 113.513l-2.2 6.901c-3.7 11.701-9.701 16.202-20.402 16.202c-1.9 0-5.6-.2-7.101-.4v18.702c1.4.4 7.4.6 9.201.6");
+          const apScale = 0.34;
+          ctx.translate(W / 2 - (512 * apScale) / 2, btnY + btnH / 2 - (211 * apScale) / 2 + 4);
+          ctx.scale(apScale, apScale);
+          ctx.fillStyle = "#ffffff";
+          ctx.fill(applePayPath);
+          ctx.restore();
+
+          // Button Left (MACRO ZOOM & TAP TARGET): Mint Glow Tabby Button!
+          const tabX = 56;
+          const tabScale = 1 - 0.10 * pressAmt;
+          ctx.save();
+          ctx.translate(tabX + btnW / 2, btnY + btnH / 2);
+          ctx.scale(tabScale, tabScale);
+          ctx.shadowColor = "rgba(59, 255, 193, 0.55)";
+          ctx.shadowBlur = 32;
+          ctx.fillStyle = "#3bffc1";
+          drawRoundRect(ctx, -btnW / 2, -btnH / 2, btnW, btnH, 30);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+          ctx.strokeStyle = "#09090b";
+          ctx.lineWidth = 5;
+          ctx.stroke();
+          ctx.fillStyle = "#09090b";
+          ctx.font = "900 54px sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText("tabby", 0, 2);
+          ctx.restore();
+
+          // Tap Ripple on Tabby button
+          if (rippleAmt > 0.01 && rippleAmt < 0.99) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(tabX + btnW / 2, btnY + btnH / 2, 48 + rippleAmt * 185, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(9, 9, 11, ${(1 - rippleAmt) * 0.72})`;
+            ctx.lineWidth = 10;
+            ctx.stroke();
+            ctx.restore();
+          }
+
+          // Order Summary Line
+          ctx.fillStyle = "#f8f9fa";
+          drawRoundRect(ctx, 56, 1528, W - 112, 160, 28);
+          ctx.fill();
+          ctx.fillStyle = "#52525b";
+          ctx.font = '800 32px "Noto Sans Arabic", sans-serif';
+          ctx.textAlign = "right";
+          ctx.fillText("الإجمالي شامل الضريبة", W - 92, 1586);
+          ctx.fillStyle = "#09090b";
+          ctx.font = '900 40px "Noto Sans Arabic", sans-serif';
+          ctx.textAlign = "left";
+          ctx.fillText("٤٠٠٠ ر.س", 92, 1586);
+          ctx.fillStyle = "#10b981";
+          ctx.font = '800 28px "Noto Sans Arabic", sans-serif';
+          ctx.textAlign = "right";
+          ctx.fillText("قسّمها على ٤ دفعات بدون فوائد عبر تابي", W - 92, 1644);
+
+          // Paid Confirmation Banner (scales cleanly at 41.3s -> 42.88s!)
+          if (paidAmt > 0.01) {
+            ctx.save();
+            ctx.globalAlpha = Math.min(1, paidAmt);
+            ctx.translate(W / 2, 1795);
+            const pScale = 0.86 + 0.14 * paidAmt;
+            ctx.scale(pScale, pScale);
+            ctx.fillStyle = "#16a34a";
+            drawRoundRect(ctx, -(W - 112) / 2, -62, W - 112, 124, 30);
+            ctx.fill();
+            ctx.fillStyle = "#ffffff";
+            ctx.font = '900 46px "Noto Sans Arabic", sans-serif';
+            ctx.textAlign = "center";
+            ctx.fillText("تم الدفع بنجاح ✓", 0, 4);
+            ctx.restore();
+          } else {
+            // Clean Bottom App Tab Bar
+            ctx.fillStyle = "#f4f4f5";
+            drawRoundRect(ctx, 56, 1860, W - 112, 110, 42);
+            ctx.fill();
+            const navX = [170, 340, 512, 684, 854];
+            navX.forEach((nx, idx) => {
+              ctx.fillStyle = idx === 4 ? "#111114" : "#a1a1aa";
+              ctx.beginPath();
+              ctx.arc(nx, 1915, idx === 4 ? 26 : 16, 0, Math.PI * 2);
+              ctx.fill();
+            });
+          }
+
+          ctx.restore();
+          scrTex.needsUpdate = true;
+        }
+
+        drawScreenUI(0, 0, 0);
+
+        // Build 10-Part Procedural 3D Smartphone Assembly
+        const phoneGroup = new THREE.Group();
+        scene.add(phoneGroup);
+
+        const bodyW = 2.48;
+        const bodyH = 5.08;
+        const bodyShape = makeRoundedRectShape(bodyW, bodyH, 0.34);
+        const bodyGeo = new THREE.ExtrudeGeometry(bodyShape, {
+          depth: 0.16,
+          bevelEnabled: true,
+          bevelThickness: 0.036,
+          bevelSize: 0.034,
+          bevelSegments: 5,
+          curveSegments: 20,
+        });
+        bodyGeo.center();
+
+        const titaniumMat = new THREE.MeshPhysicalMaterial({
+          color: 0x1e2028,
+          metalness: 0.85,
+          roughness: 0.25,
+          clearcoat: 0.45,
+          clearcoatRoughness: 0.18,
+        });
+        const bodyMesh = new THREE.Mesh(bodyGeo, titaniumMat);
+        phoneGroup.add(bodyMesh);
+
+        // Brushed Chamfer Outer Rim Ring
+        const rimShape = makeRoundedRectShape(bodyW + 0.04, bodyH + 0.04, 0.35);
+        const rimHole = makeRoundedRectShape(bodyW - 0.06, bodyH - 0.06, 0.31);
+        rimShape.holes.push(rimHole);
+        const rimGeo = new THREE.ExtrudeGeometry(rimShape, {
+          depth: 0.14,
+          bevelEnabled: true,
+          bevelThickness: 0.012,
+          bevelSize: 0.01,
+          bevelSegments: 2,
+          curveSegments: 20,
+        });
+        rimGeo.center();
+        const steelMat = new THREE.MeshStandardMaterial({
+          color: 0x525866,
+          metalness: 0.92,
+          roughness: 0.22,
+        });
+        const rimMesh = new THREE.Mesh(rimGeo, steelMat);
+        phoneGroup.add(rimMesh);
+
+        // Front Obsidian Glass Slab
+        const glassShape = makeRoundedRectShape(2.38, 4.96, 0.30);
+        const glassGeo = new THREE.ShapeGeometry(glassShape, 18);
+        const glassMat = new THREE.MeshPhysicalMaterial({
+          color: 0x050507,
+          metalness: 0.08,
+          roughness: 0.08,
+          clearcoat: 1.0,
+          clearcoatRoughness: 0.06,
+        });
+        const glassMesh = new THREE.Mesh(glassGeo, glassMat);
+        glassMesh.position.z = 0.118;
+        phoneGroup.add(glassMesh);
+
+        // High-Res Dynamic OLED Display Plane (toneMapped: false preserves crisp #3bffc1 Tabby mint saturation!)
+        const screenGeo = new THREE.PlaneGeometry(2.24, 4.78);
+        const screenMat = new THREE.MeshBasicMaterial({
+          map: scrTex,
+          toneMapped: false,
+        });
+        const screenMesh = new THREE.Mesh(screenGeo, screenMat);
+        screenMesh.position.z = 0.123;
+        phoneGroup.add(screenMesh);
+
+        // Dynamic Island Capsule + Front Lens
+        const islandShape = makeRoundedRectShape(0.68, 0.17, 0.085);
+        const islandGeo = new THREE.ShapeGeometry(islandShape, 12);
+        const islandMat = new THREE.MeshBasicMaterial({ color: 0x050507 });
+        const islandMesh = new THREE.Mesh(islandGeo, islandMat);
+        islandMesh.position.set(0, 2.16, 0.128);
+        phoneGroup.add(islandMesh);
+
+        const frontLens = new THREE.Mesh(
+          new THREE.CircleGeometry(0.042, 16),
+          new THREE.MeshPhysicalMaterial({ color: 0x172554, roughness: 0.05, clearcoat: 1.0 })
+        );
+        frontLens.position.set(0.20, 2.16, 0.130);
+        phoneGroup.add(frontLens);
+
+        // Hardware Side Buttons (Power + 3 Left Volume/Action Buttons)
+        const btnMat = new THREE.MeshStandardMaterial({ color: 0x3b404c, metalness: 0.9, roughness: 0.22 });
+        const powerBtn = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.56, 0.08), btnMat);
+        powerBtn.position.set(bodyW / 2 + 0.036, 0.55, 0);
+        phoneGroup.add(powerBtn);
+
+        [1.15, 0.55, -0.02].forEach((by, idx) => {
+          const vb = new THREE.Mesh(new THREE.BoxGeometry(0.05, idx === 0 ? 0.22 : 0.42, 0.08), btnMat);
+          vb.position.set(-bodyW / 2 - 0.036, by, 0);
+          phoneGroup.add(vb);
+        });
+
+        // Rear Camera Module + Triple Lenses (Depth completeness at any yaw angle)
+        const camBump = new THREE.Mesh(
+          new THREE.ExtrudeGeometry(makeRoundedRectShape(0.95, 0.98, 0.18), {
+            depth: 0.06,
+            bevelEnabled: true,
+            bevelThickness: 0.015,
+            bevelSize: 0.015,
+            bevelSegments: 2,
+          }),
+          new THREE.MeshPhysicalMaterial({ color: 0x14151a, metalness: 0.6, roughness: 0.22, clearcoat: 0.8 })
+        );
+        camBump.position.set(-0.56, 1.78, -0.17);
+        phoneGroup.add(camBump);
+
+        [
+          [-0.78, 2.02],
+          [-0.78, 1.54],
+          [-0.36, 1.78],
+        ].forEach(([lx, ly]) => {
+          const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, 0.04, 24), steelMat);
+          ring.rotation.x = Math.PI / 2;
+          ring.position.set(lx, ly, -0.18);
+          phoneGroup.add(ring);
+        });
+
+        // Soft Studio Shadow Plane underneath phone
+        const shCanvas = document.createElement("canvas");
+        shCanvas.width = 256;
+        shCanvas.height = 256;
+        const sctx = shCanvas.getContext("2d");
+        const sg = sctx.createRadialGradient(128, 128, 10, 128, 128, 124);
+        sg.addColorStop(0, "rgba(0,0,0,0.28)");
+        sg.addColorStop(0.55, "rgba(0,0,0,0.10)");
+        sg.addColorStop(1, "rgba(0,0,0,0)");
+        sctx.fillStyle = sg;
+        sctx.fillRect(0, 0, 256, 256);
+        const shadowPlane = new THREE.Mesh(
+          new THREE.PlaneGeometry(4.8, 7.6),
+          new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(shCanvas), transparent: true, depthWrite: false })
+        );
+        shadowPlane.position.set(0.18, -0.35, -1.2);
+        scene.add(shadowPlane);
+
+        function syncPhone3D(force = false) {
+          const t = tl ? tl.time() : 0;
+          const active = t >= 31.36 && t <= 42.96 && phone3dState.visible > 0.01;
+          stageEl.style.opacity = active ? String(phone3dState.visible) : "0";
+          if (!active && !force) return;
+
+          drawScreenUI(phone3dState.pressAmt, phone3dState.rippleAmt, phone3dState.paidAmt);
+          phoneGroup.position.set(phone3dState.posX, phone3dState.posY, phone3dState.posZ);
+          phoneGroup.rotation.set(phone3dState.rotX, phone3dState.rotY, phone3dState.rotZ);
+          camera.position.set(phone3dState.camX, phone3dState.camY, phone3dState.camZ);
+          camera.lookAt(phone3dState.camX * 0.65, phone3dState.camY * 0.85, 0);
+          shadowPlane.position.x = phone3dState.posX + 0.16;
+          shadowPlane.material.opacity = Math.min(1, phone3dState.visible);
+          renderer.render(scene, camera);
+        }
+
+        syncPhone3D(true);
+        return syncPhone3D;
+      };
+
       const tl = gsap.timeline({ paused: true });
+      const syncPhone3D = initPhone3D();
+      tl.eventCallback("onUpdate", () => syncPhone3D(false));
+      window.__syncPhone3D = syncPhone3D;
 
       // =========================================================
       // MOTION CURVES & COMPOUND INERTIA HELPERS
@@ -1230,7 +1796,7 @@
       tl.to("#camera-rig", { scale: 1.055, rotation: -0.22, duration: 3.25, ease: "sine.inOut" }, 0)
         .to("#camera-rig", { scale: 1.0, rotation: 0, duration: 2.31, ease: "sine.inOut" }, 3.25);
 
-      // Beat 1 (0.00s -> 1.42s): "وش" "يعني" "API؟" -> silky velocity ascent high into the upper area and fade out!
+      // Beat 1 (0.00s -> 1.46s): "وش" "يعني" "API؟" -> continuous smooth ascent high to top edge + synchronized fade!
       tl.set("#hk-w0", { opacity: 1, scale: 1.0, y: 0 }, 0);
       tl.set("#hk-w1", { opacity: 0, scale: 0.84, y: 28 }, 0.24)
         .to("#hk-w1", { opacity: 1, scale: 1.04, y: 0, duration: 0.16, ease: "power3.out" }, 0.25)
@@ -1240,41 +1806,50 @@
         .to("#hk-w2", { opacity: 1, scale: 1.06, y: 0, duration: 0.18, ease: "power3.out" }, 0.54)
         .to("#hk-w2", { scale: 1.0, duration: 0.14, ease: "power2.out" }, 0.72);
 
-      // Lift #hook-line-1 high into the upper zone (y: -640 -> top ~190px) briskly and smoothly with trailing fade
-      tl.to("#hook-line-1", { y: -640, duration: 0.50, ease: "power2.out" }, 0.84)
-        .to("#hook-line-1", { opacity: 0, duration: 0.28, ease: "power2.in" }, 1.06);
+      // Reference-matched smooth vertical ascent & simultaneous fade-out (0.86s -> 1.44s)
+      tl.to("#hook-line-1", { y: -860, duration: 0.58, ease: "power1.inOut" }, 0.86)
+        .to("#hook-line-1", { opacity: 0, duration: 0.44, ease: "power1.inOut" }, 0.98);
 
-      // Beat 2 (1.04s -> 3.60s): Reverse vertical rise-from-below + silky RTL tracking!
+      // Beat 2 (1.04s -> 3.58s): Synchronized upward counter-rise from below + silky RTL tracking!
       tl.set("#hook-line-2-wrap", { opacity: 0, y: 460, scale: 1 }, 1.02)
         .set("#hook-line-2", { x: -535 }, 1.02)
-        .to("#hook-line-2-wrap", { y: 0, duration: 0.50, ease: "power3.out" }, 1.04)
-        .to("#hook-line-2-wrap", { opacity: 1, duration: 0.36, ease: "power2.out" }, 1.04)
-        .to("#hook-line-2", { x: 475, duration: 2.24, ease: "sine.inOut" }, 1.20)
+        .to("#hook-line-2-wrap", { y: 0, duration: 0.52, ease: "power2.out" }, 1.04)
+        .to("#hook-line-2-wrap", { opacity: 1, duration: 0.38, ease: "power1.out" }, 1.04)
+        .to("#hook-line-2", { x: 475, duration: 2.26, ease: "sine.inOut" }, 1.18)
         // Smooth shrink-out while hero enters
-        .to("#hook-line-2-wrap", { scale: 0.76, opacity: 0, duration: 0.38, ease: "power2.inOut" }, 3.22);
+        .to("#hook-line-2-wrap", { scale: 0.76, opacity: 0, duration: 0.36, ease: "power2.inOut" }, 3.22);
 
-      // Beat 3 (3.24s -> 5.56s): Merged Dark Background -> Side-looking Finger-Gun Hero fades in large,
-      // glides smoothly into center, then ramps cleanly (zero tween overlap!) into chest-up close-up -> seamless morph to Thumbs-Up!
+      // Beat 3 (3.24s -> 5.56s): Merged Dark Background -> Original 10_gun_point Hero enters large,
+      // glides smoothly into center, zooms cleanly into chest-up close-up -> Squash & Stretch + Rebound pose swap to Thumbs-Up!
       tl.to(["#w1-dof-a", "#w1-dof-b"], { opacity: 0, duration: 0.42, ease: "power2.out" }, 3.24);
 
-      tl.set("#w1-hero-stage", { opacity: 0, scale: 1.42, x: 0, y: 75 }, 3.24)
+      tl.set("#w1-hero-stage", { opacity: 0, scale: 1.32, x: -45, y: 76 }, 3.24)
+        .set("#w1-hero-squash", { scaleX: 1, scaleY: 1, y: 0 }, 3.24)
         .set("#w1-hero-gun", { opacity: 1 }, 3.24)
         .set("#w1-hero-thumbs", { opacity: 0 }, 3.24)
-        .to("#w1-hero-stage", { opacity: 1, duration: 0.50, ease: "power2.out" }, 3.26)
-        // Phase A: Large fade-in gliding smoothly to center framing (3.26s -> 3.96s)
-        .to("#w1-hero-stage", { scale: 1.0, x: -30, y: -95, duration: 0.70, ease: "power2.out" }, 3.26)
-        // Phase B: Seamless handoff at 3.96s into chest-and-up close-up with full fingertip margin (3.96s -> 4.72s)
-        .to("#w1-hero-stage", { scale: 1.20, x: -120, y: 78, duration: 0.76, ease: "sine.inOut" }, 3.96)
-        // Seamless morph to Thumbs-Up right as voice hits "أبسط" (4.42s)
-        .to("#w1-hero-gun", { opacity: 0, duration: 0.18, ease: "sine.inOut" }, 4.42)
-        .to("#w1-hero-thumbs", { opacity: 1, duration: 0.18, ease: "sine.inOut" }, 4.42)
-        // Continuous gentle micro push-in through end of Act 1 so camera velocity never dies
-        .to("#w1-hero-stage", { scale: 1.24, y: 70, duration: 0.84, ease: "sine.inOut" }, 4.72);
+        .to("#w1-hero-stage", { opacity: 1, duration: 0.48, ease: "power2.out" }, 3.26)
+        // Phase A: Large fade-in gliding smoothly into frame with full pistol clearance (3.26s -> 3.96s)
+        .to("#w1-hero-stage", { scale: 1.0, x: -72, y: 10, duration: 0.70, ease: "power2.out" }, 3.26)
+        // Phase B: Seamless chest-up zoom keeping full gun muzzle & thumb comfortably inside right margin (3.96s -> 4.72s)
+        .to("#w1-hero-stage", { scale: 1.17, x: -175, y: 46, duration: 0.76, ease: "power2.inOut" }, 3.96)
+        // Phase C: Continuous gentle breathing push-in through end of Act 1
+        .to("#w1-hero-stage", { scale: 1.21, y: 38, duration: 0.84, ease: "sine.inOut" }, 4.72);
+
+      // Classic Animation Squash & Stretch + Rebound on Hero Frame Swap (4.24s -> 4.92s)
+      tl.to("#w1-hero-squash", { scaleX: 0.96, scaleY: 1.055, y: -16, duration: 0.11, ease: "power2.out" }, 4.24)
+        .to("#w1-hero-squash", { scaleX: 1.12, scaleY: 0.86, y: 24, duration: 0.11, ease: "power2.in" }, 4.35)
+        // Exact frame swap at peak compression (4.45s -> 4.49s)
+        .to("#w1-hero-gun", { opacity: 0, duration: 0.04, ease: "none" }, 4.45)
+        .to("#w1-hero-thumbs", { opacity: 1, duration: 0.04, ease: "none" }, 4.45)
+        // Rebound stretch upward -> secondary bounce -> settle
+        .to("#w1-hero-squash", { scaleX: 0.935, scaleY: 1.095, y: -26, duration: 0.17, ease: "power2.out" }, 4.46)
+        .to("#w1-hero-squash", { scaleX: 1.03, scaleY: 0.97, y: 7, duration: 0.14, ease: "sine.inOut" }, 4.63)
+        .to("#w1-hero-squash", { scaleX: 1.0, scaleY: 1.0, y: 0, duration: 0.15, ease: "power2.out" }, 4.77);
 
       addPendulumSway("#w1-hero-stage", 3.34, 5.54, 0.8, 0.9, 1.9);
 
-      tl.set("#w1-simple-seal", { opacity: 0, y: 28, scale: 0.92 }, 4.40)
-        .to("#w1-simple-seal", { opacity: 1, y: 0, scale: 1.0, duration: 0.46, ease: "power3.out" }, 4.44);
+      tl.set("#w1-simple-seal", { opacity: 0, y: 28, scale: 0.92 }, 4.44)
+        .to("#w1-simple-seal", { opacity: 1, y: 0, scale: 1.0, duration: 0.44, ease: "power3.out" }, 4.48);
 
       // Sealed Pure-White Optical Bloom at exact Act 1 -> Act 2 cut (5.56s)
       retinalFlash(5.56, 1.0);
@@ -1303,8 +1878,8 @@
       cushionDrop("#w2-customer-group", 6.78, { fromY: -45, rot: 0, dur: 0.66 });
 
       // 7.80s: Glide diagonally across to Kitchen Doors
-      tl.to("#spatial-world", { x: -2680, y: -140, duration: 0.90, ease: "power2.inOut" }, 7.78)
-        .to("#camera-rig", { scale: 1.20, rotation: -0.65, duration: 0.90, ease: "power2.inOut" }, 7.78)
+      tl.to("#spatial-world", { x: -2680, y: -85, duration: 0.90, ease: "power2.inOut" }, 7.78)
+        .to("#camera-rig", { scale: 1.18, rotation: -0.65, duration: 0.90, ease: "power2.inOut" }, 7.78)
         .to("#w2-char-think", { opacity: 0, duration: 0.25 }, 8.32);
 
       // Rising Kitchen Steam
@@ -1317,7 +1892,7 @@
       // 8.92s: Kitchen Stop Sticker + Push-in Tension + "صح؟"
       tl.to("#optical-vignette", { opacity: 0.56, duration: 0.42 }, 8.90);
       cardTiltIn("#w2-stop-sticker", 8.94, { fromRotY: -22, fromRotX: 8, toRotZ: -2.5, dur: 0.66 });
-      tl.to("#camera-rig", { scale: 1.28, rotation: -0.9, duration: 2.0, ease: "sine.inOut" }, 9.05);
+      tl.to("#camera-rig", { scale: 1.22, rotation: -0.85, duration: 2.0, ease: "sine.inOut" }, 9.05);
 
       // 10.82s: Translucent background wash -> 11.02s: Boxless black "صح؟" appears cleanly -> fades out before 11.76s whip-pan!
       tl.set("#w2-sah-wash", { opacity: 0 }, 10.80)
@@ -1354,25 +1929,30 @@
       silkScaleIn("#w2-waiter-rig", 14.14, { fromScale: 0.74, toRot: 2.2, dur: 0.66 });
       addPendulumSway("#w2-waiter-rig", 14.16, 19.22, 2.2, 1.5, 1.5);
 
-      // 15.52s: Order Paper emerges beside customer -> travels with Waiter to Kitchen & disappears into door!
+      // 15.52s: Order Paper emerges beside Customer -> glides RIGHT INTO Flork's chest/hands -> locked steady during transit!
       tl.to("#w2-bg-stage", { opacity: 0.85, duration: 0.4 }, 15.48);
-      silkGlide("#w2-order-ticket", 15.52, { fromX: -90, fromY: 20, toRot: -6, dur: 0.50 });
-      tl.to("#w2-order-ticket", { x: 255, y: -14, rotation: 6, duration: 0.60, ease: "power2.inOut" }, 16.05);
+      tl.set("#w2-order-ticket", { opacity: 0, x: -245, y: 24, scale: 0.72, rotation: -10 }, 15.50)
+        .to("#w2-order-ticket", { opacity: 1, x: -185, y: 12, scale: 1.0, rotation: -6, duration: 0.48, ease: "power3.out" }, 15.52)
+        // Nestle neatly right into Flork's hands/chest BEFORE Waiter starts walking right!
+        .to("#w2-order-ticket", { x: 0, y: 0, scale: 1.0, rotation: -2, duration: 0.54, ease: "power2.inOut" }, 16.05);
 
+      // Waiter walks toward Kitchen — #w2-order-ticket is nested inside #w2-waiter-rig so it stays 100% locked in his chest/hands!
       tl.to("#spatial-world", { x: -2440, y: -100, duration: 0.90, ease: "power2.inOut" }, 16.70)
         .to("#camera-rig", { scale: 1.16, rotation: -0.6, duration: 0.90, ease: "power2.inOut" }, 16.70)
         .to("#w2-waiter-rig", { x: 420, duration: 0.94, ease: "power2.inOut" }, 16.70)
-        .to("#w2-order-ticket", { x: 845, y: -32, rotation: 10, duration: 0.88, ease: "power2.inOut" }, 16.70)
-        .to("#w2-order-ticket", { scale: 0.58, opacity: 0, duration: 0.36, ease: "power2.in" }, 17.34);
+        // Deliver into Kitchen doors once arrived
+        .to("#w2-order-ticket", { x: 165, y: -22, scale: 0.56, rotation: 8, opacity: 0, duration: 0.34, ease: "power2.in" }, 17.42);
 
-      // 18.00s: Fresh Burger emerges from Kitchen -> carried smoothly back -> delivered cleanly to Customer Table!
-      silkGlide("#w2-food-dome", 17.98, { fromX: 85, fromY: -18, toRot: -3, dur: 0.48 });
+      // 17.98s: Burger emerges from Kitchen directly into Flork's hands/chest -> locked steady all the way back to Customer!
+      tl.set("#w2-food-dome", { opacity: 0, x: 180, y: -18, scale: 0.72, rotation: 8 }, 17.96)
+        .to("#w2-food-dome", { opacity: 1, x: 0, y: 0, scale: 1.0, rotation: -2, duration: 0.36, ease: "power3.out" }, 17.98);
+
       tl.to("#spatial-world", { x: -1620, y: -120, duration: 0.94, ease: "power2.inOut" }, 18.28)
         .to("#camera-rig", { scale: 1.14, rotation: 0.6, duration: 0.94, ease: "power2.inOut" }, 18.28)
         .to("#w2-waiter-rig", { x: -280, duration: 0.94, ease: "power2.inOut" }, 18.28)
-        .to("#w2-food-dome", { x: -910, y: 12, rotation: 0, duration: 0.92, ease: "power2.inOut" }, 18.28)
         .to("#w2-bg-stage", { opacity: 1, duration: 0.45 }, 18.42)
-        .to("#w2-food-dome", { scale: 0.78, opacity: 0, duration: 0.24, ease: "power2.in" }, 19.06);
+        // Serve neatly onto Customer's table upon arrival
+        .to("#w2-food-dome", { x: -175, y: 20, scale: 0.78, opacity: 0, duration: 0.24, ease: "power2.in" }, 19.04);
 
       // 19.22s: Clean fade-out of waiter BEFORE instant macro close-up cut at 19.34s
       tl.to(["#w2-waiter-rig", "#w2-bg-stage"], { opacity: 0, duration: 0.12 }, 19.20)
@@ -1450,7 +2030,8 @@
 
       // 26.42s: Painterly Red X slashes right across Apple Pay + Guard pops!
       tl.to("#optical-vignette", { opacity: 0.58, duration: 0.38 }, 26.38)
-        .to("#camera-rig", { scale: 1.14, rotation: -0.70, duration: 0.72, ease: "power2.out" }, 26.40);
+        .to("#camera-rig", { scale: 1.14, rotation: -0.70, duration: 0.72, ease: "power2.out" }, 26.40)
+        .to("#w3b-sensitive-note", { opacity: 0, duration: 0.22 }, 26.42);
       tl.to("#w3b-x-1", { strokeDashoffset: 0, duration: 0.24, ease: "power3.out" }, 26.44)
         .to("#w3b-x-2", { strokeDashoffset: 0, duration: 0.24, ease: "power3.out" }, 26.64);
       cushionDrop("#w3b-guard-badge", 26.68, { fromY: -40, rot: -1.5, dur: 0.56 });
@@ -1470,49 +2051,92 @@
       silkGlide("#w3b-flork-card", 29.62, { fromX: 120, fromY: -20, toRot: 4, dur: 0.56 });
       tl.to(["#w3b-check-halo", "#w3b-check"], { strokeDashoffset: 0, duration: 0.44, ease: "power3.out" }, 29.95);
 
-      // Sealed Velvet Light Dissolve into Act 4 Phone World at exact cut (31.46s)
+      // Sealed Velvet Light Dissolve into Act 4 Three.js Phone World at exact cut (31.46s)
       curtainDissolve(31.46, { tone: "light", inDur: 0.16, outDur: 0.24 });
 
       // =========================================================
-      // ACT 4: 3D PHONE -> CARDLESS SPATIAL TABBY STAGE (31.46s -> 42.88s)
+      // ACT 4: THREE.JS 3D PHONE + DEPTH-BLURRED TILES -> CARDLESS SPATIAL TABBY STAGE (31.46s -> 42.88s)
       // =========================================================
       tl.set("#spatial-world", { x: -7600, y: 0 }, 31.46)
-        .set("#camera-rig", { scale: 1.0, rotation: -0.6 }, 31.46)
-        .to("#optical-vignette", { opacity: 0.32, duration: 0.42 }, 31.52);
+        .set("#camera-rig", { scale: 1.0, rotation: -0.4 }, 31.46)
+        .to("#optical-vignette", { opacity: 0.30, duration: 0.42 }, 31.52);
 
-      cardTiltIn("#w4-phone", 31.54, { fromRotY: -20, fromRotX: 10, toRotZ: -2, dur: 0.68 });
-      tl.to("#w4-phone", { rotation: 0, duration: 1.9, ease: "sine.inOut" }, 32.25);
+      // Three.js 3D Smartphone entrance tilt -> gentle float -> Macro Dive straight onto Tabby button!
+      tl.set(phone3dState, {
+        visible: 0,
+        posX: 0.34,
+        posY: -0.24,
+        posZ: -0.5,
+        rotX: 0.20,
+        rotY: -0.62,
+        rotZ: -0.14,
+        camX: 0,
+        camY: 0.0,
+        camZ: 12.0,
+        pressAmt: 0,
+        rippleAmt: 0,
+        paidAmt: 0,
+      }, 31.46)
+      .to(phone3dState, {
+        visible: 1,
+        posX: 0.12,
+        posY: 0.02,
+        posZ: 0,
+        rotX: 0.12,
+        rotY: -0.38,
+        rotZ: -0.08,
+        camZ: 11.2,
+        duration: 0.72,
+        ease: "power3.out",
+      }, 31.50)
+      .to(phone3dState, {
+        posY: 0.08,
+        rotX: 0.08,
+        rotY: -0.30,
+        rotZ: -0.04,
+        duration: 1.50,
+        ease: "sine.inOut",
+      }, 32.22);
 
-      // Surround Phone with Blurred Depth Store Tiles
-      silkGlide("#w4-badge-salla", 31.60, { fromX: -90, fromY: 40, toRot: -5, dur: 0.58 });
-      silkGlide("#w4-badge-noon", 31.72, { fromX: -105, fromY: -20, toRot: 6, dur: 0.58 });
-      silkGlide("#w4-badge-amzn", 31.84, { fromX: -90, fromY: -35, toRot: -4, dur: 0.58 });
-      silkGlide("#w4-badge-apay", 31.94, { fromX: 90, fromY: 35, toRot: 5, dur: 0.58 });
-      silkGlide("#w4-badge-bag", 32.04, { fromX: 85, fromY: -35, toRot: -5, dur: 0.58 });
+      // Surround 3D Phone with Depth-Blurred Store Icons (Matching 3.mp4 Sheet 4 Frame 6)
+      silkGlide("#w4-badge-noon", 31.56, { fromX: -95, fromY: 35, toRot: -6, dur: 0.56 });
+      silkGlide("#w4-badge-amzn", 31.68, { fromX: -120, fromY: -10, toRot: 4, dur: 0.58 });
+      silkGlide("#w4-badge-purp", 31.78, { fromX: -110, fromY: -45, toRot: -7, dur: 0.58 });
+      silkGlide("#w4-badge-apay", 31.88, { fromX: 95, fromY: 25, toRot: 6, dur: 0.56 });
+      silkGlide("#w4-badge-bag", 31.98, { fromX: 90, fromY: -30, toRot: -5, dur: 0.56 });
 
-      // 33.76s: Macro Dive straight onto Bottom "tabby" Checkout Button (Reference 34.5s - 35.5s!)
-      tl.to("#camera-rig", { scale: 1.66, rotation: 0.35, duration: 0.72, ease: "power2.inOut" }, 33.74)
-        .to("#spatial-world", { x: -7540, y: -195, duration: 0.72, ease: "power2.inOut" }, 33.74)
-        .to(["#w4-badge-salla", "#w4-badge-noon", "#w4-badge-amzn", "#w4-badge-apay", "#w4-badge-bag"], { opacity: 0, duration: 0.36 }, 33.76);
+      // Gentle idle float on surrounding icons (non-overlapping with entrance and exit!)
+      tl.to("#w4-badge-noon", { y: -14, duration: 1.45, ease: "sine.inOut" }, 32.20)
+        .to("#w4-badge-amzn", { y: -10, duration: 1.40, ease: "sine.inOut" }, 32.28)
+        .to("#w4-badge-purp", { y: 12, duration: 1.38, ease: "sine.inOut" }, 32.38);
 
-      // Tactile Squish & Recoil on Tabby Tap (34.48s)
-      tl.to("#w4-tabby-btn", { scale: 0.91, duration: 0.08, ease: "power2.in" }, 34.48)
-        .to("#w4-tabby-btn", { scale: 1.04, duration: 0.16, ease: "back.out(2)" }, 34.56)
-        .to("#w4-tabby-btn", { scale: 1.0, duration: 0.14, ease: "power1.out" }, 34.72);
-      tl.set("#w4-tap-ring", { opacity: 0.92, scale: 0.3 }, 34.48)
-        .to("#w4-tap-ring", { opacity: 0, scale: 2.0, duration: 0.46, ease: "power2.out" }, 34.49);
-      tl.set("#w4-btn-sweep", { x: -200, opacity: 0.85 }, 34.50)
-        .to("#w4-btn-sweep", { x: 750, duration: 0.48, ease: "power2.inOut" }, 34.54)
-        .to("#w4-btn-sweep", { opacity: 0, duration: 0.08 }, 35.02);
+      // 33.74s -> 34.48s: True 3D Camera Macro Dive onto glowing mint "tabby" button + radial counter-motion exit of blurred icons!
+      tl.to(phone3dState, {
+        camX: -0.58,
+        camY: -0.76,
+        camZ: 4.5,
+        rotX: 0.04,
+        rotY: -0.14,
+        rotZ: -0.015,
+        duration: 0.72,
+        ease: "power2.inOut",
+      }, 33.74)
+      .to("#camera-rig", { scale: 1.14, rotation: 0.25, duration: 0.72, ease: "power2.inOut" }, 33.74)
+      .to("#spatial-world", { x: -7580, y: -25, duration: 0.72, ease: "power2.inOut" }, 33.74);
 
-      // =========================================================
-      // 35.52s -> 41.20s: OPEN STUDIO SPATIAL FLOW (ZERO HTML CARDS!)
-      // Phone -> Running Flork & Tabby Tile -> Spinning Gear -> 4 Stacked Pills -> Tabby -> Phone!
-      // =========================================================
-      // 35.52s: Camera pulls out & tracks RIGHT onto Standalone Tabby Emblem Tile
+      tl.to(["#w4-badge-noon", "#w4-badge-amzn", "#w4-badge-purp"], { x: -180, opacity: 0, duration: 0.42, ease: "power2.in" }, 33.74)
+        .to(["#w4-badge-apay", "#w4-badge-bag"], { x: 180, opacity: 0, duration: 0.42, ease: "power2.in" }, 33.74);
+
+      // Tactile 3D Button Press & Ripple on Tabby Tap (34.48s -> 35.10s)
+      tl.to(phone3dState, { pressAmt: 1, duration: 0.09, ease: "power2.in" }, 34.48)
+        .to(phone3dState, { pressAmt: 0, duration: 0.22, ease: "back.out(2.2)" }, 34.57)
+        .to(phone3dState, { rippleAmt: 1, duration: 0.48, ease: "power2.out" }, 34.49);
+
+      // 35.52s -> 36.36s: Camera tracks RIGHT out onto Standalone Tabby Emblem Tile (Phone glides left off-frame!)
       tl.to("#spatial-world", { x: -8300, y: 40, duration: 0.84, ease: "power2.inOut" }, 35.52)
         .to("#camera-rig", { scale: 1.12, rotation: 0, duration: 0.84, ease: "power2.inOut" }, 35.52)
-        .to("#optical-vignette", { opacity: 0.38, duration: 0.45 }, 35.56);
+        .to("#optical-vignette", { opacity: 0.36, duration: 0.45 }, 35.56)
+        .to(phone3dState, { visible: 0, duration: 0.24 }, 36.12);
 
       silkGlide("#w4-flork-run", 35.58, { fromX: -140, fromY: 20, toRot: -4, dur: 0.56 });
       tl.to("#w4-flork-run", { x: 90, opacity: 0, duration: 0.48, ease: "power2.in" }, 36.85);
@@ -1522,7 +2146,7 @@
         .to("#w4-tile-sweep", { x: 460, duration: 0.58, ease: "power2.inOut" }, 36.55)
         .to("#w4-tile-sweep", { opacity: 0, duration: 0.08 }, 37.14);
 
-      // 37.50s: Glide smoothly up-right onto Standalone Rotating Gear + Orbiting Arrows (Reference 39.0s!)
+      // 37.48s: Glide smoothly up-right onto Cycle Arrows Processing Stage + draw branching curves!
       tl.to("#spatial-world", { x: -8740, y: 260, duration: 0.96, ease: "power2.inOut" }, 37.48)
         .to("#camera-rig", { scale: 1.24, rotation: -0.35, duration: 0.96, ease: "power2.inOut" }, 37.48);
 
@@ -1530,21 +2154,47 @@
       tl.set("#w4-orbit-ring", { rotation: 0 }, 37.50)
         .to("#w4-orbit-ring", { rotation: 540, duration: 3.8, ease: "none" }, 37.50);
 
-      // 39.55s: Camera glides smoothly down-right onto 4 Stacked Monochrome Installment Pills (Reference 40.5s!)
-      tl.to("#spatial-world", { x: -8960, y: -60, duration: 0.68, ease: "power2.inOut" }, 39.55)
-        .to("#camera-rig", { scale: 1.24, rotation: 0.3, duration: 0.68, ease: "power2.inOut" }, 39.55);
+      // 39.42s: Hand-drawn branching curves stroke out -> Camera glides down-right onto 4 Perforated Tickets!
+      ["#w4-br-1", "#w4-br-2", "#w4-br-3", "#w4-br-4"].forEach((br, idx) => {
+        tl.to(br, { strokeDashoffset: 0, duration: 0.44, ease: "power2.out" }, 39.42 + idx * 0.11);
+      });
 
-      cushionDrop("#w4-pill-1", 39.62, { fromY: -40, rot: -1, dur: 0.36 });
-      cushionDrop("#w4-pill-2", 39.78, { fromY: -40, rot: 0.8, dur: 0.36 });
-      cushionDrop("#w4-pill-3", 39.94, { fromY: -40, rot: -0.8, dur: 0.36 });
-      cushionDrop("#w4-pill-4", 40.10, { fromY: -40, rot: 1, dur: 0.36 });
+      tl.to("#spatial-world", { x: -8960, y: -50, duration: 0.68, ease: "power2.inOut" }, 39.55)
+        .to("#camera-rig", { scale: 1.20, rotation: 0.25, duration: 0.68, ease: "power2.inOut" }, 39.55);
 
-      // 41.20s: Snap smoothly back via Tabby to Upright Phone with 6 Bursting Ink Checkmarks! (Reference 42.0s!)
-      tl.to("#spatial-world", { x: -7600, y: -20, duration: 0.76, ease: "power3.out" }, 41.18)
-        .to("#camera-rig", { scale: 0.94, rotation: -0.3, duration: 0.76, ease: "power3.out" }, 41.18)
-        .to("#optical-vignette", { opacity: 0.24, duration: 0.4 }, 41.24);
+      cushionDrop("#w4-pill-1", 39.62, { fromY: -40, rot: -1.4, dur: 0.36 });
+      cushionDrop("#w4-pill-2", 39.78, { fromY: -40, rot: 1.0, dur: 0.36 });
+      cushionDrop("#w4-pill-3", 39.94, { fromY: -40, rot: -1.0, dur: 0.36 });
+      cushionDrop("#w4-pill-4", 40.10, { fromY: -40, rot: 1.3, dur: 0.36 });
 
-      silkScaleIn("#w4-paid-stamp", 41.32, { fromScale: 1.22, toRot: 0, dur: 0.44 });
+      // 41.18s: Snap smoothly back to Upright 3D Phone displaying "تم الدفع بنجاح ✓" + 6 Bursting Checkmarks!
+      tl.set(phone3dState, {
+        posX: -0.22,
+        posY: 0.04,
+        posZ: 0,
+        rotX: 0.04,
+        rotY: -0.24,
+        rotZ: -0.03,
+        camX: 0,
+        camY: 0.0,
+        camZ: 12.0,
+        pressAmt: 0,
+        rippleAmt: 0,
+        paidAmt: 0,
+      }, 41.14)
+      .to(phone3dState, {
+        visible: 1,
+        rotX: 0,
+        rotY: 0.06,
+        rotZ: 0,
+        paidAmt: 1,
+        duration: 0.62,
+        ease: "power3.out",
+      }, 41.18)
+      .to("#spatial-world", { x: -7600, y: 0, duration: 0.76, ease: "power3.out" }, 41.18)
+      .to("#camera-rig", { scale: 1.0, rotation: -0.2, duration: 0.76, ease: "power3.out" }, 41.18)
+      .to("#optical-vignette", { opacity: 0.24, duration: 0.4 }, 41.24);
+
       ["#w4-cb-1", "#w4-cb-2", "#w4-cb-3", "#w4-cb-4", "#w4-cb-5", "#w4-cb-6"].forEach((cb, i) => {
         tl.to(cb, { strokeDashoffset: 0, duration: 0.32, ease: "power3.out" }, 41.38 + i * 0.07);
       });
@@ -1566,7 +2216,7 @@
       silkScaleIn("#w5-title-intro", 42.94, { fromScale: 0.84, toRot: 0, dur: 0.48 });
       tl.to("#w5-title-intro", { opacity: 0, scale: 0.92, y: -30, duration: 0.24, ease: "power2.in" }, 44.18);
 
-      // 44.32s -> 47.25s: Butter-Smooth 100% GPU-Composited Suspension Bridge + Unbroken Push-In Zoom!
+      // 44.32s -> 47.25s: Butter-Smooth 100% GPU-Composited Suspension Bridge + Animated Data Flow Pulse!
       tl.set("#w5-bridge-stage", { opacity: 0, scale: 0.94 }, 44.28)
         .to("#w5-bridge-stage", { opacity: 1, scale: 1.0, duration: 0.48, ease: "power2.out" }, 44.30);
 
@@ -1575,7 +2225,8 @@
         .set("#w5-node-r", { opacity: 0, x: 75 }, 44.28)
         .to("#w5-node-r", { opacity: 1, x: 0, duration: 0.56, ease: "power2.out" }, 44.34)
         .set("#w5-bridge-core", { opacity: 0, scaleX: 0.78 }, 44.30)
-        .to("#w5-bridge-core", { opacity: 1, scaleX: 1.0, duration: 0.64, ease: "power2.out" }, 44.36);
+        .to("#w5-bridge-core", { opacity: 1, scaleX: 1.0, duration: 0.64, ease: "power2.out" }, 44.36)
+        .to("#w5-data-pulse", { strokeDashoffset: -280, duration: 2.8, ease: "none" }, 44.40);
 
       tl.to("#camera-rig", { scale: 1.24, rotation: 0.18, duration: 2.72, ease: "sine.inOut" }, 44.40);
 
