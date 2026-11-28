@@ -100,27 +100,40 @@
         text-shadow: 0 3px 0 rgba(255, 255, 255, 0.9);
       }
 
-      /* Tactile Tilted Yellow Sticky Note with Dark Outline, Top Sheen & Corner Tape */
+      /* Minimalist Editorial Black & White Paper Note (NO yellow, NO tape flaps!) */
       .sticky-note-3d {
         position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 24px 54px;
-        min-width: 420px;
+        padding: 22px 52px;
+        min-width: 410px;
         background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 46%),
-          linear-gradient(166deg, #fef08a 0%, #fde047 48%, #facc15 100%);
-        border: 4px solid #18181b;
-        border-radius: 8px 10px 12px 8px;
+          linear-gradient(168deg, #ffffff 0%, #f4f5f7 68%, #e6e8ec 100%);
+        border: 3.5px solid #09090b;
+        border-radius: 10px 10px 26px 10px;
         box-shadow:
-          0 6px 12px rgba(0, 0, 0, 0.16),
-          0 18px 34px rgba(0, 0, 0, 0.20),
-          0 34px 58px rgba(0, 0, 0, 0.14),
-          inset 0 2px 0 rgba(255, 255, 255, 0.55);
+          0 6px 12px rgba(0, 0, 0, 0.14),
+          0 18px 34px rgba(0, 0, 0, 0.18),
+          0 32px 54px rgba(0, 0, 0, 0.12),
+          inset 0 2px 0 rgba(255, 255, 255, 0.9);
         transform-style: preserve-3d;
-        transform-origin: 50% 15%;
+        transform-origin: 50% 25%;
         will-change: transform, opacity;
+      }
+
+      .sticky-note-3d::after {
+        content: "";
+        position: absolute;
+        right: -1px;
+        bottom: -1px;
+        width: 24px;
+        height: 24px;
+        background: linear-gradient(135deg, #d4d4d8 0%, #f4f4f5 52%, transparent 54%);
+        border-top: 2px solid #09090b;
+        border-left: 2px solid #09090b;
+        border-top-left-radius: 6px;
+        pointer-events: none;
       }
 
       .sticky-note-text {
@@ -128,33 +141,9 @@
         z-index: 2;
         font-size: 46px;
         font-weight: 900;
-        color: #111114;
+        color: #09090b;
         white-space: nowrap;
-        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
-      }
-
-      .note-tape {
-        position: absolute;
-        width: 78px;
-        height: 24px;
-        background: linear-gradient(180deg, rgba(255, 255, 245, 0.68) 0%, rgba(244, 242, 224, 0.48) 100%);
-        border: 1.5px solid rgba(24, 24, 27, 0.22);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.14);
-        pointer-events: none;
-        z-index: 4;
-        will-change: transform;
-      }
-
-      .note-tape-l {
-        left: -18px;
-        top: -12px;
-        transform-origin: 50% 50%;
-      }
-
-      .note-tape-r {
-        right: -18px;
-        top: -12px;
-        transform-origin: 50% 50%;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
       }
 
       /* Tactile 3D App Tile & Clean Floating Prop Styling */
@@ -223,32 +212,36 @@
       }
 
       /* =========================================================
-         SHARED FLOWING BLACK-AND-SILVER WAVE CANVAS
-         Pure deep obsidian (~82%) + undulating silver-white waves
+         SHARED FLOWING BLACK-WITH-WHITE-WAVE CANVAS
+         Deep dominant obsidian black (~82%) + visible flowing white silk waves
          ========================================================= */
       .dark-wave-stage {
         position: absolute;
         inset: -320px;
-        background: radial-gradient(ellipse 90% 76% at 50% 42%, #181920 0%, #0b0c10 56%, #030305 100%);
+        background: radial-gradient(ellipse 92% 78% at 50% 44%, #111216 0%, #07080a 54%, #020203 100%);
         overflow: hidden;
         pointer-events: none;
       }
 
       .dark-wave-layer-a {
         position: absolute;
-        inset: -260px;
+        inset: -420px;
         background:
-          radial-gradient(ellipse 76% 42% at 24% 26%, rgba(255, 255, 255, 0.10) 0%, rgba(180, 185, 200, 0.04) 42%, transparent 70%),
-          radial-gradient(ellipse 74% 40% at 78% 74%, rgba(255, 255, 255, 0.08) 0%, rgba(160, 165, 180, 0.03) 44%, transparent 72%);
+          radial-gradient(ellipse 68% 26% at 22% 24%, rgba(255, 255, 255, 0.24) 0%, rgba(215, 222, 236, 0.09) 38%, transparent 66%),
+          radial-gradient(ellipse 72% 24% at 78% 74%, rgba(255, 255, 255, 0.22) 0%, rgba(205, 212, 226, 0.08) 38%, transparent 65%),
+          linear-gradient(128deg, transparent 22%, rgba(255, 255, 255, 0.08) 46%, rgba(255, 255, 255, 0.16) 50%, rgba(255, 255, 255, 0.07) 54%, transparent 74%);
+        filter: blur(26px);
         will-change: transform;
       }
 
       .dark-wave-layer-b {
         position: absolute;
-        inset: -280px;
+        inset: -420px;
         background:
-          radial-gradient(ellipse 68% 36% at 76% 24%, rgba(255, 255, 255, 0.07) 0%, rgba(180, 185, 200, 0.03) 40%, transparent 68%),
-          radial-gradient(ellipse 72% 38% at 22% 78%, rgba(255, 255, 255, 0.07) 0%, rgba(180, 185, 200, 0.03) 42%, transparent 70%);
+          radial-gradient(ellipse 62% 24% at 76% 24%, rgba(255, 255, 255, 0.20) 0%, rgba(196, 204, 220, 0.07) 36%, transparent 64%),
+          radial-gradient(ellipse 66% 26% at 24% 78%, rgba(255, 255, 255, 0.22) 0%, rgba(200, 208, 224, 0.08) 38%, transparent 66%),
+          linear-gradient(232deg, transparent 28%, rgba(255, 255, 255, 0.12) 49%, transparent 68%);
+        filter: blur(30px);
         will-change: transform;
       }
 
@@ -376,11 +369,11 @@
         background: #ffffff;
       }
 
-      /* World 3A: Deep Black & Silver Wave API Space */
+      /* World 3A: Deep Black & Flowing White Wave API Space */
       #w3a-dark-bg {
         position: absolute;
         inset: -320px;
-        background: radial-gradient(ellipse 90% 76% at 50% 44%, #181920 0%, #0b0c10 56%, #030305 100%);
+        background: radial-gradient(ellipse 92% 78% at 50% 44%, #111216 0%, #07080a 54%, #020203 100%);
         overflow: hidden;
       }
 
@@ -500,12 +493,12 @@
       }
 
       /* =========================================================
-         WORLD 5: DEEP OBSIDIAN BRIDGE FINALE (x = 9900 .. 10980)
+         WORLD 5: DEEP OBSIDIAN BRIDGE FINALE (x = 10200 .. 11280)
          ========================================================= */
       #w5-dark-bg {
         position: absolute;
         inset: -320px;
-        background: radial-gradient(ellipse 90% 76% at 50% 42%, #181920 0%, #0b0c10 56%, #030305 100%);
+        background: radial-gradient(ellipse 92% 78% at 50% 44%, #111216 0%, #07080a 54%, #020203 100%);
         overflow: hidden;
       }
 
@@ -760,7 +753,7 @@
               <div id="w1-hero-halo" data-layout-ignore="true"></div>
               <div id="w1-hero-squash" data-layout-allow-overflow="true">
                 <div id="w1-hero-gun" class="puppet-rig waist-fade" data-layout-allow-overflow="true" style="left: 10px; top: -180px; width: 1060px; height: 1884px;">
-                  <img id="img-w1-gun" src="./assets/img/10_gun_point.webp" alt="الشخصية الرئيسية" />
+                  <img id="img-w1-gun" src="./assets/img/10_gun_point.webp" alt="الشخصية الرئيسية" style="filter: drop-shadow(0 0 1.5px rgba(0, 0, 0, 0.72));" />
                 </div>
                 <div id="w1-hero-thumbs" class="puppet-rig waist-fade" data-layout-allow-overflow="true" style="left: 10px; top: -120px; width: 1060px; height: 1884px;">
                   <img id="img-w1-thumbs" src="./assets/img/char_thumbs.webp" alt="أبسط" />
@@ -859,31 +852,19 @@
               <img id="img-w2-think" src="./assets/img/char_think.webp" alt="الشخصية تفكر" />
             </div>
 
-            <!-- Kitchen Stop Reaction Frame (Centered generously inside top margin!) -->
-            <div id="w2-stop-sticker" class="sticker-card" data-layout-allow-overflow="true" style="left: 1840px; top: 380px; width: 540px; height: 480px; opacity: 0; overflow: visible; background: transparent; border: none; box-shadow: none; z-index: 38;">
-              <div style="width: 100%; height: 430px; border-radius: 32px; overflow: hidden; border: 5px solid #09090b; box-shadow: 0 16px 32px rgba(0,0,0,0.30), 0 36px 60px rgba(0,0,0,0.18); background: #ffffff;">
-                <img id="img-stop" src="./assets/img/sticker_stop.webp" alt="ممنوع دخول المطبخ" style="width: 100%; height: 100%; object-fit: cover;" />
-              </div>
-              <div style="position: relative; margin: -28px auto 0; width: 450px; height: 80px; display: flex; align-items: center; justify-content: center; transform: rotate(-2.2deg); filter: drop-shadow(0 8px 14px rgba(0,0,0,0.28));">
-                <svg viewBox="0 0 390 72" width="450" height="80" fill="none" style="position: absolute; inset: 0;">
-                  <path d="M 10 14 Q 195 4 380 12 L 372 60 Q 195 68 18 58 Z" fill="#111114" stroke="#dc2626" stroke-width="3.5" stroke-linejoin="round"/>
-                </svg>
-                <span style="position: relative; z-index: 2; font-size: 36px; font-weight: 900; color: #ffffff;">ممنوع تدخل المطبخ!</span>
-              </div>
+            <!-- Clean Square Die-Cut Kitchen Stop Sticker (NO ugly text banner frame!) -->
+            <div id="w2-stop-sticker" data-layout-allow-overflow="true" style="position: absolute; left: 1895px; top: 250px; width: 430px; height: 430px; border-radius: 52px; border: 7px solid #ffffff; outline: 4.5px solid #09090b; overflow: hidden; background: #ffffff; box-shadow: 0 12px 24px rgba(0,0,0,0.22), 0 30px 56px rgba(0,0,0,0.16); transform-origin: 50% 82%; opacity: 0; z-index: 38; will-change: transform, opacity, filter;">
+              <img id="img-stop" src="./assets/img/sticker_stop.webp" alt="ممنوع دخول المطبخ" style="width: 100%; height: 100%; object-fit: contain; display: block;" />
             </div>
 
-            <!-- Full-Bleed High-Contrast B&W Meme Cut + Bold White/Stroked "صح؟" (11.233s -> 12.200s!) -->
-            <div id="w2-sah-bw-cut" data-layout-ignore="true" style="position: absolute; left: 1570px; top: 0px; width: 1080px; height: 1920px; background: #18181b; opacity: 0; pointer-events: none; z-index: 51; overflow: hidden;">
-              <img src="./assets/img/sticker_think_bw.webp" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; filter: grayscale(1) contrast(1.26) brightness(0.92);" />
-              <div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 48%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.68) 100%);"></div>
-            </div>
-
-            <div id="w2-sah-stamp" data-layout-allow-overflow="true" data-layout-allow-overlap="true" style="position: absolute; left: 1810px; top: 760px; width: 600px; text-align: center; opacity: 0; z-index: 54;">
-              <span style="font-size: 168px; font-weight: 900; color: #ffffff; -webkit-text-stroke: 10px #000000; paint-order: stroke fill; text-shadow: 0 18px 38px rgba(0,0,0,0.65);">صح؟</span>
+            <!-- In-Place Frosted Veil & Crisp "صح؟" over Blurred Scene (11.20s -> 12.22s!) -->
+            <div id="w2-sah-veil" data-layout-ignore="true" style="position: absolute; left: 1100px; top: -400px; width: 2400px; height: 2800px; background: radial-gradient(circle at 50% 48%, rgba(255,255,255,0.68) 0%, rgba(244,245,248,0.52) 100%); opacity: 0; pointer-events: none; z-index: 49;"></div>
+            <div id="w2-sah-stamp" data-layout-allow-overflow="true" data-layout-allow-overlap="true" style="position: absolute; left: 1810px; top: 720px; width: 600px; text-align: center; opacity: 0; z-index: 54; will-change: transform, opacity, filter;">
+              <span style="font-size: 164px; font-weight: 900; color: #09090b; text-shadow: 0 0 34px rgba(255,255,255,0.96), 0 12px 28px rgba(0,0,0,0.16);">صح؟</span>
             </div>
 
             <!-- Waiter Flork Hero Foreground — Well-Proportioned + Locked Order Paper & Burger! -->
-            <div id="w2-waiter-rig" class="flork-rig" data-layout-allow-overflow="true" style="left: 1040px; top: 760px; width: 420px; height: 420px; opacity: 0; z-index: 44;">
+            <div id="w2-waiter-rig" class="flork-rig" data-layout-allow-overflow="true" style="left: 1040px; top: 760px; width: 420px; height: 420px; opacity: 0; z-index: 44; will-change: transform, opacity, filter;">
               <img id="img-w2-waiter" src="./assets/img/flork_point.webp" alt="النادل الوسيط" style="width: 420px; height: 356px; object-fit: contain;" />
               <img src="./assets/img/bowtie_icon.svg" alt="" data-layout-ignore="true" style="position: absolute; left: 162px; top: 238px; width: 78px; height: 46px; object-fit: contain;" />
 
@@ -900,25 +881,6 @@
                 <svg width="260" height="18" viewBox="0 0 260 20" fill="none">
                   <path d="M 10 12 Q 130 2 250 13" stroke="#09090b" stroke-width="6" stroke-linecap="round"/>
                 </svg>
-              </div>
-            </div>
-
-            <!-- Beat 19.567s -> 20.267s: MACRO FACE CLOSE-UP + Sequential "بسيطة" -> "صح؟" -->
-            <div id="w2-macro-wrap" data-layout-allow-overflow="true" style="position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; opacity: 0; z-index: 60;">
-              <div id="w2-macro-bg-ghost" data-layout-ignore="true" style="position: absolute; left: 100px; top: 210px; width: 880px; height: 500px; filter: blur(12px); opacity: 0.35; z-index: 60; pointer-events: none;">
-                <svg width="880" height="500" viewBox="0 0 240 170" fill="none">
-                  <path d="M25 65 L215 65 L225 92 L15 92 Z" fill="#ffffff" stroke="#000000" stroke-width="5"/>
-                  <rect x="30" y="92" width="180" height="68" fill="#ffffff" stroke="#000000" stroke-width="5"/>
-                </svg>
-              </div>
-              <div id="w2-simple-word-1" style="position: absolute; left: 100px; top: 260px; width: 880px; text-align: center; font-size: 128px; font-weight: 900; color: #000000; opacity: 0; z-index: 65;">
-                بسيطة
-              </div>
-              <div id="w2-simple-word-2" style="position: absolute; left: 100px; top: 260px; width: 880px; text-align: center; font-size: 142px; font-weight: 900; color: #000000; opacity: 0; z-index: 65;">
-                صح؟
-              </div>
-              <div id="w2-char-macro" class="puppet-rig waist-fade" data-layout-allow-overflow="true" style="left: -100px; top: -380px; width: 1240px; height: 2204px; z-index: 62;">
-                <img id="img-w2-thumbs" src="./assets/img/char_thumbs.webp" alt="بسيطة صح" />
               </div>
             </div>
           </div>
@@ -999,16 +961,12 @@
                     <div class="app-tile-sheen" data-layout-ignore="true"></div>
                   </div>
 
-                  <!-- Tilted Yellow Sticky Notes cleanly centered below tile -->
-                  <div id="w3b-tape-general" class="sticky-note-3d" style="position: absolute; left: 330px; top: 1000px; z-index: 36;">
-                    <div class="note-tape note-tape-l" id="w3b-tape-gen-l" data-layout-ignore="true"></div>
-                    <div class="note-tape note-tape-r" id="w3b-tape-gen-r" data-layout-ignore="true"></div>
+                  <!-- Minimalist Black & White Paper Notes (No yellow, no tape flaps!) -->
+                  <div id="w3b-tape-general" class="sticky-note-3d" style="position: absolute; left: 335px; top: 1000px; z-index: 36;">
                     <span class="sticky-note-text">التطبيقات بشكل عام</span>
                   </div>
 
-                  <div id="w3b-tape-waiter" class="sticky-note-3d" style="position: absolute; left: 335px; top: 995px; opacity: 0; z-index: 38;">
-                    <div class="note-tape note-tape-l" id="w3b-tape-wai-l" data-layout-ignore="true"></div>
-                    <div class="note-tape note-tape-r" id="w3b-tape-wai-r" data-layout-ignore="true"></div>
+                  <div id="w3b-tape-waiter" class="sticky-note-3d" style="position: absolute; left: 340px; top: 995px; opacity: 0; z-index: 38;">
                     <span class="sticky-note-text">نرجع للنادل!</span>
                   </div>
 
@@ -1196,20 +1154,20 @@
               وهذا هو الـ API
             </div>
 
-            <!-- Beat 2 (44.33s -> 47.33s): Glowing Bridge + Balanced 1.42x Zoom keeping BOTH tiles framing bridge! -->
-            <div id="w5-bridge-stage" data-layout-allow-overflow="true" style="position: absolute; left: 20px; top: 560px; width: 1040px; height: 420px; transform-origin: 50% 48%; opacity: 0; will-change: transform, opacity;">
-              <div id="w5-bridge-glow" data-layout-ignore="true" style="position: absolute; left: 100px; top: -20px; width: 840px; height: 380px; background: radial-gradient(ellipse 72% 60% at 50% 50%, rgba(255,255,255,0.28) 0%, rgba(250,204,21,0.10) 48%, transparent 100%); pointer-events: none;"></div>
+            <!-- Beat 2 (44.33s -> 47.33s): Clean Silver-White Bridge + Normal Smooth Captions -->
+            <div id="w5-bridge-stage" data-layout-allow-overflow="true" style="position: absolute; left: 20px; top: 550px; width: 1040px; height: 420px; transform-origin: 50% 48%; opacity: 0; will-change: transform, opacity;">
+              <div id="w5-bridge-glow" data-layout-ignore="true" style="position: absolute; left: 100px; top: -20px; width: 840px; height: 380px; background: radial-gradient(ellipse 72% 60% at 50% 50%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 52%, transparent 100%); pointer-events: none;"></div>
 
-              <div id="w5-node-l" class="app-tile-3d" style="position: absolute; left: 0; top: 75px; width: 255px; height: 255px; border-radius: 52px; border: 5px solid #facc15; box-shadow: 0 0 56px rgba(250,204,21,0.52), 0 22px 44px rgba(0,0,0,0.45);">
+              <div id="w5-node-l" class="app-tile-3d" style="position: absolute; left: 0; top: 75px; width: 255px; height: 255px; border-radius: 52px; border: 4px solid rgba(255,255,255,0.85); box-shadow: 0 0 38px rgba(255,255,255,0.18), 0 22px 44px rgba(0,0,0,0.48);">
                 <img class="app-tile-full" src="./assets/img/app_hungerstation.jpg" alt="HungerStation" />
               </div>
 
-              <div id="w5-node-r" class="app-tile-3d app-tile-dark" style="position: absolute; right: 0; top: 75px; width: 255px; height: 255px; border-radius: 52px; border: 4px solid rgba(255,255,255,0.85); padding: 30px; box-shadow: 0 0 44px rgba(255,255,255,0.22), 0 22px 44px rgba(0,0,0,0.45);">
+              <div id="w5-node-r" class="app-tile-3d app-tile-dark" style="position: absolute; right: 0; top: 75px; width: 255px; height: 255px; border-radius: 52px; border: 4px solid rgba(255,255,255,0.85); padding: 30px; box-shadow: 0 0 38px rgba(255,255,255,0.18), 0 22px 44px rgba(0,0,0,0.48);">
                 <img src="./assets/img/apple_pay_white.svg" alt="Apple Pay" style="width: 100%; height: 100%; object-fit: contain;" />
               </div>
 
               <!-- Bold Solid Luminous White Suspension Bridge -->
-              <div id="w5-bridge-core" data-layout-allow-overflow="true" style="position: absolute; left: 220px; top: 10px; width: 600px; height: 310px; transform-origin: 50% 60%; filter: drop-shadow(0 0 26px rgba(255,255,255,0.48)); will-change: transform, opacity;">
+              <div id="w5-bridge-core" data-layout-allow-overflow="true" style="position: absolute; left: 220px; top: 10px; width: 600px; height: 310px; transform-origin: 50% 60%; filter: drop-shadow(0 0 24px rgba(255,255,255,0.42)); will-change: transform, opacity;">
                 <svg width="600" height="310" viewBox="0 0 600 310" fill="none" shape-rendering="geometricPrecision">
                   <rect x="108" y="48" width="26" height="196" rx="10" fill="#ffffff"/>
                   <rect x="466" y="48" width="26" height="196" rx="10" fill="#ffffff"/>
@@ -1224,13 +1182,10 @@
               </div>
             </div>
 
-            <!-- Word-by-Word Captions positioned tightly below Bridge -->
-            <div id="w5-macro-words" data-layout-allow-overflow="true" style="position: absolute; left: 40px; right: 40px; top: 960px; height: 180px; pointer-events: none; z-index: 38;">
-              <div id="w5-mw-0" style="position: absolute; inset: 0; text-align: center; font-size: 98px; font-weight: 900; color: #ffffff; text-shadow: 0 0 32px rgba(255,255,255,0.5), 0 10px 26px rgba(0,0,0,0.85); opacity: 0;">بدون</div>
-              <div id="w5-mw-1" style="position: absolute; inset: 0; text-align: center; font-size: 106px; font-weight: 900; color: #ffffff; text-shadow: 0 0 32px rgba(255,255,255,0.5), 0 10px 26px rgba(0,0,0,0.85); opacity: 0;">ما يشوف</div>
-              <div id="w5-mw-2" style="position: absolute; inset: 0; text-align: center; font-size: 112px; font-weight: 900; color: #ffffff; text-shadow: 0 0 32px rgba(255,255,255,0.5), 0 10px 26px rgba(0,0,0,0.85); opacity: 0;">أحد</div>
-              <div id="w5-mw-3" style="position: absolute; inset: 0; text-align: center; font-size: 108px; font-weight: 900; color: #ffffff; text-shadow: 0 0 32px rgba(255,255,255,0.5), 0 10px 26px rgba(0,0,0,0.85); opacity: 0;">تفاصيل</div>
-              <div id="w5-mw-4" style="position: absolute; inset: 0; text-align: center; font-size: 112px; font-weight: 900; color: #ffffff; text-shadow: 0 0 32px rgba(255,255,255,0.5), 0 10px 26px rgba(0,0,0,0.85); opacity: 0;">الثاني</div>
+            <!-- Normal Smooth Subtitle Reveal below Bridge -->
+            <div id="w5-macro-words" data-layout-allow-overflow="true" style="position: absolute; left: 40px; right: 40px; top: 1020px; display: flex; flex-direction: column; align-items: center; gap: 14px; pointer-events: none; z-index: 38;">
+              <div id="w5-sub-1" style="text-align: center; font-size: 76px; font-weight: 900; color: #ffffff; text-shadow: 0 0 28px rgba(255,255,255,0.40), 0 10px 26px rgba(0,0,0,0.85); opacity: 0;">بدون ما يشوف أحد</div>
+              <div id="w5-sub-2" style="text-align: center; font-size: 80px; font-weight: 900; color: #ffffff; text-shadow: 0 0 28px rgba(255,255,255,0.40), 0 10px 26px rgba(0,0,0,0.85); opacity: 0;">تفاصيل الثاني</div>
             </div>
 
             <!-- Beat 3 (47.33s -> 48.47s): Centered Vertically (y: 547..1742px) -->
@@ -1238,27 +1193,28 @@
               <img id="img-w5-point-you" src="./assets/img/char_point_you.webp" alt="الشخصية تشير إليك" />
             </div>
 
-            <!-- Beat 4 (48.47s -> 49.74s): Cleanly Framed Seated Desk Outro + Laptop (Ample Headroom!) -->
+            <!-- Beat 4 (48.47s -> 49.74s): Clean Centered Waist-Up Character Outro (NO Desk, NO Laptop!) -->
             <div id="w5-desk-outro" data-layout-allow-overflow="true" style="position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; opacity: 0; z-index: 34;">
-              <div style="position: absolute; left: 80px; top: 190px; width: 920px; height: 910px; overflow: hidden; z-index: 2;">
-                <div class="puppet-rig" data-layout-allow-overflow="true" style="left: 30px; top: 0px; width: 900px; height: 1600px;">
-                  <img src="./assets/img/char_talk.webp" alt="الشخصية عند المكتب" />
-                </div>
+              <div class="puppet-rig" data-layout-allow-overflow="true" style="left: 116px; top: 210px; width: 1080px; height: 1920px; -webkit-mask-image: linear-gradient(to bottom, #000000 54%, rgba(0, 0, 0, 0) 72%); mask-image: linear-gradient(to bottom, #000000 54%, rgba(0, 0, 0, 0) 72%);">
+                <img src="./assets/img/char_talk.webp" alt="لشروحات تقنية أكثر" />
               </div>
-              <svg style="position: absolute; left: 110px; top: 960px; z-index: 4; filter: drop-shadow(0 28px 46px rgba(0,0,0,0.72));" width="860" height="440" viewBox="0 0 860 440" fill="none">
-                <path d="M 165 130 L 695 130 L 820 215 L 40 215 Z" fill="#2c2427" stroke="#0b080a" stroke-width="6" stroke-linejoin="round"/>
-                <rect x="40" y="215" width="780" height="34" rx="6" fill="#1b1518" stroke="#0b080a" stroke-width="5"/>
-                <rect x="92" y="249" width="28" height="175" rx="6" fill="#181316" stroke="#090708" stroke-width="4"/>
-                <rect x="740" y="249" width="28" height="175" rx="6" fill="#181316" stroke="#090708" stroke-width="4"/>
-                <rect x="520" y="249" width="24" height="150" rx="5" fill="#120d10" stroke="#090708" stroke-width="4"/>
-                <rect x="316" y="249" width="24" height="150" rx="5" fill="#120d10" stroke="#090708" stroke-width="4"/>
-                <rect x="580" y="136" width="110" height="22" rx="4" fill="#d4d4d8" stroke="#18181b" stroke-width="3"/>
-                <rect x="470" y="120" width="44" height="48" rx="8" fill="#3f3f46" stroke="#18181b" stroke-width="3"/>
-              </svg>
-              <img src="./assets/img/laptop_3d.png" alt="لابتوب" style="position: absolute; left: 220px; top: 840px; width: 320px; height: auto; object-fit: contain; z-index: 6; transform: scaleX(-1) rotate(-2deg); filter: drop-shadow(0 16px 26px rgba(0,0,0,0.62));" />
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <!-- In-Place Viewport Frosted-Blur Character Overlay ("بسيطة صح؟" at exact camera stop!) -->
+      <div id="w2-macro-overlay" class="clip" data-start="5.40" data-duration="14.87" data-layout-allow-overflow="true" style="position: absolute; inset: 0; pointer-events: none; opacity: 0; z-index: 120;">
+        <div id="w2-macro-veil" data-layout-ignore="true" style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 48%, rgba(255,255,255,0.62) 0%, rgba(244,245,248,0.48) 100%); opacity: 0;"></div>
+        <div id="w2-simple-word-1" style="position: absolute; left: 80px; right: 80px; top: 380px; text-align: center; font-size: 132px; font-weight: 900; color: #09090b; text-shadow: 0 0 30px rgba(255,255,255,0.95); opacity: 0; z-index: 65;">
+          بسيطة
+        </div>
+        <div id="w2-simple-word-2" style="position: absolute; left: 80px; right: 80px; top: 380px; text-align: center; font-size: 144px; font-weight: 900; color: #09090b; text-shadow: 0 0 30px rgba(255,255,255,0.95); opacity: 0; z-index: 65;">
+          صح؟
+        </div>
+        <div id="w2-char-macro" class="puppet-rig waist-fade" data-layout-allow-overflow="true" style="left: -20px; top: -110px; width: 1080px; height: 1920px; z-index: 62;">
+          <img id="img-w2-thumbs" src="./assets/img/char_thumbs.webp" alt="بسيطة صح" />
         </div>
       </div>
 
@@ -1832,35 +1788,21 @@
         }
       }
 
-      // Bounded, deterministic 3D wind oscillation on tilted sticky note + corner tape flutter
-      function addStickyWind(noteSel, tapeLSel, tapeRSel, start, end, baseRot = -1.8) {
-        const period = 1.35;
+      // Bounded, deterministic 3D wind oscillation on B&W editorial note
+      function addStickyWind(noteSel, start, end, baseRot = -1.8) {
+        const period = 1.40;
         let t = start;
         let dir = 1;
-        tl.set(noteSel, { rotation: baseRot, rotationX: 1.5, rotationY: -2.0, skewX: -0.6 }, start);
-        tl.set(tapeLSel, { rotation: -14, y: 0 }, start);
-        tl.set(tapeRSel, { rotation: 14, y: 0 }, start);
+        tl.set(noteSel, { rotation: baseRot, rotationX: 1.2, rotationY: -1.6, skewX: -0.4 }, start);
         while (t < end) {
           const half = period / 2;
           const dur = Math.min(half, end - t);
           if (dur <= 0.06) break;
           tl.to(noteSel, {
-            rotation: baseRot + dir * 0.85,
-            rotationX: dir * 3.2,
-            rotationY: -dir * 4.0,
-            skewX: dir * 1.1,
-            duration: dur,
-            ease: "sine.inOut",
-          }, t);
-          tl.to(tapeLSel, {
-            rotation: -14 - dir * 2.2,
-            y: dir * 1.2,
-            duration: dur,
-            ease: "sine.inOut",
-          }, t);
-          tl.to(tapeRSel, {
-            rotation: 14 + dir * 2.2,
-            y: -dir * 1.2,
+            rotation: baseRot + dir * 0.75,
+            rotationX: dir * 2.6,
+            rotationY: -dir * 3.2,
+            skewX: dir * 0.85,
             duration: dur,
             ease: "sine.inOut",
           }, t);
@@ -1911,16 +1853,35 @@
           .to("#whip-streak", { opacity: 0, duration: dur * 0.6, ease: "power2.out" }, t + dur * 0.4);
       }
 
-      // Helper: Organic Dual-Wave Drift on Black/Silver Stages
+      // Helper: Fluid Multi-Beat White-Wave Drift on Dominant Obsidian Canvas
       function animateDarkWaves(waveA, waveB, start, end) {
-        const dur = end - start;
-        const half = dur / 2;
-        tl.set(waveA, { x: -85, y: 55, rotation: -5, scale: 1.0 }, start)
-          .to(waveA, { x: 95, y: -65, rotation: 6, scale: 1.12, duration: half, ease: "sine.inOut" }, start)
-          .to(waveA, { x: -75, y: 50, rotation: -4, scale: 1.03, duration: half, ease: "sine.inOut" }, start + half);
-        tl.set(waveB, { x: 85, y: -60, rotation: 7, scale: 1.06 }, start)
-          .to(waveB, { x: -90, y: 70, rotation: -6, scale: 0.98, duration: half, ease: "sine.inOut" }, start)
-          .to(waveB, { x: 80, y: -55, rotation: 5, scale: 1.08, duration: half, ease: "sine.inOut" }, start + half);
+        let t = start;
+        let dir = 1;
+        const step = 1.85;
+        tl.set(waveA, { x: -165, y: 95, rotation: -10, scale: 0.96 }, start);
+        tl.set(waveB, { x: 160, y: -90, rotation: 11, scale: 1.08 }, start);
+        while (t < end) {
+          const dur = Math.min(step, end - t);
+          if (dur <= 0.08) break;
+          tl.to(waveA, {
+            x: dir * 175,
+            y: -dir * 115,
+            rotation: dir * 12,
+            scale: dir > 0 ? 1.16 : 0.95,
+            duration: dur,
+            ease: "sine.inOut",
+          }, t);
+          tl.to(waveB, {
+            x: -dir * 170,
+            y: dir * 110,
+            rotation: -dir * 11,
+            scale: dir > 0 ? 0.96 : 1.15,
+            duration: dur,
+            ease: "sine.inOut",
+          }, t);
+          t += dur;
+          dir *= -1;
+        }
       }
 
       // =========================================================
@@ -2041,17 +2002,23 @@
       cardTiltIn("#w2-stop-sticker", 8.94, { fromRotY: -20, fromRotX: 7, toRotZ: -2.2, dur: 0.58 });
       tl.to("#camera-rig", { scale: 1.11, rotation: -0.7, duration: 1.70, ease: "sine.inOut" }, 9.48);
 
-      // 11.233s -> 12.200s: Hard cut to Exact Full-Bleed B&W Meme Backdrop + Bold White/Stroked "صح؟"
-      tl.set("#w2-stop-sticker", { opacity: 0 }, 11.233)
-        .set("#spatial-world", { x: -2850, y: 0 }, 11.233)
-        .set("#camera-rig", { scale: 1.0, rotation: 0 }, 11.233)
-        .set("#w2-sah-bw-cut", { opacity: 1 }, 11.233)
-        .set("#hf-vignette", { opacity: 0.24 }, 11.233)
-        .set("#w2-sah-stamp", { opacity: 0, scale: 0.74, y: 20 }, 11.233)
-        .to("#w2-sah-stamp", { opacity: 1, scale: 1.0, y: 0, duration: 0.22, ease: "back.out(1.6)" }, 11.24)
-        .set(["#w2-sah-bw-cut", "#w2-sah-stamp"], { opacity: 0 }, 12.20);
+      // 11.16s -> 12.24s: In-Place Frosted Blur + "صح؟", then Smooth Blur-Out before Panorama Zoom-Out!
+      tl.set(["#w2-bg-stage", "#w2-stop-sticker"], { filter: "blur(0px)" }, 0)
+        .set("#w2-sah-veil", { opacity: 0 }, 0)
+        .to("#w2-bg-stage", { filter: "blur(18px)", opacity: 0.42, duration: 0.24, ease: "power2.out" }, 11.16)
+        .to("#w2-stop-sticker", { filter: "blur(16px)", opacity: 0.26, scale: 0.94, duration: 0.24, ease: "power2.out" }, 11.16)
+        .to("#w2-sah-veil", { opacity: 1, duration: 0.22, ease: "power2.out" }, 11.16)
+        .to("#hf-vignette", { opacity: 0.24, duration: 0.22 }, 11.16)
+        .set("#w2-sah-stamp", { opacity: 0, scale: 0.84, y: 20, filter: "blur(6px)" }, 11.16)
+        .to("#w2-sah-stamp", { opacity: 1, scale: 1.0, y: 0, filter: "blur(0px)", duration: 0.24, ease: "power3.out" }, 11.18)
+        .to("#w2-sah-stamp", { scale: 1.05, duration: 0.54, ease: "sine.inOut" }, 11.42)
+        // Smooth exit of "صح؟" + stop sticker BEFORE panorama zooms out
+        .to("#w2-sah-stamp", { opacity: 0, scale: 0.90, filter: "blur(10px)", duration: 0.22, ease: "power2.in" }, 11.96)
+        .to("#w2-stop-sticker", { opacity: 0, scale: 0.86, duration: 0.22, ease: "power2.in" }, 11.96)
+        .to("#w2-sah-veil", { opacity: 0, duration: 0.24, ease: "power2.out" }, 12.02)
+        .to("#w2-bg-stage", { filter: "blur(0px)", opacity: 1, duration: 0.30, ease: "power2.out" }, 12.04);
 
-      // 12.20s -> 14.767s: Whip-Pan into Wide Panorama (scale 0.45 -> 0.48 fits Customer & Kitchen cleanly inside!)
+      // 12.20s -> 14.767s: Smooth Whip-Pan Zoom-Out into Clean Panorama (everything cleared cleanly!)
       whipPanStreak(12.20, 0.26);
       tl.to("#camera-rig", { scale: 0.45, rotation: 0, duration: 0.52, ease: "power3.out" }, 12.20)
         .to("#spatial-world", { x: -2010, y: 0, duration: 0.52, ease: "power3.out" }, 12.20)
@@ -2069,12 +2036,12 @@
         .to(["#w2-comm-q", "#w2-comm-qt"], { opacity: 1, duration: 0.24 }, 12.92)
         .to("#w2-comm-svg", { opacity: 0, duration: 0.18 }, 14.54);
 
-      // 14.767s -> 19.567s: Smooth dive onto Well-Proportioned Waiter Flork
+      // 14.767s -> 19.45s: Smooth dive onto Well-Proportioned Waiter Flork
       tl.to("#camera-rig", { scale: 1.02, rotation: 0.25, duration: 0.58, ease: "power3.out" }, 14.767)
         .to("#spatial-world", { x: -1990, y: -40, duration: 0.58, ease: "power3.out" }, 14.767)
         .to("#w2-bg-stage", { opacity: 0.52, duration: 0.40, ease: "power2.out" }, 14.78);
       silkScaleIn("#w2-waiter-rig", 14.78, { fromScale: 0.78, toRot: 1.8, dur: 0.52 });
-      addPendulumSway("#w2-waiter-rig", 14.80, 19.52, 1.8, 1.2, 1.5);
+      addPendulumSway("#w2-waiter-rig", 14.80, 19.42, 1.8, 1.2, 1.5);
 
       // 15.55s: Order Paper -> Flork's chest/hands -> Fade label BEFORE walking!
       tl.to("#w2-bg-stage", { opacity: 0.88, duration: 0.35 }, 15.56)
@@ -2099,19 +2066,24 @@
         .to("#w2-bg-stage", { opacity: 1, duration: 0.38 }, 18.38)
         .to("#w2-food-dome", { x: -160, y: 18, scale: 0.78, opacity: 0, duration: 0.24, ease: "power2.in" }, 19.12);
 
-      // 19.567s -> 20.267s: ZERO-GAP hard cut to Macro Close-Up + sequential "بسيطة" -> "صح؟"
-      tl.set(["#w2-waiter-rig", "#w2-bg-stage"], { opacity: 0 }, 19.567)
-        .set("#camera-rig", { scale: 1.0, rotation: 0 }, 19.567)
-        .set("#spatial-world", { x: -1280, y: 0 }, 19.567)
-        .set("#w2-macro-wrap", { opacity: 1 }, 19.567)
-        .set("#w2-simple-word-1", { opacity: 1, scale: 0.94 }, 19.567)
-        .to("#w2-simple-word-1", { scale: 1.0, duration: 0.16, ease: "back.out(1.4)" }, 19.567)
-        .set("#w2-simple-word-1", { opacity: 0 }, 19.87)
-        .set("#w2-simple-word-2", { opacity: 1, scale: 0.92 }, 19.87)
-        .to("#w2-simple-word-2", { scale: 1.0, duration: 0.16, ease: "back.out(1.5)" }, 19.87)
-        .set("#w2-char-macro", { opacity: 1, scale: 0.96, rotation: 1.2 }, 19.567)
-        .to("#w2-char-macro", { scale: 1.0, duration: 0.34, ease: "power3.out" }, 19.567);
-      addPendulumSway("#w2-char-macro", 19.58, 20.24, 1.8, 1.1, 0.9);
+      // 19.45s -> 20.267s: REPEAT SAME FROSTED BLUR IN-PLACE AT EXACT CAMERA STOP + Character + "بسيطة" -> "صح؟"!
+      tl.set("#w2-waiter-rig", { filter: "blur(0px)" }, 0)
+        .set("#w2-macro-overlay", { opacity: 0 }, 0)
+        .to("#w2-bg-stage", { filter: "blur(18px)", opacity: 0.42, duration: 0.24, ease: "power2.out" }, 19.45)
+        .to("#w2-waiter-rig", { filter: "blur(16px)", opacity: 0.28, duration: 0.24, ease: "power2.out" }, 19.45)
+        .set("#w2-macro-overlay", { opacity: 1 }, 19.45)
+        .set("#w2-macro-veil", { opacity: 0 }, 19.45)
+        .to("#w2-macro-veil", { opacity: 1, duration: 0.24, ease: "power2.out" }, 19.45)
+        .set("#w2-char-macro", { opacity: 0, y: 110, scale: 0.95, rotation: 1.0 }, 19.45)
+        .to("#w2-char-macro", { opacity: 1, y: 0, scale: 1.0, duration: 0.26, ease: "power3.out" }, 19.46)
+        .set("#w2-simple-word-1", { opacity: 0, scale: 0.92, y: 16 }, 19.45)
+        .to("#w2-simple-word-1", { opacity: 1, scale: 1.0, y: 0, duration: 0.20, ease: "power3.out" }, 19.50)
+        .to("#w2-simple-word-1", { opacity: 0, duration: 0.10, ease: "power2.in" }, 19.80)
+        .set("#w2-simple-word-2", { opacity: 0, scale: 0.92, y: 14 }, 19.84)
+        .to("#w2-simple-word-2", { opacity: 1, scale: 1.0, y: 0, duration: 0.18, ease: "power3.out" }, 19.86)
+        .set(["#w2-macro-overlay", "#w2-macro-veil"], { opacity: 0 }, 20.267)
+        .set(["#w2-bg-stage", "#w2-waiter-rig"], { filter: "blur(0px)" }, 20.267);
+      addPendulumSway("#w2-char-macro", 19.48, 20.24, 1.4, 1.0, 0.9);
 
       // Fast Subtle Act 2 -> Act 3 cut flash at 20.267s
       retinalFlash(20.267, 0.55);
@@ -2147,7 +2119,7 @@
         .set("#w3b-swap-0", { opacity: 1, scale: 1.0 }, 23.367)
         .set("#hf-vignette", { opacity: 0.34 }, 23.367);
 
-      addStickyWind("#w3b-tape-general", "#w3b-tape-gen-l", "#w3b-tape-gen-r", 23.367, 25.48, -1.8);
+      addStickyWind("#w3b-tape-general", 23.367, 25.48, -1.8);
       tl.to("#camera-rig", { scale: 1.06, duration: 1.96, ease: "sine.inOut" }, 23.40);
 
       // Exact millisecond swaps matching 3.mp4:
@@ -2203,7 +2175,7 @@
         .to("#w3b-layer-fg", { x: -56, y: 28, duration: 0.77, ease: "power2.inOut" }, 28.18)
         .to("#camera-rig", { scale: 1.06, rotation: 0.20, duration: 0.77, ease: "power2.inOut" }, 28.18);
 
-      addStickyWind("#w3b-tape-waiter", "#w3b-tape-wai-l", "#w3b-tape-wai-r", 28.18, 29.75, 1.6);
+      addStickyWind("#w3b-tape-waiter", 28.18, 29.75, 1.6);
 
       // 29.65s -> 30.25s: Pan UP-RIGHT cleanly back onto Apple Pay -> Waiter & Card Florks + Green ✓!
       tl.to("#spatial-world", { x: -5680, y: 460, duration: 0.60, ease: "power2.inOut" }, 29.65)
@@ -2383,9 +2355,10 @@
       silkScaleIn("#w5-title-intro", 42.88, { fromScale: 0.86, toRot: 0, dur: 0.44 });
       tl.set("#w5-title-intro", { opacity: 0 }, 44.333);
 
-      // 44.333s -> 45.800s: Glowing Solid Bridge enters smoothly
+      // 44.333s -> 47.333s: Glowing Bridge enters smoothly + gentle continuous drift + normal subtitle lines
       tl.set("#w5-bridge-stage", { opacity: 0, scale: 0.94, y: 0 }, 44.32)
-        .to("#w5-bridge-stage", { opacity: 1, scale: 1.0, duration: 0.44, ease: "power2.out" }, 44.333);
+        .to("#w5-bridge-stage", { opacity: 1, scale: 1.0, duration: 0.44, ease: "power2.out" }, 44.333)
+        .to("#w5-bridge-stage", { scale: 1.10, y: -18, duration: 2.50, ease: "sine.inOut" }, 44.78);
 
       tl.set("#w5-node-l", { opacity: 0, x: -65 }, 44.32)
         .to("#w5-node-l", { opacity: 1, x: 0, duration: 0.48, ease: "power2.out" }, 44.34)
@@ -2394,28 +2367,12 @@
         .set("#w5-bridge-core", { opacity: 0, scaleX: 0.82 }, 44.32)
         .to("#w5-bridge-core", { opacity: 1, scaleX: 1.0, duration: 0.52, ease: "power2.out" }, 44.36);
 
-      // Word 0: "بدون" (45.45s -> 45.80s)
-      tl.set("#w5-mw-0", { opacity: 0, scale: 0.90 }, 45.43)
-        .to("#w5-mw-0", { opacity: 1, scale: 1.0, duration: 0.14, ease: "power3.out" }, 45.45)
-        .set("#w5-mw-0", { opacity: 0 }, 45.80);
-
-      // 45.800s -> 47.333s: Smooth Punch-In (scale 1.42, y -110 keeping BOTH HungerStation & Apple Pay framing bridge!)
-      whipPanStreak(45.74, 0.18);
-      tl.to("#w5-bridge-stage", { scale: 1.42, y: -110, duration: 0.24, ease: "power3.out" }, 45.80)
-        .to("#w5-bridge-stage", { scale: 1.47, y: -118, duration: 1.28, ease: "sine.inOut" }, 46.04);
-
-      tl.set("#w5-mw-1", { opacity: 1, scale: 0.92 }, 45.80)
-        .to("#w5-mw-1", { scale: 1.0, duration: 0.14, ease: "back.out(1.4)" }, 45.80)
-        .set("#w5-mw-1", { opacity: 0 }, 46.27)
-        .set("#w5-mw-2", { opacity: 1, scale: 0.92 }, 46.27)
-        .to("#w5-mw-2", { scale: 1.0, duration: 0.12, ease: "back.out(1.4)" }, 46.27)
-        .set("#w5-mw-2", { opacity: 0 }, 46.53)
-        .set("#w5-mw-3", { opacity: 1, scale: 0.92 }, 46.53)
-        .to("#w5-mw-3", { scale: 1.0, duration: 0.12, ease: "back.out(1.4)" }, 46.53)
-        .set("#w5-mw-3", { opacity: 0 }, 46.87)
-        .set("#w5-mw-4", { opacity: 1, scale: 0.92 }, 46.87)
-        .to("#w5-mw-4", { scale: 1.0, duration: 0.14, ease: "back.out(1.4)" }, 46.87)
-        .set("#w5-mw-4", { opacity: 0 }, 47.333);
+      // Normal smooth caption entrance ("بدون ما يشوف أحد / تفاصيل الثاني")
+      tl.set("#w5-sub-1", { opacity: 0, y: 18 }, 45.38)
+        .to("#w5-sub-1", { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }, 45.40)
+        .set("#w5-sub-2", { opacity: 0, y: 18 }, 46.24)
+        .to("#w5-sub-2", { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }, 46.26)
+        .to(["#w5-sub-1", "#w5-sub-2"], { opacity: 0, duration: 0.16, ease: "power2.in" }, 47.17);
 
       // 47.333s -> 48.467s: Subtle Flash cut to Centered Pointing Hero
       retinalFlash(47.333, 0.55);
@@ -2426,11 +2383,11 @@
         .to("#w5-char-point-you", { y: 0, duration: 0.38, ease: "power3.out" }, 47.333);
       addPendulumSway("#w5-char-point-you", 47.34, 48.46, 1.8, 1.1, 1.1);
 
-      // 48.467s -> 49.740s: Clean cut to Seated Desk Outro + Laptop!
+      // 48.467s -> 49.740s: Clean cut to Centered Waist-Up Character Outro (NO Desk!)
       tl.set("#w5-char-point-you", { opacity: 0 }, 48.467)
         .set("#camera-rig", { scale: 1.0, rotation: 0 }, 48.467)
-        .set("#w5-desk-outro", { opacity: 1, scale: 1.0 }, 48.467)
-        .to("#w5-desk-outro", { scale: 1.03, duration: 1.26, ease: "sine.inOut" }, 48.47);
+        .set("#w5-desk-outro", { opacity: 1, scale: 1.0, y: 40 }, 48.467)
+        .to("#w5-desk-outro", { scale: 1.04, y: 0, duration: 1.26, ease: "power2.out" }, 48.47);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;
